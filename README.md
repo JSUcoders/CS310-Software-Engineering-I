@@ -7,6 +7,6 @@ Design demo:  VolumeCalculator.java //calculates the scientific volume of an obj
 
 Implement the following features.
 
-# (8) Allow only string-valued positional arguments and retrieve them from the command-line.
+(8) Allow only string-valued positional arguments and retrieve them from the command-line.
 
-# (5) Allow the inclusion of additional descriptive information on the program and each argument and provide named "-h" argument that shows usage and help information by default.
+(5) Allow the inclusion of additional descriptive information on the program and each argument and provide named "-h" argument that shows usage and help information by default.
