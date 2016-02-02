@@ -9,20 +9,14 @@ public class VolumeCalculatorTest {
 	
 	@Before 
 	public void setup(){
-		a = new VolumeCalculator();
-    @Test
-	public void <method>{
-		
-		
+		a = new VolumeCalculator(1,2,3);
 	}
 	
 	
 	@Test
 	public void testGetLength(){
 		boolean result = false;
-		a.VolumeCalculator(1,2,3);
-		
-		if(a.getLength == 1){
+		if(a.getLength() == 1){
 			result = true;
 		} 
 		assertTrue(result);
@@ -30,9 +24,7 @@ public class VolumeCalculatorTest {
 	@Test
 	public void testGetWidth(){
 		boolean result = false;
-		a.VolumeCalculator(1,2,3);
-		
-		if(a.getWidth == 2){
+		if(a.getWidth() == 2){
 			result = true;
 		} 
 		assertTrue(result);
@@ -41,9 +33,7 @@ public class VolumeCalculatorTest {
 	@Test
 	public void testGetHight(){
 		boolean result = false;
-		a.VolumeCalculator(1,2,3);
-		
-		if(a.getHight == 3){
+		if(a.getHight() == 3){
 			result = true;
 		} 
 		assertTrue(result);
@@ -52,9 +42,7 @@ public class VolumeCalculatorTest {
 	@Test
 	public void testGetVolume(){
 		boolean result = false;
-		a.VolumeCalculator(1,2,3);
-		
-		if(a.getVolume == 3){
+		if(a.getVolume() == 6){
 			result = true;
 		} 
 		assertTrue(result);
