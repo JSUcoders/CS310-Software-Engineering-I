@@ -1,7 +1,7 @@
 # CS310 Software Engineering Scrum Week One
 
 See #Trello Board for more information. Linked below.
-https://trello.com/b/91t4QCnE/cs-310 
+https://trello.com/b/91t4QCnE
 
 #Design demo:
 VolumeCalculator.java //calculates the scientific volume of an object. Should take three parameters; L, W, and H.
