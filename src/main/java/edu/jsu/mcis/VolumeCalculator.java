@@ -5,7 +5,7 @@ public class VolumeCalculator {
     private int length =0;
 	private int width =0; 
 	private int hight =0;
-    VolumeCalculator(int a,int b,int c){
+    public VolumeCalculator(int a,int b,int c){
 		length = a;
 		width = b;
 		hight = c;
@@ -28,10 +28,14 @@ public class VolumeCalculator {
 		int volume = length * width * hight;
 		return volume;
 	}
+    
+    public void parseString(String[] s){
+                
+    }
 	
     
     public static void main(String[] args) {
-      
+       
     }
 }
 
