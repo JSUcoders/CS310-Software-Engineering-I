@@ -20,7 +20,7 @@ public class ArgsParser{
     }
     
     public void parse(String[] cla){
-        for(int i =0; i < cla.length();i++){
+        for(int i =0; i < cla.length;i++){
             argValues.add(cla[i]);
         }
     }

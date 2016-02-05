@@ -1,4 +1,4 @@
-package edu.jsu.mcis
+package edu.jsu.mcis;
 
 import org.junit.*;
 import static org.junit.Assert.*;
@@ -6,14 +6,14 @@ import static org.junit.Assert.*;
 public class ArgsParserTest{
     @Test
     public void testNewInstanceHasNoArguments(){
-        ArgsParser p = new ArgParser();
-        assertEquals(0, p.getNumArguments());
+        ArgsParser p = new ArgsParser();
+        assertEquals(0, p.getNumOfArguments());
     }
     
     @Test
     public void  testArgumentIsAddedCorrectly(){
        ArgsParser p = new ArgsParser();
-       p.addArg()
+      // p.addArg();
     }
     
     @Test
@@ -22,7 +22,7 @@ public class ArgsParserTest{
         ArgsParser p = new ArgsParser();
         p.addArg("length");
         p.parse(s);
-        assetEquals("17", p.getArg("length"));
+        assertEquals("17", p.getArg("length"));
     }
     
    /* @Test
