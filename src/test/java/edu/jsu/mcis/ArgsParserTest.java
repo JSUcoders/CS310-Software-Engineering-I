@@ -4,6 +4,8 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class ArgsParserTest{
+    
+   
     @Test
     public void testNewInstanceHasNoArguments(){
         ArgsParser p = new ArgsParser();
@@ -26,6 +28,15 @@ public class ArgsParserTest{
         p.parse(s);
         assertEquals("17", p.getArg("length"));
         assertEquals(1, p.getNumOfArguments());
+    }
+    
+    @Test(expected = TooFewArgsException.class)
+    public void testExceptionIsThrownWhenTooFewArguments(){
+        ArgsParser p = new ArgsParser();
+        String[] s = {"7", "3"};
+        p.addArg("length");
+        p.addArg("width");
+        p.parse(s);
     }
     
    /* @Test

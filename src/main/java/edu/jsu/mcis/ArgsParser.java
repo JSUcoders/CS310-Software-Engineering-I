@@ -24,10 +24,26 @@ public class ArgsParser{
         argNames.add(name);
     }
     
-    public void parse(String[] cla){
-        for(int i =0; i < cla.length;i++){
-            argValues.add(cla[i]);
+    private void checkForTooFewArgs(String[] cla) throws TooFewArgsException{
+        if(cla.length <3){
+            throw new TooFewArgsException(cla);
         }
+        
+    }
+    
+    public void parse(String[] cla){
+        try{
+            
+            for(int i =0; i < cla.length;i++){
+                argValues.add(cla[i]);
+            } 
+            
+        }
+        catch(TooFewArgsException t){
+            t.showMessage();
+        }
+        
+        
     }
     
     public String getArg(String name){
@@ -43,4 +59,6 @@ public class ArgsParser{
         else return "";
         
     }
+    
+    
 }
