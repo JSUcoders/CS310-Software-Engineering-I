@@ -33,9 +33,11 @@ public class ArgsParserTest{
     @Test(expected = TooFewArgsException.class)
     public void testExceptionIsThrownWhenTooFewArguments(){
         ArgsParser p = new ArgsParser();
+        
         String[] s = {"7", "3"};
         p.addArg("length");
         p.addArg("width");
+        p.addArg("height");
         p.parse(s);
     }
     

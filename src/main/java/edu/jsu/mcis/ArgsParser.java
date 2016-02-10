@@ -5,10 +5,12 @@ public class ArgsParser{
     
     private List<String> argValues;
     private List<String> argNames;
+    
    
     public ArgsParser(){
         argValues = new ArrayList<String>();
         argNames = new ArrayList<String>();
+       
     }
 
 
@@ -24,39 +26,37 @@ public class ArgsParser{
         argNames.add(name);
     }
     
-    private void checkForTooFewArgs(String[] cla) throws TooFewArgsException{
-        if(cla.length <3){
+    private void checkForTooFewArgs(String[] cla)  {
+        if(cla.length < argNames.size()){
             throw new TooFewArgsException(cla);
         }
         
     }
     
-    public void parse(String[] cla){
-        try{
+    public void parse(String[] cla) {
+        
+        
             
-            for(int i =0; i < cla.length;i++){
-                argValues.add(cla[i]);
-            } 
             
-        }
-        catch(TooFewArgsException t){
-            t.showMessage();
-        }
+        for(int i =0; i < cla.length;i++){
+             argValues.add(cla[i]);
+        } 
+        this.checkForTooFewArgs(cla);
+        
+        
+        
         
         
     }
     
     public String getArg(String name){
-        if(name.equals(argNames.get(0))){
-            return argValues.get(0);
+        for(int i =0;i < getNumOfNameArgs();i++){
+            if(name.equals(argNames.get(i))){
+                return argValues.get(i);
+            }
         }
-        else if(name.equals(argNames.get(1))){
-            return argValues.get(1);
-        }
-        else if(name.equals(argNames.get(2))){
-            return argValues.get(2); 
-        }
-        else return "";
+        return "";
+       
         
     }
     
