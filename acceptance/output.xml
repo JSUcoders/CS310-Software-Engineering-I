@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 2.9 (Jython 2.7.0 on java1.8.0_66)" generated="20160211 17:24:45.949">
+<suite source="C:\Users\Grady\Documents\GitHub\CS310-Software-Engineering-I\acceptance\ArgsParserTests.txt" name="ArgsParserTests" id="s1">
+<test id="s1-t1">
+<status critical="yes" endtime="20160211 17:24:47.155" starttime="20160211 17:24:47.146" status="FAIL">Test case name cannot be empty.</status>
+</test>
+<status endtime="20160211 17:24:47.183" starttime="20160211 17:24:45.991" status="FAIL"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="0" fail="1" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
+</suite>
+</statistics>
+<errors>
+<msg level="ERROR" timestamp="20160211 17:24:47.068">Error in file 'C:\Users\Grady\Documents\GitHub\CS310-Software-Engineering-I\acceptance\ArgsParserTests.txt': Importing test library 'ArgsParserKeywords' failed: ImportError: No module named ArgsParserKeywords
+Traceback (most recent call last):
+  None
+PYTHONPATH:
+  C:\Users\Grady\Software\Lib
+  C:\Users\Grady\Software\robotframework-2.9.jar\Lib
+  __classpath__
+  __pyclasspath__/
+CLASSPATH:
+  .
+  ..\build\classes\main
+  C:\Users\Grady\Software\robotframework-2.9.jar</msg>
+</errors>
+</robot>

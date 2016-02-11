@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-02-05T17:54:05" hostname="AdamsPC" time="0.024">
-  <properties/>
-  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.018"/>
-  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.005"/>
-  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
