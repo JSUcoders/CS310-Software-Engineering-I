@@ -1,10 +1,21 @@
-## Acceptance Tests feature 1
+*** Settings ***
+Library           ArgsParserKeywords  
 
+
+*** Keywords ***
+
+
+
+
+*** Test Cases ***	
+	| test for feature 1
     | *Variable*  | *Value*                                                                                                   |
     | ${expected} | usage: java VolumeCalculator length width height\nVolumeCalcultor.java: error: unrecognized arguments: 43 |
-
+	
     | *Test Case*                            | *Action*                              | *Argument*         | *Argument*   | *Argument* | *Argument* |
-    | Test Volume Calculator Normal Function | Start Volume Cacluator With Arguments | 7                  | 5            | 2          |            |
+    
+	
+	| Test Volume Calculator Normal Function | Start Volume Cacluator With Arguments | 7                  | 5            | 2          |            |
     |                                        | ${length}=                            | Get Length         |              |            |            |
     |                                        | Should Be Equal                       | 7                  | ${length}    |            |            |
     |                                        | ${width}=                             | Get Width          |              |            |            |
@@ -13,10 +24,14 @@
     |                                        | Should Be Equal                       | 2                  | ${height}    |            |            |
     |                                        | ${output}=                            | Get Program Output |              |            |            |
     |                                        | Should Be Equal                       | ${output}          | 70           |            |            |
+   
+
     | Test Unrecognized Argument             | Start Volume Cacluator With Arguments | 7                  | 5            | 2          | 43         |
     |                                        | ${output}=                            | Get Program Output |              |            |            |
     |                                        | Should Be Equal                       | ${output}          | 70           |            |            |
-    | Test Absurd Program Normal Function    | Start Absurd Program With Arguments   | dog                | 2            | true       | 3.5        |
+    
+	
+	| Test Absurd Program Normal Function    | Start Absurd Program With Arguments   | dog                | 2            | true       | 3.5        |
     |                                        | ${pet}=                               | Get Pet            |              |            |            |
     |                                        | Should Be Equal                       | dog                | ${pet}       |            |            |
     |                                        | ${number}=                            | Get Number         |              |            |            |
@@ -26,8 +41,8 @@
     |                                        | ${bathrooms}=                         | Get Bathrooms      |              |            |            |
     |                                        | Should Be Equal                       | 3.5                | ${bathrooms} |            |            |
 
-## Acceptance Tests feature 2
-
+*** comments ***	
+	| test for feature 2
     | *Variable*  | *Value*                                                                                                                                                                                                                                   |
     | ${expected} | usage: java VolumeCalculator length width height\nCalcuate the volume of a box.\npositional arguments:\n   length the length of the box (float)\n   width the width of the box(float)\n   height the height of the box(float) |
     
