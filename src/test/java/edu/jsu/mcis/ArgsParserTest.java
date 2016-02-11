@@ -43,6 +43,17 @@ public class ArgsParserTest{
         p.parse(s);
         
     }
+	
+	@Test(expected = TooManyArgsException.class)
+	public void testExceptionIsThrownWhenTooManyArguments(){
+		ArgsParser p = new ArgsParser();
+		
+		String[] s = {"7", "3", "2", "42"};
+		p.addArg("length");
+		p.addArg("width");
+		p.addArg("height");
+		p.parse(s);
+	}
     
    /* @Test
     public void testVolumeIsCalculatedCorrectly(){

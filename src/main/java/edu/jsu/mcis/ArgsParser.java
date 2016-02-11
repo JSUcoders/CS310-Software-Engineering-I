@@ -35,7 +35,14 @@ public class ArgsParser{
         
     }
     
-
+	private void checkForTooManyArgs(String[] cla, List<String> numNamedArgs) {
+		if(cla.length > argNames.size()){
+		
+			throw new TooManyArgsException(cla, numNamedArgs);
+		
+		}
+	
+	}
     
     public void parse(String[] cla) {
         
@@ -45,6 +52,7 @@ public class ArgsParser{
         } 
         
         checkForTooFewArgs(cla, argNames);
+		checkForTooManyArgs(cla, argNames);
         
     }
     
