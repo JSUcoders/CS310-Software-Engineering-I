@@ -55,18 +55,16 @@ public class ArgsParserTest{
 		p.parse(s);
 	}
     
-   /* @Test
-    public void testVolumeIsCalculatedCorrectly(){
-        String[] s = {"7","5","2"};
-        ArgsParser p= new ArgsParser();
+    @Test(expected = HelpException.class)
+    public void testHelpExceptionIsThrown(){
+        ArgsParser p = new ArgsParser();
+        String[] s = {"-h"};
         p.addArg("length");
         p.addArg("width");
         p.addArg("height");
         p.parse(s);
-        float length = Float.parseFloat(p.getArg("length"));
-        float width = Float.parseFloat(p.getArg("width"));
-        float height = Float.parseFloat(p.getArg("height"));
-        float volume = length*width*height;
-    }*/
+    }
+    
+   
     
 }
