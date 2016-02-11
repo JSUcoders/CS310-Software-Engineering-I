@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-02-05T17:54:05" hostname="AdamsPC" time="0.024">
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-02-11T23:38:02" hostname="AdamsPC" time="0.133">
   <properties/>
-  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.018"/>
-  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.005"/>
-  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.047"/>
+  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.013"/>
+  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testExceptionIsThrownWhenTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.01"/>
+  <testcase name="testHelpExceptionIsThrown" classname="edu.jsu.mcis.ArgsParserTest" time="0.003"/>
+  <testcase name="testExceptionIsThrownWhenTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.005"/>
+  <system-out><![CDATA[hello
+Unrecognized arguments:  42
+Arguments required: 
+length
+width
+height
+Positional arguments: 
+length
+width
+height
+Not enough arguments. Need: 3 Have: 2
+Arguments required: 
+length
+width
+height
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
