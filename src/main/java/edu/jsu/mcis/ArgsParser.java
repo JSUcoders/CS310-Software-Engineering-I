@@ -44,13 +44,19 @@ public class ArgsParser{
 	
 	}
     
+    private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs){
+        if(cla[0].equals("-h") || cla[0].equals("-help")){
+            throw new HelpException(numArgs, numNamedArgs); 
+        }
+    }
+    
     public void parse(String[] cla) {
         
            
         for(int i =0; i < cla.length;i++){
              argValues.add(cla[i]);
         } 
-        
+        checkForHelp(cla, argValues, argNames);
         checkForTooFewArgs(cla, argNames);
 		checkForTooManyArgs(cla, argNames);
         
