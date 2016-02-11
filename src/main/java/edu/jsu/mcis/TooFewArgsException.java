@@ -1,25 +1,16 @@
 package edu.jsu.mcis;
-
+import java.util.*;
 public class TooFewArgsException extends RuntimeException {
-    private int numArgs;
     
-    public TooFewArgsException(String[] cla){
-        numArgs = cla.length;
+    
+    public TooFewArgsException(String[] cla, List<String> argNames){
+        System.out.println("Not enough arguments. Need: "+argNames.size() + " Have: "+cla.length);
+        System.out.println("Arguments required: ");
+        for(int i =0; i < argNames.size();i++){
+            System.out.println(argNames.get(i));
+        }
         
     }
     
-    public String showMessage(){
-      
-        
-        if(numArgs == 0 ){
-            return "Arguments given: "+ "\n" +"Arguments needed: ";
-        }
-        else if(numArgs==1 ){
-            return "Arguments given: "+ "\n"+"Arguments needed: ";
-        }
-        else if(numArgs==2 ){
-            return "Arguments given: "+ "\n" +"Arguments needed: ";
-        }
-        return "";
-    }
+    
 }

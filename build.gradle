@@ -1,5 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'jacoco'
+apply plugin: 'groovy'
 
 sourceCompatibility = 1.7
 version = '1.0'
@@ -29,6 +30,9 @@ jacocoTestReport {
 
 test {
     systemProperties 'property': 'value'
+    testLogging{
+        showStandardStreams = true
+    }
 }
 
 uploadArchives {

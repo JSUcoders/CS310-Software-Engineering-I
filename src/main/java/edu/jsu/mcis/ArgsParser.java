@@ -26,26 +26,25 @@ public class ArgsParser{
         argNames.add(name);
     }
     
-    private void checkForTooFewArgs(String[] cla)  {
+    private void checkForTooFewArgs(String[] cla, List<String> numNamedArgs)  {
         if(cla.length < argNames.size()){
-            throw new TooFewArgsException(cla);
+            
+            throw new TooFewArgsException(cla, numNamedArgs);
+            
         }
         
     }
     
+
+    
     public void parse(String[] cla) {
         
-        
-            
-            
+           
         for(int i =0; i < cla.length;i++){
              argValues.add(cla[i]);
         } 
-        this.checkForTooFewArgs(cla);
         
-        
-        
-        
+        checkForTooFewArgs(cla, argNames);
         
     }
     
