@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-02-11T23:38:02" hostname="AdamsPC" time="0.133">
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2016-02-12T00:05:18" hostname="AdamsPC" time="0.088">
   <properties/>
-  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.047"/>
-  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.013"/>
-  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
-  <testcase name="testExceptionIsThrownWhenTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.01"/>
-  <testcase name="testHelpExceptionIsThrown" classname="edu.jsu.mcis.ArgsParserTest" time="0.003"/>
-  <testcase name="testExceptionIsThrownWhenTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.005"/>
-  <system-out><![CDATA[hello
-Unrecognized arguments:  42
+  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.044"/>
+  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.002"/>
+  <testcase name="testExceptionIsThrownWhenTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.011"/>
+  <testcase name="testHelpExceptionIsThrown" classname="edu.jsu.mcis.ArgsParserTest" time="0.007"/>
+  <testcase name="testExceptionIsThrownWhenTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.003"/>
+  <system-out><![CDATA[Unrecognized arguments:  42
 Arguments required: 
 length
 width

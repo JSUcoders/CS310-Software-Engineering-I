@@ -26,7 +26,6 @@ public class ArgsParserTest{
         ArgsParser p = new ArgsParser();
         p.addArg("length");
         p.parse(s);
-        System.out.println("hello");
         assertEquals("17", p.getArg("length"));
         assertEquals(1, p.getNumOfArguments());
         
