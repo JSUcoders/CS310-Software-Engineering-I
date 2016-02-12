@@ -22,19 +22,23 @@ public class ArgsParserTest{
     
     @Test
     public void testArgumentValueIsParsedCorrectly(){
-        String[] s = {"17"};
+        String[] s = {"17", "5", "12"};
         ArgsParser p = new ArgsParser();
         p.addArg("length");
+        p.addArg("width");
+        p.addArg("height");
         p.parse(s);
         assertEquals("17", p.getArg("length"));
-        assertEquals(1, p.getNumOfArguments());
+        assertEquals("5", p.getArg("width"));
+        assertEquals("12", p.getArg("height"));
+        assertEquals(3, p.getNumOfArguments());
         
     }
     
     @Test(expected = TooFewArgsException.class)
     public void testExceptionIsThrownWhenTooFewArguments(){
         ArgsParser p = new ArgsParser();
-        
+        p.setProgramName("VolumeCalculator");
         String[] s = {"7", "3"};
         p.addArg("length");
         p.addArg("width");
@@ -46,7 +50,7 @@ public class ArgsParserTest{
 	@Test(expected = TooManyArgsException.class)
 	public void testExceptionIsThrownWhenTooManyArguments(){
 		ArgsParser p = new ArgsParser();
-		
+		p.setProgramName("VolumeCalculator");
 		String[] s = {"7", "3", "2", "42"};
 		p.addArg("length");
 		p.addArg("width");
@@ -57,11 +61,27 @@ public class ArgsParserTest{
     @Test(expected = HelpException.class)
     public void testHelpExceptionIsThrown(){
         ArgsParser p = new ArgsParser();
+        p.setProgramName("VolumeCalculator");
+        p.setProgramDescription("Calculate the volume of a box");
         String[] s = {"-h"};
         p.addArg("length");
         p.addArg("width");
         p.addArg("height");
         p.parse(s);
+    }
+    
+    @Test
+    public void testDescriptionIsAdded(){
+        ArgsParser p = new ArgsParser();
+        p.setProgramDescription("This is a test");
+        assertEquals("This is a test", p.getProgramDescription());
+    }
+    
+    @Test
+    public void testProgramNameIsAddedCorrectly(){
+        ArgsParser p = new ArgsParser();
+        p.setProgramName("Test");
+        assertEquals("Test", p.getProgramName());
     }
     
    

@@ -1,14 +1,6 @@
-Unrecognized arguments:  42
-Arguments required: 
-length
-width
-height
-Positional arguments: 
-length
-width
-height
-'Not enough arguments. Need: 3 Have: 2
-Arguments required: 
-length
-width
-height
+kusage: java VolumeCalculator length width height
+VolumeCalculator.java: error: unrecognized arguments: 42
+Pusage: java VolumeCalculator length width height
+Calculate the volume of a box
+	pusage: java VolumeCalculator height
+VolumeCalculator.java: error: the following arguments are required: height

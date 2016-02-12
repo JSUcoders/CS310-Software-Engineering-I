@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 2.9 (Jython 2.7.0 on java1.8.0_66)" name="Generator">
+<meta content="Robot Framework 3.0 (Jython 2.7.0 on java1.8.0_60)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAJEBoACtnfgA5cYYAERsiAEx2lAAbKkQAcazBACZCVwAcM1cAK0ucAAMDBQAnQncASG+FABkoVQAyWmgA6f8SgvH/Ij99+GLyIinyJfn/Yi//KSLzUy9iZogpIld3/4JVVTkid7vyUjNVNVJEAGOZ6Z7pXwAABpmZkRiLAAAGiJZpmGAAAEEt3SXdxAAATC7o/u3EAAC8MRZpjasAAAY1VVVTYAAABKqqqqpAAAAADKqq4AAAAAAAv4sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMADAADgAwAA4AcAAOAHAADgBwAAwAcAAOAHAADgDwAA8A8AAPg/AAD+fwAA">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -651,9 +651,11 @@ window.model = (function () {
             for (var i in suites)
                 tests = tests.concat(suites[i].searchTestsInSuite(pattern, matcher));
             return tests;
-        }
+        };
         suite.searchTestsByTag = function (tag) {
             return suite.searchTests(function (test) {
+                if (tag.info == "critical" || tag.info == "non-critical")
+                    return containsTagPattern(test.tags, tag.label);
                 if (tag.combined)
                     return containsTagPattern(test.tags, tag.combined);
                 return containsTag(test.tags, tag.label);
@@ -1159,15 +1161,18 @@ window.testdata = function () {
         kw.populateMessages(Populator(element[10], strings, message));
         return kw;
     }
-    function lazyPopulateKeywordsFromFile(parent, keywordsOrIndex, strings) {
+    function lazyPopulateKeywordsFromFile(parent, modelOrIndex, strings) {
+        var model, index, populator;
+        var creator = childCreator(parent, createKeyword);
         if (parent.isChildrenLoaded) {
-            var keywords = keywordsOrIndex;
-            parent.populateKeywords(Populator(keywords, strings, childCreator(parent, createKeyword)));
+            model = modelOrIndex;
+            populator = Populator(model, strings, creator);
         } else {
-            var index = keywordsOrIndex;
+            index = modelOrIndex;
             parent.childFileName = window.settings['splitLogBase'] + '-' + index + '.js';
-            parent.populateKeywords(SplitLogPopulator(keywordsOrIndex, childCreator(parent, createKeyword)));
+            populator = SplitLogPopulator(index, creator);
         }
+        parent.populateKeywords(populator);
     }
     function tags(taglist, strings) {
         return util.map(taglist, strings.get);
@@ -1552,25 +1557,25 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[0,0,1192],[],[[0,0,1,0,[],[0,1155,9,4],[]]],[],[1,0,1,0]];
+window.output["suite"] = [1,2,3,0,[],[0,0,1503],[],[[4,0,1,0,[],[1,807,297],[]],[5,0,1,0,[],[0,1129,95,6],[]],[7,0,1,0,[],[1,1264,199],[]]],[],[3,2,3,2]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*ArgsParserTests","*C:\\Users\\Grady\\Documents\\GitHub\\CS310-Software-Engineering-I\\acceptance\\ArgsParserTests.txt","*ArgsParserTests.txt","*Test case name cannot be empty."]);
+window.output["strings"] = window.output["strings"].concat(["*","*ArgsParserTests","*C:\\Users\\adam\\Documents\\Computer Science\\Software Engineering\\CS310-Software-Engineering-I\\acceptance\\ArgsParserTests.txt","*ArgsParserTests.txt","*Test Volume Calculator Normal Function","*Test Unrecognized Argument","*70.0 != usage: java VolumeCalculator length width height\nVolumeCalcultor.java: error: unrecognized arguments: 43","*Test Absurd Program Normal Function"]);
 </script>
 <script type="text/javascript">
-window.output["generatedTimestamp"] = "20160211 17:24:47 GMT -05:00";
+window.output["stats"] = [[{"elapsed":"00:00:01","fail":1,"label":"Critical Tests","pass":2},{"elapsed":"00:00:01","fail":1,"label":"All Tests","pass":2}],[],[{"elapsed":"00:00:02","fail":1,"id":"s1","label":"ArgsParserTests","name":"ArgsParserTests","pass":2}]];
 </script>
 <script type="text/javascript">
-window.output["generatedMillis"] = 1009;
+window.output["baseMillis"] = 1455258304109;
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1455233085991;
+window.output["generatedMillis"] = 1891;
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:00","fail":1,"label":"Critical Tests","pass":0},{"elapsed":"00:00:00","fail":1,"label":"All Tests","pass":0}],[],[{"elapsed":"00:00:01","fail":1,"id":"s1","label":"ArgsParserTests","name":"ArgsParserTests","pass":0}]];
+window.output["generatedTimestamp"] = "20160212 00:25:06 GMT -05:00";
 </script>
 <script type="text/javascript">
 window.settings = {"background":{"fail":"#f66","nonCriticalFail":"#9e9","pass":"#9e9"},"logURL":"log.html","title":""};

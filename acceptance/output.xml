@@ -1,34 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 2.9 (Jython 2.7.0 on java1.8.0_66)" generated="20160211 17:24:45.949">
-<suite source="C:\Users\Grady\Documents\GitHub\CS310-Software-Engineering-I\acceptance\ArgsParserTests.txt" name="ArgsParserTests" id="s1">
-<test id="s1-t1">
-<status critical="yes" endtime="20160211 17:24:47.155" starttime="20160211 17:24:47.146" status="FAIL">Test case name cannot be empty.</status>
+<robot generator="Robot 3.0 (Jython 2.7.0 on java1.8.0_60)" generated="20160212 00:25:04.076">
+<suite source="C:\Users\adam\Documents\Computer Science\Software Engineering\CS310-Software-Engineering-I\acceptance\ArgsParserTests.txt" name="ArgsParserTests" id="s1">
+<test name="Test Volume Calculator Normal Function" id="s1-t1">
+<kw library="ArgsParserKeywords" name="Start Volume Calculator With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>5</arg>
+<arg>2</arg>
+</arguments>
+<status endtime="20160212 00:25:04.974" starttime="20160212 00:25:04.936" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Length">
+<assign>
+<var>${length}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.022">${length} = 7</msg>
+<status endtime="20160212 00:25:05.025" starttime="20160212 00:25:04.986" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>7</arg>
+<arg>${length}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.051" starttime="20160212 00:25:05.033" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Width">
+<assign>
+<var>${width}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.068">${width} = 5</msg>
+<status endtime="20160212 00:25:05.072" starttime="20160212 00:25:05.057" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>5</arg>
+<arg>${width}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.096" starttime="20160212 00:25:05.079" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Height">
+<assign>
+<var>${height}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.114">${height} = 2</msg>
+<status endtime="20160212 00:25:05.119" starttime="20160212 00:25:05.104" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>2</arg>
+<arg>${height}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.142" starttime="20160212 00:25:05.126" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Program Output">
+<assign>
+<var>${output}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.160">${output} = 70.0</msg>
+<status endtime="20160212 00:25:05.167" starttime="20160212 00:25:05.149" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>70.0</arg>
+</arguments>
+<status endtime="20160212 00:25:05.189" starttime="20160212 00:25:05.174" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20160212 00:25:05.213" starttime="20160212 00:25:04.916" status="PASS"></status>
 </test>
-<status endtime="20160211 17:24:47.183" starttime="20160211 17:24:45.991" status="FAIL"></status>
+<test name="Test Unrecognized Argument" id="s1-t2">
+<kw library="ArgsParserKeywords" name="Start Volume Calculator With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>5</arg>
+<arg>2</arg>
+<arg>43</arg>
+</arguments>
+<msg level="INFO" timestamp="20160212 00:25:05.273">usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: unrecognized arguments: 43</msg>
+<status endtime="20160212 00:25:05.278" starttime="20160212 00:25:05.255" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Program Output">
+<assign>
+<var>${output}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.292">${output} = 70.0</msg>
+<status endtime="20160212 00:25:05.296" starttime="20160212 00:25:05.284" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${output}</arg>
+<arg>${expected}</arg>
+</arguments>
+<msg level="FAIL" timestamp="20160212 00:25:05.319">70.0 != usage: java VolumeCalculator length width height
+VolumeCalcultor.java: error: unrecognized arguments: 43</msg>
+<status endtime="20160212 00:25:05.323" starttime="20160212 00:25:05.303" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20160212 00:25:05.333" starttime="20160212 00:25:05.238" status="FAIL">70.0 != usage: java VolumeCalculator length width height
+VolumeCalcultor.java: error: unrecognized arguments: 43</status>
+</test>
+<test name="Test Absurd Program Normal Function" id="s1-t3">
+<kw library="ArgsParserKeywords" name="Start Absurd Program With Arguments">
+<arguments>
+<arg>dog</arg>
+<arg>2</arg>
+<arg>true</arg>
+<arg>3.5</arg>
+</arguments>
+<status endtime="20160212 00:25:05.400" starttime="20160212 00:25:05.386" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Pet">
+<assign>
+<var>${pet}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.413">${pet} = dog</msg>
+<status endtime="20160212 00:25:05.418" starttime="20160212 00:25:05.404" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>dog</arg>
+<arg>${pet}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.439" starttime="20160212 00:25:05.423" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Number">
+<assign>
+<var>${number}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.454">${number} = 2</msg>
+<status endtime="20160212 00:25:05.457" starttime="20160212 00:25:05.444" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>2</arg>
+<arg>${number}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.477" starttime="20160212 00:25:05.463" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Rainy">
+<assign>
+<var>${rainy}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.491">${rainy} = true</msg>
+<status endtime="20160212 00:25:05.494" starttime="20160212 00:25:05.483" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>true</arg>
+<arg>${rainy}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.518" starttime="20160212 00:25:05.501" status="PASS"></status>
+</kw>
+<kw library="ArgsParserKeywords" name="Get Bathrooms">
+<assign>
+<var>${bathrooms}</var>
+</assign>
+<msg level="INFO" timestamp="20160212 00:25:05.533">${bathrooms} = 3.5</msg>
+<status endtime="20160212 00:25:05.535" starttime="20160212 00:25:05.524" status="PASS"></status>
+</kw>
+<kw library="BuiltIn" name="Should Be Equal">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>3.5</arg>
+<arg>${bathrooms}</arg>
+</arguments>
+<status endtime="20160212 00:25:05.555" starttime="20160212 00:25:05.541" status="PASS"></status>
+</kw>
+<status critical="yes" endtime="20160212 00:25:05.572" starttime="20160212 00:25:05.373" status="PASS"></status>
+</test>
+<status endtime="20160212 00:25:05.612" starttime="20160212 00:25:04.109" status="FAIL"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1">Critical Tests</stat>
-<stat pass="0" fail="1">All Tests</stat>
+<stat pass="2" fail="1">Critical Tests</stat>
+<stat pass="2" fail="1">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="0" fail="1" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
+<stat pass="2" fail="1" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
 </suite>
 </statistics>
 <errors>
-<msg level="ERROR" timestamp="20160211 17:24:47.068">Error in file 'C:\Users\Grady\Documents\GitHub\CS310-Software-Engineering-I\acceptance\ArgsParserTests.txt': Importing test library 'ArgsParserKeywords' failed: ImportError: No module named ArgsParserKeywords
-Traceback (most recent call last):
-  None
-PYTHONPATH:
-  C:\Users\Grady\Software\Lib
-  C:\Users\Grady\Software\robotframework-2.9.jar\Lib
-  __classpath__
-  __pyclasspath__/
-CLASSPATH:
-  .
-  ..\build\classes\main
-  C:\Users\Grady\Software\robotframework-2.9.jar</msg>
 </errors>
 </robot>
