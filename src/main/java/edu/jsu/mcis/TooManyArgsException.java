@@ -2,7 +2,7 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class TooManyArgsException extends RuntimeException{
-	
+	private String exceptionOutput= "";
 	
 	public TooManyArgsException(String[] cla, List<String> argNames, String prgmName){
 		String extraArgs = "";
@@ -14,8 +14,10 @@ public class TooManyArgsException extends RuntimeException{
             args += (argNames.get(i) + " ");
         }
         String argSub = args.substring(0, args.length() - 1); 
-        System.out.println("usage: java "+ prgmName+" "+argSub + "\n" + prgmName + ".java: error: unrecognized arguments:"+extraArgs);
-        
-        
+		exceptionOutput ="usage: java "+ prgmName+" "+argSub + "\n" + prgmName + ".java: error: unrecognized arguments:"+extraArgs;
+        System.out.println(getExceptionOutput());
     }
+	public String getExceptionOutput(){
+		return exceptionOutput;
+	}
 }

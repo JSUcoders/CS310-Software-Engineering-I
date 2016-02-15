@@ -1,10 +1,11 @@
 package edu.jsu.mcis;
 import java.util.*;
 public class TooFewArgsException extends RuntimeException {
-    
+    private String exceptionOutput= "";
     
     public TooFewArgsException(String[] cla, List<String> argNames, String prgmName){
         String args = "";
+		
         for(int i =0;i<argNames.size();i++){
             args += (argNames.get(i) + " ");
         }
@@ -23,11 +24,11 @@ public class TooFewArgsException extends RuntimeException {
             
             
         }
-        
-        System.out.println("usage: java "+ prgmName+" "+argSub + "\n" + prgmName + ".java: error: the following arguments are required: "+missingArgNames);
-        
-        
+        exceptionOutput ="usage: java "+ prgmName+" "+argSub + "\n" + prgmName + ".java: error: the following arguments are required: "+missingArgNames;
+        System.out.println(getExceptionOutput());
     }
-    
+    public String getExceptionOutput(){
+		return exceptionOutput;
+	}
     
 }

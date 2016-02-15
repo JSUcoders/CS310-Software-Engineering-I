@@ -2,7 +2,7 @@ import edu.jsu.mcis.*;
 import java.util.Arrays;
 public class ArgsParserKeywords{
 	private ArgsParser p;
-	
+	private String programOutput;
 	public void startVolumeCalculatorWithArguments(String[] args){
         String message = "VolumeCalculator";
         String description = "Calculate the volume of a box";
@@ -10,12 +10,29 @@ public class ArgsParserKeywords{
         p.setProgramName(message);
         p.setProgramDescription(description);
         try{
-            
             p.addArg("length");
             p.addArg("width");
             p.addArg("height");
             p.parse(args);
-        }catch(RuntimeException r){
+			
+			float length = Float.parseFloat(p.getArg("length"));
+			float width = Float.parseFloat(p.getArg("width"));
+			float height = Float.parseFloat(p.getArg("height"));
+			setProgramOutput(String.valueOf(length * width * height));
+		}
+		catch(HelpException e){
+			setProgramOutput(e.getExceptionOutput());
+		}
+		
+		catch(TooFewArgsException e){
+			setProgramOutput(e.getExceptionOutput());
+		}
+		
+		catch(TooManyArgsException e){
+			setProgramOutput(e.getExceptionOutput());
+		}
+        
+		catch(RuntimeException r){
             
         }
 		
@@ -35,13 +52,18 @@ public class ArgsParserKeywords{
 	
 	public String getProgramOutput(){
         
+		/**
 		float length = Float.parseFloat(p.getArg("length"));
 		float width = Float.parseFloat(p.getArg("width"));
 		float height = Float.parseFloat(p.getArg("height"));
 		
 		return String.valueOf(length * width * height);
+		**/
+		return programOutput;
 	}
-	
+	public void setProgramOutput(String a){
+		programOutput = a;
+	};
 	public void startAbsurdProgramWithArguments(String[] args){
 		p = new ArgsParser();
 		p.addArg("pet");
