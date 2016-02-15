@@ -5,3 +5,7 @@
 #Project files
 [Bb]uild/
 
+#All class files
+*.class
+
+
