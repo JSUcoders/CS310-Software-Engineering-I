@@ -7,6 +7,3 @@
 
 #Gradle system files
 .gradle/
-
-#runacceptance
-runacceptance.bat
