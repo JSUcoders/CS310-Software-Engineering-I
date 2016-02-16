@@ -8,4 +8,5 @@
 #All class files
 *.class
 
-
+#Gradle system files
+.gradle/
