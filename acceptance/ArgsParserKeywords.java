@@ -89,4 +89,23 @@ public class ArgsParserKeywords{
 	public String getBathrooms(){
 		return p.getArg("bathrooms");
 	}
+	public void startProgramWithArguments(String[] args){
+		ArgsParser q = new ArgsParser();
+		setProgramOutput(" ");
+		String message = "VolumeCalculator";
+        String description = "Calculate the volume of a box.";
+        
+        q.setProgramName(message);
+        q.setProgramDescription(description);
+        
+		try{
+            q.addArg("length");
+            q.addArg("width");
+            q.addArg("height");
+            q.parse(args);
+		}
+		catch(HelpException e){
+			setProgramOutput(e.getExceptionOutput());
+		}
+	}
 }
