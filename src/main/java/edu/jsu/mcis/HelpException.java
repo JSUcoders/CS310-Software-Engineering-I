@@ -9,7 +9,7 @@ public class HelpException extends RuntimeException{
             args += (argNames.get(i) + " ");
         }
         String argSub = args.substring(0, args.length() - 1);
-		exceptionOutput ="usage: java "+ prgmName+" "+argSub+"\n"+prgmDescript;
+		exceptionOutput ="usage: java "+ prgmName+" "+argSub+"\n"+prgmDescript+"\npositional arguments:"+"\nlength the length of the box (float)"+"\nwidth the width of the box(float)"+"\nheight the height of the box(float)";
         System.out.println(getExceptionOutput());
     }
 	public String getExceptionOutput(){
