@@ -67,7 +67,7 @@ public class ArgsParser{
     
     private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs, String prgmName, String prgmDescript){
        
-        if(cla[0].equals("-h") || cla[0].equals("-help")){
+        if(cla[0].equals("-h") || cla[0].equals("--help")){
             throw new HelpException(numArgs, numNamedArgs, prgmName, prgmDescript); 
         }
     }
