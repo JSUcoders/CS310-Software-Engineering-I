@@ -84,6 +84,13 @@ public class ArgsParserTest{
         assertEquals("Test", p.getProgramName());
     }
     
+	@Test
+	public void testDataTypeIsAddedCorrectly(){
+		ArgsParser p = new ArgsParser();
+		p.addArg("length", float.class);
+		
+		assertEquals(ArgsParser.DataType.FLOAT, p.getDataType("length"));
+	}
    
     
 }

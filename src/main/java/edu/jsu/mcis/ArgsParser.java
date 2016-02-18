@@ -3,13 +3,17 @@ import java.util.*;
 
 public class ArgsParser{
     
+	protected enum DataType{INT, FLOAT, BOOL, STRING};
+	
     private List<String> argValues;
     private List<String> argNames;
+	private List<DataType> argDataType;
     private String programName;
     private String programDescription;
     public ArgsParser(){
         argValues = new ArrayList<String>();
         argNames = new ArrayList<String>();
+		argDataType = new ArrayList<DataType>();
         programName = "";
         programDescription = "";
     }
@@ -44,6 +48,23 @@ public class ArgsParser{
     public void addArg(String name){
         argNames.add(name);
     }
+	
+	public void addArg(String name, Class<?> t){
+		argNames.add(name);
+		if(t == int.class){
+			argDataType.add(DataType.INT);
+		}
+		else if(t == float.class){
+			argDataType.add(DataType.FLOAT);
+		}
+		else if(t == boolean.class){
+			argDataType.add(DataType.BOOL);
+		}
+		else{
+			argDataType.add(DataType.STRING);
+		}
+		
+	}
     
     private void checkForTooFewArgs(String[] cla, List<String> numNamedArgs, String prgmName)  {
     
@@ -95,6 +116,15 @@ public class ArgsParser{
        
         
     }
+	
+	public DataType getDataType(String name){
+		for(int i = 0; i < getNumOfNameArgs();i++){
+			if(name.equals(argNames.get(i))){
+				return argDataType.get(i);
+			}
+		}
+		return DataType.STRING;
+	}
     
     
 }
