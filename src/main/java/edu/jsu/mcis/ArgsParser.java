@@ -71,6 +71,13 @@ public class ArgsParser{
             throw new HelpException(numArgs, numNamedArgs, prgmName, prgmDescript); 
         }
     }
+	
+	private void checkForInvalidArgument(List<String>nameOfArgs,String prgmName){
+		
+		
+		
+		
+	}
     
     public void parse(String[] cla) {
         
