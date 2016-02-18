@@ -6,6 +6,7 @@ public class ArgsParserKeywords{
 	public void startVolumeCalculatorWithArguments(String[] args){
         String message = "VolumeCalculator";
         String description = "Calculate the volume of a box";
+        String[] argDescripts = {"length the length of the box" , "width the width of the box", "height the height of the box"};
         p = new ArgsParser();
         p.setProgramName(message);
         p.setProgramDescription(description);
@@ -13,6 +14,7 @@ public class ArgsParserKeywords{
             p.addArg("length");
             p.addArg("width");
             p.addArg("height");
+            p.addArgDescriptions(argDescripts);
             p.parse(args);
 			
 			float length = Float.parseFloat(p.getArg("length"));
@@ -94,7 +96,7 @@ public class ArgsParserKeywords{
 		setProgramOutput(" ");
 		String message = "VolumeCalculator";
         String description = "Calculate the volume of a box.";
-        
+        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         q.setProgramName(message);
         q.setProgramDescription(description);
         
@@ -102,6 +104,7 @@ public class ArgsParserKeywords{
             q.addArg("length");
             q.addArg("width");
             q.addArg("height");
+            q.addArgDescriptions(argDescripts);
             q.parse(args);
 		}
 		catch(HelpException e){
