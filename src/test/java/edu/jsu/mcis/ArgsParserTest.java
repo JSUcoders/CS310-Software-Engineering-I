@@ -63,10 +63,12 @@ public class ArgsParserTest{
         ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
         p.setProgramDescription("Calculate the volume of a box");
+        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"-h"};
         p.addArg("length");
         p.addArg("width");
         p.addArg("height");
+        p.addArgDescriptions(argDescripts);
         p.parse(s);
     }
     

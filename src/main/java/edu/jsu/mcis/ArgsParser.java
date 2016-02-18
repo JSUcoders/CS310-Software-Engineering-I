@@ -7,14 +7,21 @@ public class ArgsParser{
     private List<String> argNames;
     private String programName;
     private String programDescription;
+    private String[] argDescriptions;
     public ArgsParser(){
         argValues = new ArrayList<String>();
         argNames = new ArrayList<String>();
         programName = "";
         programDescription = "";
+        
     }
     
-  
+    public void addArgDescriptions(String[] positionalArgs){
+        argDescriptions = new String[argNames.size()];
+        for(int i =0; i < positionalArgs.length;i++){
+            argDescriptions[i] = positionalArgs[i];
+        }
+    }
     
     public void setProgramDescription(String d){
       programDescription = d; 
@@ -65,10 +72,10 @@ public class ArgsParser{
 	
 	}
     
-    private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs, String prgmName, String prgmDescript){
+    private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs, String prgmName, String prgmDescript, String[] argDescript){
        
         if(cla[0].equals("-h") || cla[0].equals("--help")){
-            throw new HelpException(numArgs, numNamedArgs, prgmName, prgmDescript); 
+            throw new HelpException(numNamedArgs, prgmName, prgmDescript, argDescriptions); 
         }
     }
 	
@@ -85,7 +92,7 @@ public class ArgsParser{
         for(int i =0; i < cla.length;i++){
              argValues.add(cla[i]);
         } 
-        checkForHelp(cla, argValues, argNames, programName, programDescription);
+        checkForHelp(cla, argValues, argNames, programName, programDescription, argDescriptions);
         checkForTooFewArgs(cla, argNames, programName);
 		checkForTooManyArgs(cla, argNames, programName);
         
