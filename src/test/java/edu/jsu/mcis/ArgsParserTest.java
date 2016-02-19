@@ -93,6 +93,14 @@ public class ArgsParserTest{
 		
 		assertEquals(ArgsParser.DataType.FLOAT, p.getDataType("length"));
 	}
+	
+	@Test
+	public void testDefaultDataTypeIsString(){
+		ArgsParser p = new ArgsParser();
+		p.addArg("length");
+		
+		assertEquals(ArgsParser.DataType.STRING, p.getDataType("length"));
+	}
    
     
 }

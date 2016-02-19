@@ -29,13 +29,13 @@ public class InvalidArgumentException extends RuntimeException{
 		
 		
 		
-		public String getExceptionOutput(){
+		/*public String getExceptionOutput(){
 			
 			
 			return exceptionOutput;
 			
 			
-		}
+		}*/
 		
 		
 			

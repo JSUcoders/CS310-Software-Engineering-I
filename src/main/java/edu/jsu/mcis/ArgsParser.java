@@ -54,6 +54,7 @@ public class ArgsParser{
     
     public void addArg(String name){
         argNames.add(name);
+		argDataType.add(DataType.STRING);
     }
 	
 	public void addArg(String name, Class<?> t){
