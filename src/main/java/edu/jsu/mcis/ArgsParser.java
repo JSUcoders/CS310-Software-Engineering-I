@@ -121,10 +121,24 @@ public class ArgsParser{
         
     }
     
-    public String getArg(String name){
+    public Object getArg(String name){
         for(int i =0;i < getNumOfNameArgs();i++){
             if(name.equals(argNames.get(i))){
-                return argValues.get(i);
+                if(argDataType.get(i) == DataType.INT){
+					return Integer.parseInt(argValues.get(i));
+				}
+				
+				else if(argDataType.get(i) == DataType.FLOAT){
+					return Float.parseFloat(argValues.get(i));
+				}
+				
+				else if(argDataType.get(i) == DataType.BOOL){
+					return Boolean.parseBoolean(argValues.get(i));
+				}
+				
+				else{
+					return argValues.get(i);
+				}
             }
         }
         return "";

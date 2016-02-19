@@ -16,7 +16,7 @@ public class ArgsParserTest{
     public void  testArgumentIsAddedCorrectly(){
        ArgsParser p = new ArgsParser();
        p.addArg("length");
-       assertEquals(1,p.getNumOfNameArgs() );
+       assertEquals(1, p.getNumOfNameArgs() );
        
     }
     
