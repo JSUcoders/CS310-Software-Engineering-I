@@ -11,3 +11,5 @@ VolumeCalculator.java //calculates the scientific volume of an object. Should ta
 1.) (8) Allow only string-valued positional arguments and retrieve them from the command-line.
 
 2.) (5) Allow the inclusion of additional descriptive information on the program and each argument and provide named "-h" argument that shows usage and help information by default.
+
+3.) (13) Allow datatype information to be added to arguments so that non-string arguments can be used.
