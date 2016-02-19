@@ -101,6 +101,17 @@ public class ArgsParserTest{
 		
 		assertEquals(ArgsParser.DataType.STRING, p.getDataType("length"));
 	}
+	
+	@Test(expected = InvalidArgumentException.class)
+	public void testInvalidArgExceptionIsThrown(){
+		ArgsParser p = new ArgsParser();
+		String[] s = {"7", "something", "2"};
+		p.addArg("length", float.class);
+		p.addArg("width", float.class);
+		p.addArg("height", float.class);
+		
+		p.parse(s);
+	}
    
     
 }
