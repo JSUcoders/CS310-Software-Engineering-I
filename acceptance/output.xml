@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 3.0 (Jython 2.7.0 on java1.8.0_60)" generated="20160217 12:17:39.832">
+<robot generator="Robot 3.0 (Jython 2.7.0 on java1.8.0_60)" generated="20160222 13:10:41.329">
 <suite source="C:\Users\adam\Documents\Computer Science\Software Engineering\CS310-Software-Engineering-I\acceptance\ArgsParserTests.txt" name="ArgsParserTests" id="s1">
 <test name="Test Volume Calculator Normal Function" id="s1-t1">
 <kw library="ArgsParserKeywords" name="Start Volume Calculator With Arguments">
@@ -8,14 +8,14 @@
 <arg>5</arg>
 <arg>2</arg>
 </arguments>
-<status endtime="20160217 12:17:40.738" starttime="20160217 12:17:40.710" status="PASS"></status>
+<status endtime="20160222 13:10:42.613" starttime="20160222 13:10:42.542" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Length">
 <assign>
 <var>${length}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:40.759">${length} = 7</msg>
-<status endtime="20160217 12:17:40.762" starttime="20160217 12:17:40.749" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:42.649">${length} = 7</msg>
+<status endtime="20160222 13:10:42.654" starttime="20160222 13:10:42.634" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -23,14 +23,14 @@
 <arg>7</arg>
 <arg>${length}</arg>
 </arguments>
-<status endtime="20160217 12:17:40.781" starttime="20160217 12:17:40.767" status="PASS"></status>
+<status endtime="20160222 13:10:42.677" starttime="20160222 13:10:42.660" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Width">
 <assign>
 <var>${width}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:40.795">${width} = 5</msg>
-<status endtime="20160217 12:17:40.798" starttime="20160217 12:17:40.785" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:42.700">${width} = 5</msg>
+<status endtime="20160222 13:10:42.706" starttime="20160222 13:10:42.685" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -38,14 +38,14 @@
 <arg>5</arg>
 <arg>${width}</arg>
 </arguments>
-<status endtime="20160217 12:17:40.821" starttime="20160217 12:17:40.804" status="PASS"></status>
+<status endtime="20160222 13:10:42.755" starttime="20160222 13:10:42.721" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Height">
 <assign>
 <var>${height}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:40.836">${height} = 2</msg>
-<status endtime="20160217 12:17:40.839" starttime="20160217 12:17:40.826" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:42.790">${height} = 2</msg>
+<status endtime="20160222 13:10:42.797" starttime="20160222 13:10:42.777" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -53,14 +53,14 @@
 <arg>2</arg>
 <arg>${height}</arg>
 </arguments>
-<status endtime="20160217 12:17:40.860" starttime="20160217 12:17:40.844" status="PASS"></status>
+<status endtime="20160222 13:10:42.837" starttime="20160222 13:10:42.816" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Program Output">
 <assign>
 <var>${output}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:40.876">${output} = 70.0</msg>
-<status endtime="20160217 12:17:40.878" starttime="20160217 12:17:40.867" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:42.868">${output} = 70.0</msg>
+<status endtime="20160222 13:10:42.873" starttime="20160222 13:10:42.849" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -68,9 +68,9 @@
 <arg>${output}</arg>
 <arg>70.0</arg>
 </arguments>
-<status endtime="20160217 12:17:40.898" starttime="20160217 12:17:40.883" status="PASS"></status>
+<status endtime="20160222 13:10:42.900" starttime="20160222 13:10:42.881" status="PASS"></status>
 </kw>
-<status critical="yes" endtime="20160217 12:17:40.913" starttime="20160217 12:17:40.692" status="PASS"></status>
+<status critical="yes" endtime="20160222 13:10:42.923" starttime="20160222 13:10:42.507" status="PASS"></status>
 </test>
 <test name="Test Unrecognized Argument" id="s1-t2">
 <kw library="ArgsParserKeywords" name="Start Volume Calculator With Arguments">
@@ -80,17 +80,14 @@
 <arg>2</arg>
 <arg>43</arg>
 </arguments>
-<msg level="INFO" timestamp="20160217 12:17:40.963">usage: java VolumeCalculator length width height
-VolumeCalculator.java: error: unrecognized arguments: 43</msg>
-<status endtime="20160217 12:17:40.967" starttime="20160217 12:17:40.949" status="PASS"></status>
+<status endtime="20160222 13:10:43.038" starttime="20160222 13:10:43.013" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Program Output">
 <assign>
 <var>${output}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:40.978">${output} = usage: java VolumeCalculator length width height
-VolumeCalculator.java: error: unrecognized arguments: 43</msg>
-<status endtime="20160217 12:17:40.980" starttime="20160217 12:17:40.972" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:43.068">${output} = 70.0</msg>
+<status endtime="20160222 13:10:43.071" starttime="20160222 13:10:43.049" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -98,9 +95,12 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>${output}</arg>
 <arg>${expected}</arg>
 </arguments>
-<status endtime="20160217 12:17:41.000" starttime="20160217 12:17:40.990" status="PASS"></status>
+<msg level="FAIL" timestamp="20160222 13:10:43.128">70.0 != usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: unrecognized arguments: 43</msg>
+<status endtime="20160222 13:10:43.138" starttime="20160222 13:10:43.079" status="FAIL"></status>
 </kw>
-<status critical="yes" endtime="20160217 12:17:41.005" starttime="20160217 12:17:40.935" status="PASS"></status>
+<status critical="yes" endtime="20160222 13:10:43.156" starttime="20160222 13:10:42.968" status="FAIL">70.0 != usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: unrecognized arguments: 43</status>
 </test>
 <test name="Test Absurd Program Normal Function" id="s1-t3">
 <kw library="ArgsParserKeywords" name="Start Absurd Program With Arguments">
@@ -110,14 +110,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>true</arg>
 <arg>3.5</arg>
 </arguments>
-<status endtime="20160217 12:17:41.054" starttime="20160217 12:17:41.039" status="PASS"></status>
+<status endtime="20160222 13:10:43.350" starttime="20160222 13:10:43.312" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Pet">
 <assign>
 <var>${pet}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:41.066">${pet} = dog</msg>
-<status endtime="20160217 12:17:41.067" starttime="20160217 12:17:41.059" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:43.383">${pet} = dog</msg>
+<status endtime="20160222 13:10:43.389" starttime="20160222 13:10:43.364" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -125,14 +125,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>dog</arg>
 <arg>${pet}</arg>
 </arguments>
-<status endtime="20160217 12:17:41.083" starttime="20160217 12:17:41.073" status="PASS"></status>
+<status endtime="20160222 13:10:43.428" starttime="20160222 13:10:43.415" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Number">
 <assign>
 <var>${number}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:41.097">${number} = 2</msg>
-<status endtime="20160217 12:17:41.100" starttime="20160217 12:17:41.090" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:43.448">${number} = 2</msg>
+<status endtime="20160222 13:10:43.451" starttime="20160222 13:10:43.438" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -140,14 +140,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>2</arg>
 <arg>${number}</arg>
 </arguments>
-<status endtime="20160217 12:17:41.115" starttime="20160217 12:17:41.106" status="PASS"></status>
+<status endtime="20160222 13:10:43.471" starttime="20160222 13:10:43.457" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Rainy">
 <assign>
 <var>${rainy}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:41.129">${rainy} = true</msg>
-<status endtime="20160217 12:17:41.132" starttime="20160217 12:17:41.122" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:43.503">${rainy} = true</msg>
+<status endtime="20160222 13:10:43.509" starttime="20160222 13:10:43.486" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -155,14 +155,14 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>true</arg>
 <arg>${rainy}</arg>
 </arguments>
-<status endtime="20160217 12:17:41.149" starttime="20160217 12:17:41.136" status="PASS"></status>
+<status endtime="20160222 13:10:43.542" starttime="20160222 13:10:43.515" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Bathrooms">
 <assign>
 <var>${bathrooms}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:41.167">${bathrooms} = 3.5</msg>
-<status endtime="20160217 12:17:41.170" starttime="20160217 12:17:41.159" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:43.580">${bathrooms} = 3.5</msg>
+<status endtime="20160222 13:10:43.582" starttime="20160222 13:10:43.568" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
@@ -170,56 +170,61 @@ VolumeCalculator.java: error: unrecognized arguments: 43</msg>
 <arg>3.5</arg>
 <arg>${bathrooms}</arg>
 </arguments>
-<status endtime="20160217 12:17:41.184" starttime="20160217 12:17:41.175" status="PASS"></status>
+<status endtime="20160222 13:10:43.620" starttime="20160222 13:10:43.590" status="PASS"></status>
 </kw>
-<status critical="yes" endtime="20160217 12:17:41.204" starttime="20160217 12:17:41.025" status="PASS"></status>
+<status critical="yes" endtime="20160222 13:10:43.669" starttime="20160222 13:10:43.281" status="PASS"></status>
 </test>
 <test name="Test Usage Message" id="s1-t4">
 <kw library="ArgsParserKeywords" name="Start Program With Arguments">
 <arguments>
 <arg>-h</arg>
 </arguments>
-<msg level="INFO" timestamp="20160217 12:17:41.251">usage: java VolumeCalculator length width height
-Calculate the volume of a box.
-positional arguments:
-length the length of the box(float)
-width the width of the box(float)
-height the height of the box(float)</msg>
-<status endtime="20160217 12:17:41.256" starttime="20160217 12:17:41.241" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:43.770">usage: java VolumeCalculator length width heightVolumeCalculator.java: error: the following arguments are required: width height</msg>
+<msg level="FAIL" timestamp="20160222 13:10:43.827">TooFewArgsException</msg>
+<status endtime="20160222 13:10:43.844" starttime="20160222 13:10:43.723" status="FAIL"></status>
+</kw>
+<status critical="yes" endtime="20160222 13:10:43.851" starttime="20160222 13:10:43.710" status="FAIL">TooFewArgsException</status>
+</test>
+<test name="Test Incorrect Datatype Message" id="s1-t5">
+<kw library="ArgsParserKeywords" name="Start Program With Arguments">
+<arguments>
+<arg>7</arg>
+<arg>something</arg>
+<arg>2</arg>
+</arguments>
+<status endtime="20160222 13:10:43.990" starttime="20160222 13:10:43.971" status="PASS"></status>
 </kw>
 <kw library="ArgsParserKeywords" name="Get Program Output">
 <assign>
 <var>${output}</var>
 </assign>
-<msg level="INFO" timestamp="20160217 12:17:41.268">${output} = usage: java VolumeCalculator length width height
-Calculate the volume of a box.
-positional arguments:
-length the length of the box(float)
-width the width of the box(float)
-height the height of the box...</msg>
-<status endtime="20160217 12:17:41.273" starttime="20160217 12:17:41.261" status="PASS"></status>
+<msg level="INFO" timestamp="20160222 13:10:44.033">${output} =  </msg>
+<status endtime="20160222 13:10:44.037" starttime="20160222 13:10:44.010" status="PASS"></status>
 </kw>
 <kw library="BuiltIn" name="Should Be Equal">
 <doc>Fails if the given objects are unequal.</doc>
 <arguments>
-<arg>${expected2}</arg>
 <arg>${output}</arg>
+<arg>${expected3}</arg>
 </arguments>
-<status endtime="20160217 12:17:41.292" starttime="20160217 12:17:41.278" status="PASS"></status>
+<msg level="FAIL" timestamp="20160222 13:10:44.063">  != usage: java VolumeCalculator length width height
+VolumeCalcultor.java: error: argument width: invalid float value: something</msg>
+<status endtime="20160222 13:10:44.067" starttime="20160222 13:10:44.041" status="FAIL"></status>
 </kw>
-<status critical="yes" endtime="20160217 12:17:41.297" starttime="20160217 12:17:41.226" status="PASS"></status>
+<status critical="yes" endtime="20160222 13:10:44.077" starttime="20160222 13:10:43.939" status="FAIL">  != usage: java VolumeCalculator length width height
+VolumeCalcultor.java: error: argument width: invalid float value: something</status>
 </test>
-<status endtime="20160217 12:17:41.333" starttime="20160217 12:17:39.868" status="PASS"></status>
+<status endtime="20160222 13:10:44.235" starttime="20160222 13:10:41.370" status="FAIL"></status>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="0">Critical Tests</stat>
-<stat pass="4" fail="0">All Tests</stat>
+<stat pass="2" fail="3">Critical Tests</stat>
+<stat pass="2" fail="3">All Tests</stat>
 </total>
 <tag>
 </tag>
 <suite>
-<stat pass="4" fail="0" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
+<stat pass="2" fail="3" name="ArgsParserTests" id="s1">ArgsParserTests</stat>
 </suite>
 </statistics>
 <errors>
