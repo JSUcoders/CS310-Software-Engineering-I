@@ -96,11 +96,19 @@ public class ArgsParser{
         
     }
     
+<<<<<<< HEAD
 	private void checkForTooManyArgs(String[] cla, List<String> argNms) {
         
 		if(cla.length > argNames.size()){
 		
 			throw new TooManyArgsException(makePreMessage(), cla, argNms);
+=======
+	private void checkForTooManyArgs(String pM, String prgName, String[] cla, List<String> argNms) {
+        
+		if(cla.length > argNames.size()){
+		
+			throw new TooManyArgsException(pM, prgName, cla, argNms);
+>>>>>>> origin/Scrum-01
 		
 		}
 	

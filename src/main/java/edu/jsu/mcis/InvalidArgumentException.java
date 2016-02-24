@@ -5,29 +5,11 @@ public class InvalidArgumentException extends RuntimeException{
 	
 	private String exceptionOutput="";
 	
-	
-	
-	
-	public InvalidArgumentException(List<String>argNames,String programName ){
-		
-		String args= "";
-		
-		
-		for(int i=0;i<argNames.size();i++){
-			
-			args+=(argNames.get(i)+ " ");
-			
-			
-			
-		}
-		
-		
-		String argSub = args.substring(0, args.length()-1);
-		exceptionOutput= "usage: java"+programName+"  "+argSub+"\n"+programName+".java:"+" error: argument ";
-		
-		
-		
-		
+	public InvalidArgumentException(String preMsg, String programName,List<String> argNms, List<String> argVls, List<ArgsParser.DataType> argDataType){
+		for(int i =0; i < argNms.size();i++){
+            //(/*argValue at certain index can not be parsed into datatype at same index, then argName at same index should be known*/)
+        }
+		exceptionOutput= preMsg +"\n"+programName+".java:"+" error: argument "/*wrongArg invalid datatypeofarg + argthatswrong*/;
 		
 		/*public String getExceptionOutput(){
 			
@@ -36,19 +18,8 @@ public class InvalidArgumentException extends RuntimeException{
 			
 			
 		}*/
-		
-		
-			
-			
-			
-			
-			
-			
 			
 		}
-		
-		
-		
 		
 	}
 	
