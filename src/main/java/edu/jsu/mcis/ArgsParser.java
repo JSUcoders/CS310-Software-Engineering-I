@@ -106,12 +106,12 @@ public class ArgsParser{
 	
 	}
     
-    /*private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs, String prgmName, String prgmDescript, String[] argDescript){
+    private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
        
         if(cla[0].equals("-h") || cla[0].equals("--help")){
-            throw new HelpException(numNamedArgs, prgmName, prgmDescript, argDescriptions); 
+            throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
         }
-    }*/
+    }
 	
 	private void checkForInvalidArgument(List<String>nameOfArgs,String prgmName){
 		
@@ -126,7 +126,7 @@ public class ArgsParser{
         for(int i =0; i < cla.length;i++){
              argValues.add(cla[i]);
         } 
-        //checkForHelp(cla, argValues, argNames, programName, programDescription, argDescriptions);
+        checkForHelp(cla, programDescription, argDescriptions);
         checkForTooFewArgs(makePreMessage(), programName, cla, argNames);
 		//checkForTooManyArgs(cla, argNames, programName);
         
