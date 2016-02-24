@@ -96,15 +96,15 @@ public class ArgsParser{
         
     }
     
-	/*private void checkForTooManyArgs(String pM, String prgmName, String[] cla  ) {
+	private void checkForTooManyArgs(String pM, String prgName, String[] cla, List<String> argNms) {
         
 		if(cla.length > argNames.size()){
 		
-			throw new TooManyArgsException(pM, prgmName, cla);
+			throw new TooManyArgsException(pM, prgName, cla, argNms);
 		
 		}
 	
-	}*/
+	}
     
     /*private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs, String prgmName, String prgmDescript, String[] argDescript){
        
