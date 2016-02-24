@@ -86,25 +86,25 @@ public class ArgsParser{
 		
 	}
     
-    private void checkForTooFewArgs(String pM, String prgName, String[] cla, List<String> argNms)  {
+    private void checkForTooFewArgs(String[] cla, List<String> argNms)  {
     
         if(cla.length < argNames.size()){
             
-            throw new TooFewArgsException(pM, prgName, cla, argNms);
+            throw new TooFewArgsException(makePreMessage(), cla, argNms);
             
         }
         
     }
     
-	/*private void checkForTooManyArgs(String pM, String prgmName, String[] cla  ) {
+	private void checkForTooManyArgs(String[] cla, List<String> argNms) {
         
 		if(cla.length > argNames.size()){
 		
-			throw new TooManyArgsException(pM, prgmName, cla);
+			throw new TooManyArgsException(makePreMessage(), cla, argNms);
 		
 		}
 	
-	}*/
+	}
     
     private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
        
@@ -127,8 +127,8 @@ public class ArgsParser{
              argValues.add(cla[i]);
         } 
         checkForHelp(cla, programDescription, argDescriptions);
-        checkForTooFewArgs(makePreMessage(), programName, cla, argNames);
-		//checkForTooManyArgs(cla, argNames, programName);
+        checkForTooFewArgs(cla, argNames);
+		checkForTooManyArgs(cla, argNames);
         
         
     }
