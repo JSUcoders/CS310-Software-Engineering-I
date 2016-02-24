@@ -20,6 +20,18 @@ public class ArgsParser{
         
     }
     
+    private String makePreMessage(){
+       
+        String names = "";
+        for(int i =0; i < argNames.size();i++){
+            names += argNames.get(i) + " ";
+        }
+        String namesSub = names.substring(0, names.length() - 1); 
+        String preMessage = "usage: java "+ programName+" "+ namesSub; 
+        return preMessage;
+            
+        
+    }
     public void addArgDescriptions(String[] positionalArgs){
         argDescriptions = new String[argNames.size()];
         for(int i =0; i < positionalArgs.length;i++){
@@ -74,30 +86,30 @@ public class ArgsParser{
 		
 	}
     
-    private void checkForTooFewArgs(String[] cla, List<String> numNamedArgs, String prgmName)  {
+    private void checkForTooFewArgs(String pM, String prgName, String[] cla, List<String> argNms)  {
     
         if(cla.length < argNames.size()){
             
-            throw new TooFewArgsException(cla, numNamedArgs, prgmName);
+            throw new TooFewArgsException(pM, prgName, cla, argNms);
             
         }
         
     }
     
-	private void checkForTooManyArgs(String[] cla, List<String> numNamedArgs, String prgmName) {
+	private void checkForTooManyArgs(String pM, String prgName, String[] cla, List<String> argNms) {
         
 		if(cla.length > argNames.size()){
 		
-			throw new TooManyArgsException(cla, numNamedArgs, prgmName);
+			throw new TooManyArgsException(pM, prgName, cla, argNms);
 		
 		}
 	
 	}
     
-    private void checkForHelp(String[] cla, List<String> numArgs, List<String> numNamedArgs, String prgmName, String prgmDescript, String[] argDescript){
+    private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
        
         if(cla[0].equals("-h") || cla[0].equals("--help")){
-            throw new HelpException(numNamedArgs, prgmName, prgmDescript, argDescriptions); 
+            throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
         }
     }
 	
@@ -114,32 +126,31 @@ public class ArgsParser{
         for(int i =0; i < cla.length;i++){
              argValues.add(cla[i]);
         } 
-        checkForHelp(cla, argValues, argNames, programName, programDescription, argDescriptions);
-        checkForTooFewArgs(cla, argNames, programName);
-		checkForTooManyArgs(cla, argNames, programName);
+        checkForHelp(cla, programDescription, argDescriptions);
+        checkForTooFewArgs(makePreMessage(), programName, cla, argNames);
+		//checkForTooManyArgs(cla, argNames, programName);
         
         
     }
-    
 	
 	//overload getArg? Defeats the purpose of having argDataType, though
     public Object getArg(String name){
         for(int i =0;i < getNumOfNameArgs();i++){
             if(name.equals(argNames.get(i))){
                 if(argDataType.get(i) == DataType.INT){
-					return Integer.parseInt(argValues.get(i));
+					return Integer.toString(Integer.parseInt(argValues.get(i)));
 				}
 				
 				else if(argDataType.get(i) == DataType.FLOAT){
-					return Float.parseFloat(argValues.get(i));
+					return Float.toString(Float.parseFloat(argValues.get(i)));
 				}
 				
 				else if(argDataType.get(i) == DataType.BOOL){
-					return Boolean.parseBoolean(argValues.get(i));
+					return Boolean.toString(Boolean.parseBoolean(argValues.get(i)));
 				}
 				
 				else{
-					return argValues.get(i);
+					return (String)argValues.get(i);
 				}
             }
         }

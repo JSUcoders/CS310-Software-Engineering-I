@@ -41,16 +41,16 @@ public class ArgsParserKeywords{
 		
 	}
 	
-	public float getLength(){
-		return (float) p.getArg("length");
+	public Object getLength(){
+		return p.getArg("length");
 	}
 	
-	public float getWidth(){
-		return (float) p.getArg("width");
+	public Object getWidth(){
+		return p.getArg("width");
 	}
 	
-	public float getHeight(){
-		return (float) p.getArg("height");
+	public Object getHeight(){
+		return p.getArg("height");
 	}
 	
 	public String getProgramOutput(){
@@ -77,20 +77,20 @@ public class ArgsParserKeywords{
 		p.parse(args);
 	}
 	
-	public String getPet(){
-		return (String) p.getArg("pet");
+	public Object getPet(){
+		return p.getArg("pet");
 	}
 	
-	public String getNumber(){
-		return (String) p.getArg("number");
+	public Object getNumber(){
+		return p.getArg("number");
 	}
 	
-	public String getRainy(){
-		return (String) p.getArg("rainy");
+	public Object getRainy(){
+		return p.getArg("rainy");
 	}
 	
-	public String getBathrooms(){
-		return (String) p.getArg("bathrooms");
+	public Object getBathrooms(){
+		return p.getArg("bathrooms");
 	}
 	public void startProgramWithArguments(String[] args){
 		ArgsParser q = new ArgsParser();
