@@ -121,6 +121,8 @@ public class ArgsParser{
         
     }
     
+	
+	//overload getArg? Defeats the purpose of having argDataType, though
     public Object getArg(String name){
         for(int i =0;i < getNumOfNameArgs();i++){
             if(name.equals(argNames.get(i))){

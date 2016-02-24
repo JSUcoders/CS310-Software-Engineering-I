@@ -13,13 +13,13 @@ Library           ArgsParserKeywords
 | *Test Case*                            | *Action*                              | *Argument*         | *Argument*   | *Argument* | *Argument* |
 | Test Volume Calculator Normal Function | Start Volume Calculator With Arguments | 7                  | 5            | 2          |            |
 |                                        | ${length}=                            | ArgsParserKeywords.Get Length         |              |            |            |
-|                                        | Should Be Equal                       | 7                  | ${length}    |            |            |
+|                                        | Should Be Equal As Numbers                      | ${length}                  | 7.0    |            |            |
 |                                        | ${width}=                             | Get Width          |              |            |            |
-|                                        | Should Be Equal                       | 5                  | ${width}     |            |            |
+|                                        | Should Be Equal As Numbers                      | 5.0                  | ${width}     |            |            |
 |                                        | ${height}=                            | Get Height         |              |            |            |
-|                                        | Should Be Equal                       | 2                  | ${height}    |            |            |
+|                                        | Should Be Equal As Numbers                      | 2.0                  | ${height}    |            |            |
 |                                        | ${output}=                            | Get Program Output |              |            |            |
-|                                        | Should Be Equal                       | ${output}          | 70.0           |            |            |
+|                                        | Should Be Equal As Numbers                      | ${output}          | 70.0           |            |            |
 | Test Unrecognized Argument             | Start Volume Calculator With Arguments | 7                  | 5            | 2          | 43         |
 |                                        | ${output}=                            | Get Program Output |              |            |            |
 |                                        | Should Be Equal                       | ${output}          | ${expected}           |            |            |

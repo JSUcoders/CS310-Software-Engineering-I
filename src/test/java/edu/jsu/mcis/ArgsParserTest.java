@@ -102,6 +102,21 @@ public class ArgsParserTest{
 		assertEquals(ArgsParser.DataType.STRING, p.getDataType("length"));
 	}
 	
+	@Test
+	public void testGetArgParsesArguments(){
+		ArgsParser p = new ArgsParser();
+		String[] s = {"7", "5", "2"};
+		p.addArg("length", float.class);
+		p.addArg("width", float.class);
+		p.addArg("height", float.class);
+		
+		p.parse(s);
+		
+		assertEquals((float)7, p.getArg("length"));
+		assertEquals((float)5, p.getArg("width"));
+		assertEquals((float)2, p.getArg("height"));
+	}
+	
 	@Test(expected = InvalidArgumentException.class)
 	public void testInvalidArgExceptionIsThrown(){
 		ArgsParser p = new ArgsParser();
@@ -111,6 +126,22 @@ public class ArgsParserTest{
 		p.addArg("height", float.class);
 		
 		p.parse(s);
+	}
+	
+	@Test
+	public void testAllDataTypesGetParsed(){
+		ArgsParser p = new ArgsParser();
+		String[] s = {"7", "true", "bob"};
+		p.addArg("Int", int.class);
+		p.addArg("Bool", boolean.class);
+		p.addArg("String");
+		
+		p.parse(s);
+		
+		assertEquals(ArgsParser.DataType.INT, p.getDataType("Int"));
+		assertEquals(ArgsParser.DataType.BOOL, p.getDataType("Bool"));
+		assertEquals(ArgsParser.DataType.STRING, p.getDataType("String"));
+	
 	}
    
     

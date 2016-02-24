@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 3.0 (Jython 2.7.0 on java1.8.0_60)" name="Generator">
+<meta content="Robot Framework 2.9 (Jython 2.7.0 on java1.8.0_60)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAJEBoACtnfgA5cYYAERsiAEx2lAAbKkQAcazBACZCVwAcM1cAK0ucAAMDBQAnQncASG+FABkoVQAyWmgA6f8SgvH/Ij99+GLyIinyJfn/Yi//KSLzUy9iZogpIld3/4JVVTkid7vyUjNVNVJEAGOZ6Z7pXwAABpmZkRiLAAAGiJZpmGAAAEEt3SXdxAAATC7o/u3EAAC8MRZpjasAAAY1VVVTYAAABKqqqqpAAAAADKqq4AAAAAAAv4sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMADAADgAwAA4AcAAOAHAADgBwAAwAcAAOAHAADgDwAA8A8AAPg/AAD+fwAA">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -832,11 +832,9 @@ window.model = (function () {
             for (var i in suites)
                 tests = tests.concat(suites[i].searchTestsInSuite(pattern, matcher));
             return tests;
-        };
+        }
         suite.searchTestsByTag = function (tag) {
             return suite.searchTests(function (test) {
-                if (tag.info == "critical" || tag.info == "non-critical")
-                    return containsTagPattern(test.tags, tag.label);
                 if (tag.combined)
                     return containsTagPattern(test.tags, tag.combined);
                 return containsTag(test.tags, tag.label);
@@ -1342,18 +1340,15 @@ window.testdata = function () {
         kw.populateMessages(Populator(element[10], strings, message));
         return kw;
     }
-    function lazyPopulateKeywordsFromFile(parent, modelOrIndex, strings) {
-        var model, index, populator;
-        var creator = childCreator(parent, createKeyword);
+    function lazyPopulateKeywordsFromFile(parent, keywordsOrIndex, strings) {
         if (parent.isChildrenLoaded) {
-            model = modelOrIndex;
-            populator = Populator(model, strings, creator);
+            var keywords = keywordsOrIndex;
+            parent.populateKeywords(Populator(keywords, strings, childCreator(parent, createKeyword)));
         } else {
-            index = modelOrIndex;
+            var index = keywordsOrIndex;
             parent.childFileName = window.settings['splitLogBase'] + '-' + index + '.js';
-            populator = SplitLogPopulator(index, creator);
+            parent.populateKeywords(SplitLogPopulator(keywordsOrIndex, childCreator(parent, createKeyword)));
         }
-        parent.populateKeywords(populator);
     }
     function tags(taglist, strings) {
         return util.map(taglist, strings.get);
@@ -1717,28 +1712,28 @@ function stopPropagation(event) {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[1,0,1465],[],[[4,0,1,0,[],[1,824,221],[[0,5,6,0,0,7,0,0,[1,842,28],[],[]],[0,8,6,0,0,0,9,0,[1,881,13],[],[[891,2,10]]],[0,11,12,0,13,14,0,0,[1,899,14],[],[]],[0,15,6,0,0,0,16,0,[1,917,13],[],[[927,2,17]]],[0,11,12,0,13,18,0,0,[1,936,17],[],[]],[0,19,6,0,0,0,20,0,[1,958,13],[],[[968,2,21]]],[0,11,12,0,13,22,0,0,[1,976,16],[],[]],[0,23,6,0,0,0,24,0,[1,999,11],[],[[1008,2,25]]],[0,11,12,0,13,26,0,0,[1,1015,15],[],[]]]],[27,0,1,0,[],[1,1067,70],[[0,5,6,0,0,28,0,0,[1,1081,18],[],[[1095,2,29]]],[0,23,6,0,0,0,24,0,[1,1104,8],[],[[1110,2,30]]],[0,11,12,0,13,31,0,0,[1,1122,10],[],[]]]],[32,0,1,0,[],[1,1157,179],[[0,33,6,0,0,34,0,0,[1,1171,15],[],[]],[0,35,6,0,0,0,36,0,[1,1191,8],[],[[1198,2,37]]],[0,11,12,0,13,38,0,0,[1,1205,10],[],[]],[0,39,6,0,0,0,40,0,[1,1222,10],[],[[1229,2,41]]],[0,11,12,0,13,42,0,0,[1,1238,9],[],[]],[0,43,6,0,0,0,44,0,[1,1254,10],[],[[1261,2,45]]],[0,11,12,0,13,46,0,0,[1,1268,13],[],[]],[0,47,6,0,0,0,48,0,[1,1291,11],[],[[1299,2,49]]],[0,11,12,0,13,50,0,0,[1,1307,9],[],[]]]],[51,0,1,0,[],[1,1358,71],[[0,52,6,0,0,53,0,0,[1,1373,15],[],[[1383,2,54]]],[0,23,6,0,0,0,24,0,[1,1393,12],[],[[1400,2,55]]],[0,11,12,0,13,56,0,0,[1,1410,14],[],[]]]]],[],[4,4,4,4]];
+window.output["suite"] = [1,2,3,0,[],[0,0,9708],[],[[4,0,1,0,[],[1,6218,1171],[[0,5,6,0,0,7,0,0,[1,6335,40],[],[]],[0,8,6,0,0,0,9,0,[1,6404,34],[],[[6433,2,10]]],[0,11,12,0,13,14,0,0,[1,6471,92],[],[]],[0,15,6,0,0,0,16,0,[1,6624,59],[],[[6675,2,17]]],[0,11,12,0,13,18,0,0,[1,6773,49],[],[]],[0,19,6,0,0,0,20,0,[1,6915,38],[],[[6948,2,21]]],[0,11,12,0,13,22,0,0,[1,7011,113],[],[]],[0,23,6,0,0,0,24,0,[1,7146,43],[],[[7181,2,25]]],[0,11,12,0,13,26,0,0,[1,7209,62],[],[]]]],[27,0,1,0,[],[1,7422,337],[[0,5,6,0,0,28,0,0,[1,7508,83],[],[[7572,2,29]]],[0,23,6,0,0,0,24,0,[1,7609,29],[],[[7629,2,30]]],[0,31,12,0,32,33,0,0,[1,7669,71],[],[]]]],[34,0,1,0,[],[1,7880,876],[[0,35,6,0,0,36,0,0,[1,7937,58],[],[]],[0,37,6,0,0,0,38,0,[1,8029,47],[],[[8057,2,39]]],[0,31,12,0,32,40,0,0,[1,8099,39],[],[]],[0,41,6,0,0,0,42,0,[1,8184,37],[],[[8204,2,43]]],[0,31,12,0,32,44,0,0,[1,8240,32],[],[]],[0,45,6,0,0,0,46,0,[1,8307,32],[],[[8337,2,47]]],[0,31,12,0,32,48,0,0,[1,8371,20],[],[]],[0,49,6,0,0,0,50,0,[1,8400,53],[],[[8446,2,51]]],[0,31,12,0,32,52,0,0,[1,8464,145],[],[]]]],[53,0,1,0,[],[1,8787,248],[[0,54,6,0,0,55,0,0,[1,8818,37],[],[[8840,2,56]]],[0,23,6,0,0,0,24,0,[1,8894,30],[],[[8920,2,57]]],[0,31,12,0,32,58,0,0,[1,8961,47],[],[]]]],[59,0,1,0,[],[0,9070,476,60],[[0,54,6,0,0,61,0,0,[1,9192,37],[],[]],[0,23,6,0,0,0,24,0,[1,9288,55],[],[[9340,2,62]]],[0,31,12,0,32,63,0,0,[0,9368,134],[],[[9490,5,60]]]]]],[],[5,4,5,4]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*ArgsParserTests","*C:\\Users\\adam\\Documents\\Computer Science\\Software Engineering\\CS310-Software-Engineering-I\\acceptance\\ArgsParserTests.txt","*ArgsParserTests.txt","*Test Volume Calculator Normal Function","*Start Volume Calculator With Arguments","*ArgsParserKeywords","*7, 5, 2","*Get Length","*${length}","*${length} = 7","*Should Be Equal","*BuiltIn","*<p>Fails if the given objects are unequal.\x3c/p>","*7, ${length}","*Get Width","*${width}","*${width} = 5","*5, ${width}","*Get Height","*${height}","*${height} = 2","*2, ${height}","*Get Program Output","*${output}","*${output} = 70.0","*${output}, 70.0","*Test Unrecognized Argument","*7, 5, 2, 43","*usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: 43","*${output} = usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: 43","*${output}, ${expected}","*Test Absurd Program Normal Function","*Start Absurd Program With Arguments","*dog, 2, true, 3.5","*Get Pet","*${pet}","*${pet} = dog","*dog, ${pet}","*Get Number","*${number}","*${number} = 2","*2, ${number}","*Get Rainy","*${rainy}","*${rainy} = true","*true, ${rainy}","*Get Bathrooms","*${bathrooms}","*${bathrooms} = 3.5","*3.5, ${bathrooms}","*Test Usage Message","*Start Program With Arguments","*-h","eNpljjESwjAMBHu/4kpoeEBa/pBegGKbERYTy4HnY8emSqM53WkllUyeJzxpI8wq5cVXknsRMl0hnLwFfOKj1sDRB3P/mGGBse0IdAHhpt+Le2uOFjWRgFZfs2R5cmNRI4asROsqc1pEyc6uX2lmV8eJ/sHuDnmY+QG94Uqy","eNpljjEOwjAMRfecwgMDLDlAJSbuwG7ATYJMXDVOqYS4O0kTxMBiff/vZ3v3kqxT1jccISd0NMAdF4SzcH7QCfmaGVVmYIpOPTzDrVRPwXk135hAPcGyISAjIFxktWaSFDRIRAacXcmipsH0RZXoshC1K8x+ZEE9mHalmk39T7QPNrfL34y19gMZNE0f","*${expected2}, ${output}"]);
+window.output["strings"] = window.output["strings"].concat(["*","*ArgsParserTests","*C:\\Users\\Cody\\Desktop\\CS310-Software-Engineering-I\\acceptance\\ArgsParserTests.txt","*ArgsParserTests.txt","*Test Volume Calculator Normal Function","*Start Volume Calculator With Arguments","*ArgsParserKeywords","*7, 5, 2","*Get Length","*${length}","*${length} = 7.0","*Should Be Equal As Numbers","*BuiltIn","*<p>Fails if objects are unequal after converting them to real numbers.\x3c/p>","*${length}, 7.0","*Get Width","*${width}","*${width} = 5.0","*5.0, ${width}","*Get Height","*${height}","*${height} = 2.0","*2.0, ${height}","*Get Program Output","*${output}","*${output} = 70.0","*${output}, 70.0","*Test Unrecognized Argument","*7, 5, 2, 43","*usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: 43","*${output} = usage: java VolumeCalculator length width height\nVolumeCalculator.java: error: unrecognized arguments: 43","*Should Be Equal","*<p>Fails if the given objects are unequal.\x3c/p>","*${output}, ${expected}","*Test Absurd Program Normal Function","*Start Absurd Program With Arguments","*dog, 2, true, 3.5","*Get Pet","*${pet}","*${pet} = dog","*dog, ${pet}","*Get Number","*${number}","*${number} = 2","*2, ${number}","*Get Rainy","*${rainy}","*${rainy} = true","*true, ${rainy}","*Get Bathrooms","*${bathrooms}","*${bathrooms} = 3.5","*3.5, ${bathrooms}","*Test Usage Message","*Start Program With Arguments","*-h","eNpljjESwjAMBHu/4kpoeEBa/pBegGKbERYTy4HnY8emSqM53WkllUyeJzxpI8wq5cVXknsRMl0hnLwFfOKj1sDRB3P/mGGBse0IdAHhpt+Le2uOFjWRgFZfs2R5cmNRI4asROsqc1pEyc6uX2lmV8eJ/sHuDnmY+QG94Uqy","eNpljjEOwjAMRfecwgMDLDlAJSbuwG7ATYJMXDVOqYS4O0kTxMBiff/vZ3v3kqxT1jccISd0NMAdF4SzcH7QCfmaGVVmYIpOPTzDrVRPwXk135hAPcGyISAjIFxktWaSFDRIRAacXcmipsH0RZXoshC1K8x+ZEE9mHalmk39T7QPNrfL34y19gMZNE0f","*${expected2}, ${output}","*Test Incorrect Datatype Message","*  != usage: java VolumeCalculator length width height\nVolumeCalcultor.java: error: argument width: invalid float value: something","*7, something, 2","*${output} =  ","*${output}, ${expected3}"]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:01","fail":0,"label":"Critical Tests","pass":4},{"elapsed":"00:00:01","fail":0,"label":"All Tests","pass":4}],[],[{"elapsed":"00:00:01","fail":0,"id":"s1","label":"ArgsParserTests","name":"ArgsParserTests","pass":4}]];
+window.output["generatedTimestamp"] = "20160224 16:50:09 GMT -05:00";
+</script>
+<script type="text/javascript">
+window.output["generatedMillis"] = 18153;
+</script>
+<script type="text/javascript">
+window.output["baseMillis"] = 1456354190847;
+</script>
+<script type="text/javascript">
+window.output["stats"] = [[{"elapsed":"00:00:03","fail":1,"label":"Critical Tests","pass":4},{"elapsed":"00:00:03","fail":1,"label":"All Tests","pass":4}],[],[{"elapsed":"00:00:10","fail":1,"id":"s1","label":"ArgsParserTests","name":"ArgsParserTests","pass":4}]];
 </script>
 <script type="text/javascript">
 window.output["errors"] = [];
-</script>
-<script type="text/javascript">
-window.output["baseMillis"] = 1455733059868;
-</script>
-<script type="text/javascript">
-window.output["generatedMillis"] = 2132;
-</script>
-<script type="text/javascript">
-window.output["generatedTimestamp"] = "20160217 12:17:42 GMT -05:00";
 </script>
 <script type="text/javascript">
 window.settings = {"defaultLevel":"INFO","minLevel":"INFO","reportURL":"report.html","splitLogBase":"log","title":""};

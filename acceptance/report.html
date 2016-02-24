@@ -5,7 +5,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta content="Robot Framework 3.0 (Jython 2.7.0 on java1.8.0_60)" name="Generator">
+<meta content="Robot Framework 2.9 (Jython 2.7.0 on java1.8.0_60)" name="Generator">
 <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAAAIAAAAAAAAAAAAAEAAAAAAAAAAAAAAAJEBoACtnfgA5cYYAERsiAEx2lAAbKkQAcazBACZCVwAcM1cAK0ucAAMDBQAnQncASG+FABkoVQAyWmgA6f8SgvH/Ij99+GLyIinyJfn/Yi//KSLzUy9iZogpIld3/4JVVTkid7vyUjNVNVJEAGOZ6Z7pXwAABpmZkRiLAAAGiJZpmGAAAEEt3SXdxAAATC7o/u3EAAC8MRZpjasAAAY1VVVTYAAABKqqqqpAAAAADKqq4AAAAAAAv4sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMADAADgAwAA4AcAAOAHAADgBwAAwAcAAOAHAADgDwAA8A8AAPg/AAD+fwAA">
 <style media="all" type="text/css">
 /* Generic and misc styles */
@@ -651,11 +651,9 @@ window.model = (function () {
             for (var i in suites)
                 tests = tests.concat(suites[i].searchTestsInSuite(pattern, matcher));
             return tests;
-        };
+        }
         suite.searchTestsByTag = function (tag) {
             return suite.searchTests(function (test) {
-                if (tag.info == "critical" || tag.info == "non-critical")
-                    return containsTagPattern(test.tags, tag.label);
                 if (tag.combined)
                     return containsTagPattern(test.tags, tag.combined);
                 return containsTag(test.tags, tag.label);
@@ -1161,18 +1159,15 @@ window.testdata = function () {
         kw.populateMessages(Populator(element[10], strings, message));
         return kw;
     }
-    function lazyPopulateKeywordsFromFile(parent, modelOrIndex, strings) {
-        var model, index, populator;
-        var creator = childCreator(parent, createKeyword);
+    function lazyPopulateKeywordsFromFile(parent, keywordsOrIndex, strings) {
         if (parent.isChildrenLoaded) {
-            model = modelOrIndex;
-            populator = Populator(model, strings, creator);
+            var keywords = keywordsOrIndex;
+            parent.populateKeywords(Populator(keywords, strings, childCreator(parent, createKeyword)));
         } else {
-            index = modelOrIndex;
+            var index = keywordsOrIndex;
             parent.childFileName = window.settings['splitLogBase'] + '-' + index + '.js';
-            populator = SplitLogPopulator(index, creator);
+            parent.populateKeywords(SplitLogPopulator(keywordsOrIndex, childCreator(parent, createKeyword)));
         }
-        parent.populateKeywords(populator);
     }
     function tags(taglist, strings) {
         return util.map(taglist, strings.get);
@@ -1557,25 +1552,25 @@ storage = function () {
 window.output = {};
 </script>
 <script type="text/javascript">
-window.output["suite"] = [1,2,3,0,[],[1,0,1465],[],[[4,0,1,0,[],[1,824,221],[]],[5,0,1,0,[],[1,1067,70],[]],[6,0,1,0,[],[1,1157,179],[]],[7,0,1,0,[],[1,1358,71],[]]],[],[4,4,4,4]];
+window.output["suite"] = [1,2,3,0,[],[0,0,9708],[],[[4,0,1,0,[],[1,6218,1171],[]],[5,0,1,0,[],[1,7422,337],[]],[6,0,1,0,[],[1,7880,876],[]],[7,0,1,0,[],[1,8787,248],[]],[8,0,1,0,[],[0,9070,476,9],[]]],[],[5,4,5,4]];
 </script>
 <script type="text/javascript">
 window.output["strings"] = [];
 </script>
 <script type="text/javascript">
-window.output["strings"] = window.output["strings"].concat(["*","*ArgsParserTests","*C:\\Users\\adam\\Documents\\Computer Science\\Software Engineering\\CS310-Software-Engineering-I\\acceptance\\ArgsParserTests.txt","*ArgsParserTests.txt","*Test Volume Calculator Normal Function","*Test Unrecognized Argument","*Test Absurd Program Normal Function","*Test Usage Message"]);
+window.output["strings"] = window.output["strings"].concat(["*","*ArgsParserTests","*C:\\Users\\Cody\\Desktop\\CS310-Software-Engineering-I\\acceptance\\ArgsParserTests.txt","*ArgsParserTests.txt","*Test Volume Calculator Normal Function","*Test Unrecognized Argument","*Test Absurd Program Normal Function","*Test Usage Message","*Test Incorrect Datatype Message","*  != usage: java VolumeCalculator length width height\nVolumeCalcultor.java: error: argument width: invalid float value: something"]);
 </script>
 <script type="text/javascript">
-window.output["stats"] = [[{"elapsed":"00:00:01","fail":0,"label":"Critical Tests","pass":4},{"elapsed":"00:00:01","fail":0,"label":"All Tests","pass":4}],[],[{"elapsed":"00:00:01","fail":0,"id":"s1","label":"ArgsParserTests","name":"ArgsParserTests","pass":4}]];
+window.output["generatedTimestamp"] = "20160224 16:50:09 GMT -05:00";
 </script>
 <script type="text/javascript">
-window.output["baseMillis"] = 1455733059868;
+window.output["generatedMillis"] = 18153;
 </script>
 <script type="text/javascript">
-window.output["generatedMillis"] = 2132;
+window.output["baseMillis"] = 1456354190847;
 </script>
 <script type="text/javascript">
-window.output["generatedTimestamp"] = "20160217 12:17:42 GMT -05:00";
+window.output["stats"] = [[{"elapsed":"00:00:03","fail":1,"label":"Critical Tests","pass":4},{"elapsed":"00:00:03","fail":1,"label":"All Tests","pass":4}],[],[{"elapsed":"00:00:10","fail":1,"id":"s1","label":"ArgsParserTests","name":"ArgsParserTests","pass":4}]];
 </script>
 <script type="text/javascript">
 window.settings = {"background":{"fail":"#f66","nonCriticalFail":"#9e9","pass":"#9e9"},"logURL":"log.html","title":""};

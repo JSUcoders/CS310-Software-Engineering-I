@@ -11,16 +11,17 @@ public class ArgsParserKeywords{
         p.setProgramName(message);
         p.setProgramDescription(description);
         try{
-            p.addArg("length");
-            p.addArg("width");
-            p.addArg("height");
+            p.addArg("length", float.class);
+            p.addArg("width", float.class);
+            p.addArg("height", float.class);
             p.addArgDescriptions(argDescripts);
             p.parse(args);
 			
-			float length = Float.parseFloat(p.getArg("length"));
-			float width = Float.parseFloat(p.getArg("width"));
-			float height = Float.parseFloat(p.getArg("height"));
-			setProgramOutput(String.valueOf(length * width * height));
+			float length = (float) p.getArg("length");
+			float width = (float) p.getArg("width");
+			float height = (float) p.getArg("height");
+			float volume = length * width * height;
+			setProgramOutput(String.valueOf(volume));
 		}
 		catch(HelpException e){
 			setProgramOutput(e.getExceptionOutput());
@@ -40,16 +41,16 @@ public class ArgsParserKeywords{
 		
 	}
 	
-	public String getLength(){
-		return p.getArg("length");
+	public float getLength(){
+		return (float) p.getArg("length");
 	}
 	
-	public String getWidth(){
-		return p.getArg("width");
+	public float getWidth(){
+		return (float) p.getArg("width");
 	}
 	
-	public String getHeight(){
-		return p.getArg("height");
+	public float getHeight(){
+		return (float) p.getArg("height");
 	}
 	
 	public String getProgramOutput(){
@@ -77,19 +78,19 @@ public class ArgsParserKeywords{
 	}
 	
 	public String getPet(){
-		return p.getArg("pet");
+		return (String) p.getArg("pet");
 	}
 	
 	public String getNumber(){
-		return p.getArg("number");
+		return (String) p.getArg("number");
 	}
 	
 	public String getRainy(){
-		return p.getArg("rainy");
+		return (String) p.getArg("rainy");
 	}
 	
 	public String getBathrooms(){
-		return p.getArg("bathrooms");
+		return (String) p.getArg("bathrooms");
 	}
 	public void startProgramWithArguments(String[] args){
 		ArgsParser q = new ArgsParser();
