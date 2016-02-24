@@ -3,7 +3,7 @@ import java.util.*;
 public class TooFewArgsException extends RuntimeException {
     private String exceptionOutput= "";
     
-    public TooFewArgsException(String preMsg, String prgmName, String[] cla, List<String> argNames){
+    public TooFewArgsException(String preMsg,  String[] cla, List<String> argNames){
         String args = "";
         String missingArgNames = "";
         
@@ -25,8 +25,8 @@ public class TooFewArgsException extends RuntimeException {
             
             
         }
-        exceptionOutput = preMsg + prgmName + ".java: error: the following arguments are required: "+missingArgNames;
-        System.out.println(getExceptionOutput());
+        exceptionOutput = preMsg+ ".java: error: the following arguments are required: "+missingArgNames;
+        //System.out.println(getExceptionOutput());
     }
     public String getExceptionOutput(){
 		return exceptionOutput;
