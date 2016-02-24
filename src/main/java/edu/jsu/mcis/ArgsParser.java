@@ -96,19 +96,13 @@ public class ArgsParser{
         
     }
     
-<<<<<<< HEAD
+
 	private void checkForTooManyArgs(String[] cla, List<String> argNms) {
         
 		if(cla.length > argNames.size()){
 		
-			throw new TooManyArgsException(makePreMessage(), cla, argNms);
-=======
-	private void checkForTooManyArgs(String pM, String prgName, String[] cla, List<String> argNms) {
-        
-		if(cla.length > argNames.size()){
-		
-			throw new TooManyArgsException(pM, prgName, cla, argNms);
->>>>>>> origin/Scrum-01
+			throw new TooManyArgsException(makePreMessage(),cla, argNms, programName);
+
 		
 		}
 	
@@ -150,7 +144,7 @@ public class ArgsParser{
 				}
 				
 				else if(argDataType.get(i) == DataType.FLOAT){
-					return Float.toString(Float.parseFloat(argValues.get(i)));
+					return Float.parseFloat(argValues.get(i));
 				}
 				
 				else if(argDataType.get(i) == DataType.BOOL){
