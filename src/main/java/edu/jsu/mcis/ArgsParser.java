@@ -101,7 +101,7 @@ public class ArgsParser{
         
 		if(cla.length > argNames.size()){
 		
-			throw new TooManyArgsException(makePreMessage(),cla, argNms, programName);
+			throw new TooManyArgsException(makePreMessage(),cla, argNms);
 
 		
 		}
