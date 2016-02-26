@@ -3,7 +3,7 @@ import java.util.*;
 
 public class ArgsParser{
     
-	protected enum DataType{INT, FLOAT, BOOL, STRING};
+	protected enum DataType{INT, FLOAT, BOOL, STRING, SHORT, LONG, BYTE, DOUBLE, CHAR};
 	
     private List<String> argValues;
     private List<String> argNames;
@@ -80,9 +80,25 @@ public class ArgsParser{
 		else if(t == boolean.class){
 			argDataType.add(DataType.BOOL);
 		}
-		else{
+		else if(t == String.class){
 			argDataType.add(DataType.STRING);
 		}
+        else if(t == double.class){
+            argDataType.add(DataType.DOUBLE);
+        }
+        else if(t == short.class){
+            argDataType.add(DataType.SHORT);
+        }
+        else if(t == byte.class){
+            argDataType.add(DataType.BYTE);
+        }
+        else if(t == long.class){
+            argDataType.add(DataType.LONG);
+        }
+        else if(t == char.class){
+            argDataType.add(DataType.CHAR);
+        }
+        
 		
 	}
     
@@ -90,7 +106,7 @@ public class ArgsParser{
     
         if(cla.length < argNames.size()){
             
-            throw new TooFewArgsException(makePreMessage(), cla, argNms);
+            throw new TooFewArgsException(makePreMessage(), cla, argNms, programName);
             
         }
         
@@ -101,7 +117,7 @@ public class ArgsParser{
         
 		if(cla.length > argNames.size()){
 		
-			throw new TooManyArgsException(makePreMessage(),cla, argNms);
+			throw new TooManyArgsException(makePreMessage(),cla, argNms, programName);
 
 		
 		}
@@ -115,32 +131,68 @@ public class ArgsParser{
         }
     }
 	
-	private void checkForInvalidArgument(List<String>nameOfArgs,String prgmName){
-		
-		
-		
+	private void checkForInvalidArgument( ){
+        int i =0; 
+        try{
+            for(; i < argValues.size();i++){
+                if(argDataType.get(i) == DataType.INT){
+                    int a = Integer.parseInt(argValues.get(i));
+                }
+                else if(argDataType.get(i) == DataType.FLOAT){
+                    float f = Float.parseFloat(argValues.get(i));
+                }
+                
+            }
+            
+        }
+        catch(NumberFormatException n){
+            throw new InvalidArgumentException(makePreMessage(),programName, argValues.get(i), argNames.get(i), getDataType(argNames.get(i)));
+        } 
+        for(int j =0; j < argValues.size(); j++){
+            if(argDataType.get(j)==DataType.LONG){
+                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
+            }
+            else if(argDataType.get(j)==DataType.BYTE){
+                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
+            }
+            else if(argDataType.get(j)==DataType.SHORT){
+                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
+            }
+            else if(argDataType.get(j)==DataType.DOUBLE){
+                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
+            }
+            else if(argDataType.get(j)==DataType.CHAR){
+                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
+            }
+            
+            
+            
+        }
 		
 	}
     
     public void parse(String[] cla) {
         
-           
+        if(cla.length == 0){
+            throw new TooFewArgsException(makePreMessage(), cla, argNames, programName);
+        }   
         for(int i =0; i < cla.length;i++){
              argValues.add(cla[i]);
         } 
+        
         checkForHelp(cla, programDescription, argDescriptions);
         checkForTooFewArgs(cla, argNames);
 		checkForTooManyArgs(cla, argNames);
-        
+        checkForInvalidArgument( );
         
     }
 	
-	//overload getArg? Defeats the purpose of having argDataType, though
+	
     public Object getArg(String name){
         for(int i =0;i < getNumOfNameArgs();i++){
             if(name.equals(argNames.get(i))){
                 if(argDataType.get(i) == DataType.INT){
-					return Integer.toString(Integer.parseInt(argValues.get(i)));
+					return Integer.parseInt(argValues.get(i));
 				}
 				
 				else if(argDataType.get(i) == DataType.FLOAT){
@@ -148,7 +200,7 @@ public class ArgsParser{
 				}
 				
 				else if(argDataType.get(i) == DataType.BOOL){
-					return Boolean.toString(Boolean.parseBoolean(argValues.get(i)));
+					return Boolean.parseBoolean(argValues.get(i));
 				}
 				
 				else{

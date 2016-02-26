@@ -34,7 +34,9 @@ public class ArgsParserKeywords{
 		catch(TooManyArgsException e){
 			setProgramOutput(e.getExceptionOutput());
 		}
-        
+        catch(InvalidArgumentException e){
+            setProgramOutput(e.getExceptionOutput());
+        }
 		catch(RuntimeException r){
             
         }
@@ -102,14 +104,20 @@ public class ArgsParserKeywords{
         q.setProgramDescription(description);
         
 		try{
-            q.addArg("length");
-            q.addArg("width");
-            q.addArg("height");
+            q.addArg("length", float.class);
+            q.addArg("width", float.class);
+            q.addArg("height",float.class);
             q.addArgDescriptions(argDescripts);
             q.parse(args);
 		}
 		catch(HelpException e){
 			setProgramOutput(e.getExceptionOutput());
 		}
+        catch(InvalidArgumentException e){
+            setProgramOutput(e.getExceptionOutput());
+        }
+        catch(RuntimeException r){
+            
+        }
 	}
 }

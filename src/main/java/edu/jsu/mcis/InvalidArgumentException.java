@@ -5,24 +5,47 @@ public class InvalidArgumentException extends RuntimeException{
 	
 	private String exceptionOutput="";
 	
-	public InvalidArgumentException(String preMsg, String programName,List<String> argNms, List<String> argVls, List<ArgsParser.DataType> argDataType){
-		for(int i =0; i < argNms.size();i++){
-            //if(argVls.get(i) )
-            //(/*argValue at certain index can not be parsed into datatype at same index, then argName at same index should be known*/)
+	public InvalidArgumentException(String preMsg, String programName,String badArg, String badArgName, ArgsParser.DataType d){
+        String datatype = "";
+		if(d == ArgsParser.DataType.INT){
+            datatype = "integer";
         }
-		exceptionOutput= preMsg +"\n"+programName+".java:"+" error: argument "/*wrongArg invalid datatypeofarg + argthatswrong*/;
+        else if(d == ArgsParser.DataType.FLOAT ){
+            datatype = "float";
+        }
+        else if(d == ArgsParser.DataType.DOUBLE){
+            datatype = "double";
+        }
+        else if(d == ArgsParser.DataType.CHAR ){
+            datatype = "char";
+        }
+        else if(d == ArgsParser.DataType.BOOL ){
+            datatype = "boolean";
+        }
+        else if(d == ArgsParser.DataType.LONG ){
+            datatype = "long";
+        }
+        else if(d == ArgsParser.DataType.SHORT){
+            datatype = "short";
+        }
+        else if(d == ArgsParser.DataType.BYTE){
+            datatype = "byte";
+        }
+		exceptionOutput= preMsg +"\n"+programName+".java:"+" error: argument " + badArgName+": invalid " +datatype+ " value: " + badArg;
+		System.out.println(getExceptionOutput());
+    }
+    
+    public String getExceptionOutput(){
+			
+			
+        return exceptionOutput;
+			
+			
+    }
+			
+    
 		
-		/*public String getExceptionOutput(){
-			
-			
-			return exceptionOutput;
-			
-			
-		}*/
-			
-		}
-		
-	}
+}
 	
 	
 	
