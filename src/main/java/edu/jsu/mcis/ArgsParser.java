@@ -2,24 +2,28 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class ArgsParser{
-	
-    //private List<String> argValues;
-    //private List<String> argNames;
-	//private List<DataType> argDataType;
+
     private List<Argument> arguments;
     private String programName;
     private String programDescription;
     private String[] argDescriptions;
+    private List<String> optionalArgValues;
+    private List<String> optionalArgNames;
     public ArgsParser(){
-        //argValues = new ArrayList<String>();
-        //argNames = new ArrayList<String>();
-		//argDataType = new ArrayList<DataType>();
         arguments = new ArrayList<Argument>();
         programName = "";
         programDescription = "";
-        
+        optionalArgValues = new ArrayList<String>();
+        optionalArgNames = new ArrayList<String>();
     }
     
+    
+    public List<String> getOptionalArgNames(){
+       return optionalArgNames; 
+    }
+    public List<String> getOptionalArgValues(){
+        return optionalArgValues;
+    }
     private String makePreMessage(){
        
         String names = "";
@@ -59,13 +63,7 @@ public class ArgsParser{
        return arguments.size(); 
     }
     
-    /*public int getNumOfArguments(){
-        return argValues.size();
-    }*/
     
-    /*public int getNumOfNameArgs(){
-        return argNames.size();
-    }*/
     
     public Argument.DataType getDataType(String name){
         for(int i = 0; i < getNumOfArguments();i++){
@@ -96,16 +94,7 @@ public class ArgsParser{
     }
     
 
-	/*private void checkForTooManyArgs(String[] cla) {
-        
-		if(cla.length > arguments.size()){
-		
-			throw new TooManyArgsException(makePreMessage(),cla, arguments, programName);
-
-		
-		}
 	
-	}*/
     
     private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
        
@@ -136,7 +125,18 @@ public class ArgsParser{
 	}
     
     public void parse(String[] cla) {
-        
+        for(int i = 0; i < cla.length;i++){
+            if(cla[i].charAt(0) == '-' && cla[i].charAt(1)=='-'){
+                optionalArgNames.add(cla[i]);
+                optionalArgValues.add(cla[i+1]);
+            }
+            else{
+                
+                optionalArgValues.add("box");
+                optionalArgValues.add("4");
+            }
+            
+        }
         if(cla.length == 0){
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
         } 
@@ -146,14 +146,14 @@ public class ArgsParser{
             } 
             
         }catch(IndexOutOfBoundsException e){
+            
             throw new TooManyArgsException(makePreMessage(),cla, arguments, programName);
         }    
         
         
         checkForHelp(cla, programDescription, argDescriptions);
         checkForTooFewArgs(cla);
-		//checkForTooManyArgs(cla);
-        checkForInvalidArgument( );
+        checkForInvalidArgument();
         
     }
 	

@@ -62,7 +62,7 @@ public class ArgsParserTest{
 	public void testExceptionIsThrownWhenTooManyArguments(){
 		ArgsParser p = new ArgsParser();
 		p.setProgramName("VolumeCalculator");
-		String[] s = {"7", "3", "2", "42"};
+		String[] s = {"7", "3", "2", "42", "34"};
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");

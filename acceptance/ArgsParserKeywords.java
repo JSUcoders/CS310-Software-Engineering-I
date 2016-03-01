@@ -85,7 +85,26 @@ public class ArgsParserKeywords{
 	
 	public Object getBathrooms(){
 		return p.getArg("bathrooms");
-	}
+	
+    
+    public Object getType(){
+        List<String> a = p.getOptionalArgNames();
+        List<String> b = p.getOptionalArgValues();
+        for(int i =0; i< a.size();i++){
+            if(a.get(i).equals("--type")){
+                return b.get(i);
+            }
+        }
+    }
+    public Object getDigits(){
+        List<String> a = p.getOptionalArgNames();
+        List<String> b = p.getOptionalArgValues();
+        for(int i =0; i< a.size();i++){
+            if(a.get(i).equals("--digits")){
+                return b.get(i);
+            }
+        }
+    }
 	public void startProgramWithArguments(String[] args){
 		ArgsParser q = new ArgsParser();
 		setProgramOutput(" ");

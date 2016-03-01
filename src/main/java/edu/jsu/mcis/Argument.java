@@ -7,11 +7,14 @@ public class Argument {
     private String name;
     private String value;
     private DataType type;
+   
     
     public Argument(String n, DataType t){
         name = n;
         type = t;
+       
     }
+    
     
     public void addValue(String v){
         value = v;
@@ -28,4 +31,6 @@ public class Argument {
     public DataType getType(){
         return type;
     }
+    
+    
 }
