@@ -2,19 +2,19 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class ArgsParser{
-    
-	protected enum DataType{INT, FLOAT, BOOL, STRING, SHORT, LONG, BYTE, DOUBLE, CHAR};
 	
-    private List<String> argValues;
-    private List<String> argNames;
-	private List<DataType> argDataType;
+    //private List<String> argValues;
+    //private List<String> argNames;
+	//private List<DataType> argDataType;
+    private List<Argument> arguments;
     private String programName;
     private String programDescription;
     private String[] argDescriptions;
     public ArgsParser(){
-        argValues = new ArrayList<String>();
-        argNames = new ArrayList<String>();
-		argDataType = new ArrayList<DataType>();
+        //argValues = new ArrayList<String>();
+        //argNames = new ArrayList<String>();
+		//argDataType = new ArrayList<DataType>();
+        arguments = new ArrayList<Argument>();
         programName = "";
         programDescription = "";
         
@@ -23,8 +23,8 @@ public class ArgsParser{
     private String makePreMessage(){
        
         String names = "";
-        for(int i =0; i < argNames.size();i++){
-            names += argNames.get(i) + " ";
+        for(int i =0; i < arguments.size();i++){
+            names += arguments.get(i).getName() + " ";
         }
         String namesSub = names.substring(0, names.length() - 1); 
         String preMessage = "usage: java "+ programName+" "+ namesSub; 
@@ -33,7 +33,7 @@ public class ArgsParser{
         
     }
     public void addArgDescriptions(String[] positionalArgs){
-        argDescriptions = new String[argNames.size()];
+        argDescriptions = new String[arguments.size()];
         for(int i =0; i < positionalArgs.length;i++){
             argDescriptions[i] = positionalArgs[i];
         }
@@ -55,74 +55,57 @@ public class ArgsParser{
         return programName;
     }
 
-
     public int getNumOfArguments(){
-        return argValues.size();
+       return arguments.size(); 
     }
     
-    public int getNumOfNameArgs(){
+    /*public int getNumOfArguments(){
+        return argValues.size();
+    }*/
+    
+    /*public int getNumOfNameArgs(){
         return argNames.size();
-    }
+    }*/
+    
+    public Argument.DataType getDataType(String name){
+        for(int i = 0; i < getNumOfArguments();i++){
+			if(name.equals(arguments.get(i).getName())){
+				return arguments.get(i).getType();
+			}
+		}
+		return Argument.DataType.STRING;
+	}
     
     public void addArg(String name){
-        argNames.add(name);
-		argDataType.add(DataType.STRING);
+        addArg(name, Argument.DataType.STRING);
     }
 	
-	public void addArg(String name, Class<?> t){
-		argNames.add(name);
-		if(t == int.class){
-			argDataType.add(DataType.INT);
-		}
-		else if(t == float.class){
-			argDataType.add(DataType.FLOAT);
-		}
-		else if(t == boolean.class){
-			argDataType.add(DataType.BOOL);
-		}
-		else if(t == String.class){
-			argDataType.add(DataType.STRING);
-		}
-        else if(t == double.class){
-            argDataType.add(DataType.DOUBLE);
-        }
-        else if(t == short.class){
-            argDataType.add(DataType.SHORT);
-        }
-        else if(t == byte.class){
-            argDataType.add(DataType.BYTE);
-        }
-        else if(t == long.class){
-            argDataType.add(DataType.LONG);
-        }
-        else if(t == char.class){
-            argDataType.add(DataType.CHAR);
-        }
-        
-		
+	public void addArg(String name, Argument.DataType t){
+        Argument a = new Argument(name, t);
+        arguments.add(a);
 	}
     
-    private void checkForTooFewArgs(String[] cla, List<String> argNms)  {
+    private void checkForTooFewArgs(String[] cla)  {
     
-        if(cla.length < argNames.size()){
+        if(cla.length < arguments.size()){
             
-            throw new TooFewArgsException(makePreMessage(), cla, argNms, programName);
+            throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
             
         }
         
     }
     
 
-	private void checkForTooManyArgs(String[] cla, List<String> argNms) {
+	/*private void checkForTooManyArgs(String[] cla) {
         
-		if(cla.length > argNames.size()){
+		if(cla.length > arguments.size()){
 		
-			throw new TooManyArgsException(makePreMessage(),cla, argNms, programName);
+			throw new TooManyArgsException(makePreMessage(),cla, arguments, programName);
 
 		
 		}
 	
-	}
+	}*/
     
     private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
        
@@ -134,93 +117,75 @@ public class ArgsParser{
 	private void checkForInvalidArgument( ){
         int i =0; 
         try{
-            for(; i < argValues.size();i++){
-                if(argDataType.get(i) == DataType.INT){
-                    int a = Integer.parseInt(argValues.get(i));
+            for(; i < arguments.size();i++){
+                if(arguments.get(i).getType() == Argument.DataType.INT){
+                    int a = Integer.parseInt(arguments.get(i).getValue());
                 }
-                else if(argDataType.get(i) == DataType.FLOAT){
-                    float f = Float.parseFloat(argValues.get(i));
+                else if(arguments.get(i).getType() == Argument.DataType.FLOAT){
+                    float f = Float.parseFloat(arguments.get(i).getValue());
                 }
                 
             }
             
         }
         catch(NumberFormatException n){
-            throw new InvalidArgumentException(makePreMessage(),programName, argValues.get(i), argNames.get(i), getDataType(argNames.get(i)));
+            throw new InvalidArgumentException(makePreMessage(),programName, arguments.get(i));
         } 
-        for(int j =0; j < argValues.size(); j++){
-            if(argDataType.get(j)==DataType.LONG){
-                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
-            }
-            else if(argDataType.get(j)==DataType.BYTE){
-                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
-            }
-            else if(argDataType.get(j)==DataType.SHORT){
-                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
-            }
-            else if(argDataType.get(j)==DataType.DOUBLE){
-                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
-            }
-            else if(argDataType.get(j)==DataType.CHAR){
-                throw new InvalidArgumentException(makePreMessage(), programName, argValues.get(j), argNames.get(j), getDataType(argNames.get(j)));
-            }
-            
-            
-            
-        }
+        
 		
 	}
     
     public void parse(String[] cla) {
         
         if(cla.length == 0){
-            throw new TooFewArgsException(makePreMessage(), cla, argNames, programName);
-        }   
-        for(int i =0; i < cla.length;i++){
-             argValues.add(cla[i]);
+            throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
         } 
+        try{
+            for(int i =0; i < cla.length;i++){
+             arguments.get(i).addValue(cla[i]);
+            } 
+            
+        }catch(IndexOutOfBoundsException e){
+            throw new TooManyArgsException(makePreMessage(),cla, arguments, programName);
+        }    
+        
         
         checkForHelp(cla, programDescription, argDescriptions);
-        checkForTooFewArgs(cla, argNames);
-		checkForTooManyArgs(cla, argNames);
+        checkForTooFewArgs(cla);
+		//checkForTooManyArgs(cla);
         checkForInvalidArgument( );
         
     }
 	
 	
     public Object getArg(String name){
-        for(int i =0;i < getNumOfNameArgs();i++){
-            if(name.equals(argNames.get(i))){
-                if(argDataType.get(i) == DataType.INT){
-					return Integer.parseInt(argValues.get(i));
+        int j =0;
+        for(int i =0;i < getNumOfArguments();i++){
+            if(name.equals(arguments.get(i).getName())){
+                if(arguments.get(i).getType() == Argument.DataType.INT){
+					return Integer.parseInt(arguments.get(i).getValue());
 				}
 				
-				else if(argDataType.get(i) == DataType.FLOAT){
-					return Float.parseFloat(argValues.get(i));
+				else if(arguments.get(i).getType() == Argument.DataType.FLOAT){
+					return Float.parseFloat(arguments.get(i).getValue());
 				}
 				
-				else if(argDataType.get(i) == DataType.BOOL){
-					return Boolean.parseBoolean(argValues.get(i));
+				else if(arguments.get(i).getType() == Argument.DataType.BOOL){
+					return Boolean.parseBoolean(arguments.get(i).getValue());
 				}
 				
 				else{
-					return (String)argValues.get(i);
+					return (String)arguments.get(i).getValue();
 				}
             }
+            j = i;
         }
-        return "";
+        throw new InvalidArgumentException(makePreMessage(),programName, arguments.get(j));
        
         
     }
 	
-	public DataType getDataType(String name){
-		for(int i = 0; i < getNumOfNameArgs();i++){
-			if(name.equals(argNames.get(i))){
-				return argDataType.get(i);
-			}
-		}
-		return DataType.STRING;
-	}
+
     
     
 }

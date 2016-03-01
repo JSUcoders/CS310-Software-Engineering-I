@@ -11,9 +11,9 @@ public class ArgsParserKeywords{
         p.setProgramName(message);
         p.setProgramDescription(description);
         try{
-            p.addArg("length", float.class);
-            p.addArg("width", float.class);
-            p.addArg("height", float.class);
+            p.addArg("length", Argument.DataType.FLOAT);
+            p.addArg("width", Argument.DataType.FLOAT);
+            p.addArg("height", Argument.DataType.FLOAT);
             p.addArgDescriptions(argDescripts);
             p.parse(args);
 			
@@ -55,15 +55,7 @@ public class ArgsParserKeywords{
 		return p.getArg("height");
 	}
 	
-	public String getProgramOutput(){
-        
-		/**
-		float length = Float.parseFloat(p.getArg("length"));
-		float width = Float.parseFloat(p.getArg("width"));
-		float height = Float.parseFloat(p.getArg("height"));
-		
-		return String.valueOf(length * width * height);
-		**/
+	public String getProgramOutput(){        		
 		return programOutput;
 	}
 	public void setProgramOutput(String a){
@@ -104,9 +96,9 @@ public class ArgsParserKeywords{
         q.setProgramDescription(description);
         
 		try{
-            q.addArg("length", float.class);
-            q.addArg("width", float.class);
-            q.addArg("height",float.class);
+            q.addArg("length", Argument.DataType.FLOAT);
+            q.addArg("width", Argument.DataType.FLOAT);
+            q.addArg("height",Argument.DataType.FLOAT);
             q.addArgDescriptions(argDescripts);
             q.parse(args);
 		}

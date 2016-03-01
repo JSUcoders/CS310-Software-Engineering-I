@@ -16,7 +16,7 @@ public class ArgsParserTest{
     public void  testArgumentIsAddedCorrectly(){
        ArgsParser p = new ArgsParser();
        p.addArg("length");
-       assertEquals(1, p.getNumOfNameArgs() );
+       assertEquals(1, p.getNumOfArguments() );
        
     }
     
@@ -46,7 +46,7 @@ public class ArgsParserTest{
         p.parse(s);
         
     }
-    @Test(expected = TooFewArgsException.class)
+   @Test(expected = TooFewArgsException.class)
     public void testExceptionIsThrownWhenNoArguments(){
         ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
@@ -100,9 +100,9 @@ public class ArgsParserTest{
 	@Test
 	public void testDataTypeIsAddedCorrectly(){
 		ArgsParser p = new ArgsParser();
-		p.addArg("length", float.class);
+		p.addArg("length", Argument.DataType.FLOAT);
 		
-		assertEquals(ArgsParser.DataType.FLOAT, p.getDataType("length"));
+		assertEquals(Argument.DataType.FLOAT, p.getDataType("length"));
 	}
 	
 	@Test
@@ -110,16 +110,16 @@ public class ArgsParserTest{
 		ArgsParser p = new ArgsParser();
 		p.addArg("length");
 		
-		assertEquals(ArgsParser.DataType.STRING, p.getDataType("length"));
+		assertEquals(Argument.DataType.STRING, p.getDataType("length"));
 	}
 	
 	@Test
 	public void testGetArgParsesArguments(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"7", "5", "2"};
-		p.addArg("length", float.class);
-		p.addArg("width", float.class);
-		p.addArg("height", float.class);
+		p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
 		
 		p.parse(s);
 		
@@ -131,9 +131,9 @@ public class ArgsParserTest{
 	public void testGetArgParsesArgumentsOfTypeInt(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"7", "5", "2"};
-		p.addArg("length", int.class);
-		p.addArg("width", int.class);
-		p.addArg("height", int.class);
+		p.addArg("length", Argument.DataType.INT);
+		p.addArg("width", Argument.DataType.INT);
+		p.addArg("height", Argument.DataType.INT);
 		
 		p.parse(s);
 		
@@ -146,29 +146,29 @@ public class ArgsParserTest{
 		ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
 		String[] s = {"true", "false", "True"};
-		p.addArg("test 1", boolean.class);
-		p.addArg("test 2", boolean.class);
-		p.addArg("test 3", boolean.class);
+		p.addArg("test1", Argument.DataType.BOOL);
+		p.addArg("test2", Argument.DataType.BOOL);
+		p.addArg("test3", Argument.DataType.BOOL);
 		
 		p.parse(s);
 		
-		assertTrue( (boolean)p.getArg("test 1"));
-		assertFalse( (boolean)p.getArg("test 2"));
-		assertTrue( (boolean)p.getArg("test 3"));
+		assertTrue( (boolean)p.getArg("test1"));
+		assertFalse( (boolean)p.getArg("test2"));
+		assertTrue( (boolean)p.getArg("test3"));
 	}
     @Test
 	public void testGetArgParsesArgumentsOfTypeString(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"len", "wid", "hei"};
-		p.addArg("String 1", String.class);
-		p.addArg("String 2", String.class);
-		p.addArg("String 3", String.class);
+		p.addArg("String1", Argument.DataType.STRING);
+		p.addArg("String2", Argument.DataType.STRING);
+		p.addArg("String3", Argument.DataType.STRING);
 		
 		p.parse(s);
 		
-		assertEquals("len", p.getArg("String 1"));
-		assertEquals("wid", p.getArg("String 2"));
-		assertEquals("hei", p.getArg("String 3"));
+		assertEquals("len", p.getArg("String1"));
+		assertEquals("wid", p.getArg("String2"));
+		assertEquals("hei", p.getArg("String3"));
 	}
 	
 	@Test(expected = InvalidArgumentException.class)
@@ -176,95 +176,40 @@ public class ArgsParserTest{
 		ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
 		String[] s = {"7", "something", "2"};
-		p.addArg("length", float.class);
-		p.addArg("width", float.class);
-		p.addArg("height", float.class);
+		p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
 		
 		p.parse(s);
 	}
     
-    @Test(expected = InvalidArgumentException.class)
-	public void testInvalidArgExceptionIsThrownForChars(){
-		ArgsParser p = new ArgsParser();
-        p.setProgramName("VolumeCalculator");
-		String[] s = {"m", "p", "u"};
-		p.addArg("length", char.class);
-		p.addArg("width", char.class);
-		p.addArg("height", char.class);
-		
-		p.parse(s);
-	}
+    
     @Test(expected = InvalidArgumentException.class)
 	public void testInvalidArgExceptionIsThrownForNonInts(){
 		ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
 		String[] s = {"8", "7", "bob"};
-		p.addArg("length", int.class);
-		p.addArg("width", int.class);
-		p.addArg("height", int.class);
+		p.addArg("length", Argument.DataType.INT);
+		p.addArg("width", Argument.DataType.INT);
+		p.addArg("height", Argument.DataType.INT);
 		
 		p.parse(s);
 	}
-    @Test(expected = InvalidArgumentException.class)
-	public void testInvalidArgExceptionIsThrownForBytes(){
-		ArgsParser p = new ArgsParser();
-        p.setProgramName("VolumeCalculator");
-		String[] s = {"1", "0", "0"};
-		p.addArg("length", byte.class);
-		p.addArg("width", byte.class);
-		p.addArg("height", byte.class);
-        
-		
-		p.parse(s);
-	}
-    @Test(expected = InvalidArgumentException.class)
-	public void testInvalidArgExceptionIsThrownForLongs(){
-		ArgsParser p = new ArgsParser();
-        p.setProgramName("VolumeCalculator");
-		String[] s = {"342344", "909889", "57868"};
-		p.addArg("length", long.class);
-		p.addArg("width", long.class);
-		p.addArg("height", long.class);
-		
-		p.parse(s);
-	}
-    @Test(expected = InvalidArgumentException.class)
-	public void testInvalidArgExceptionIsThrownForShorts(){
-		ArgsParser p = new ArgsParser();
-        p.setProgramName("VolumeCalculator");
-		String[] s = {"-32768", "30000", "20000"};
-		p.addArg("length", short.class);
-		p.addArg("width", short.class);
-		p.addArg("height", short.class);
-		
-		p.parse(s);
-	}
-    @Test(expected = InvalidArgumentException.class)
-	public void testInvalidArgExceptionIsThrownForDoubles(){
-		ArgsParser p = new ArgsParser();
-        p.setProgramName("VolumeCalculator");
-		String[] s = {"69.0", "6.9", "0.69"};
-		p.addArg("length", double.class);
-		p.addArg("width", double.class);
-		p.addArg("height", double.class);
-		
-		p.parse(s);
-	}
-	
+   
 	@Test
 	public void testAllDataTypesGetParsed(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"7", "true", "bob"};
         p.setProgramName("VolumeCalculator");
-		p.addArg("Int", int.class);
-		p.addArg("Bool", boolean.class);
+		p.addArg("Int", Argument.DataType.INT);
+		p.addArg("Bool", Argument.DataType.BOOL);
 		p.addArg("String");
 		
 		p.parse(s);
 		
-		assertEquals(ArgsParser.DataType.INT, p.getDataType("Int"));
-		assertEquals(ArgsParser.DataType.BOOL, p.getDataType("Bool"));
-		assertEquals(ArgsParser.DataType.STRING, p.getDataType("String"));
+		assertEquals(Argument.DataType.INT, p.getDataType("Int"));
+		assertEquals(Argument.DataType.BOOL, p.getDataType("Bool"));
+		assertEquals(Argument.DataType.STRING, p.getDataType("String"));
 	
 	}
     

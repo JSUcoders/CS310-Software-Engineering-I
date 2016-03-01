@@ -5,11 +5,11 @@ public class TooManyArgsException extends RuntimeException{
 	private String exceptionOutput= "";
 	
 
-	public TooManyArgsException(String preMessage,String[] cla, List<String> argNames, String prgmName){
+	public TooManyArgsException(String preMessage,String[] cla, List<Argument> arguments, String prgmName){
 
 		String extraArgs = "";
 		
-		for(int i = argNames.size(); i < cla.length; i++){
+		for(int i = arguments.size(); i < cla.length; i++){
 			extraArgs = extraArgs + " " + cla[i];
 		}
 
