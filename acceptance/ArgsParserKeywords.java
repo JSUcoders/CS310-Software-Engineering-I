@@ -1,4 +1,5 @@
 import edu.jsu.mcis.*;
+import java.util.*;
 import java.util.Arrays;
 public class ArgsParserKeywords{
 	private ArgsParser p;
@@ -86,7 +87,7 @@ public class ArgsParserKeywords{
 	public Object getBathrooms(){
 		return p.getArg("bathrooms");
 	
-    
+    }
     public Object getType(){
         List<String> a = p.getOptionalArgNames();
         List<String> b = p.getOptionalArgValues();
@@ -94,7 +95,11 @@ public class ArgsParserKeywords{
             if(a.get(i).equals("--type")){
                 return b.get(i);
             }
+            
+            
         }
+        
+        return b.get(0);
     }
     public Object getDigits(){
         List<String> a = p.getOptionalArgNames();
@@ -103,7 +108,9 @@ public class ArgsParserKeywords{
             if(a.get(i).equals("--digits")){
                 return b.get(i);
             }
+
         }
+        return b.get(1);
     }
 	public void startProgramWithArguments(String[] args){
 		ArgsParser q = new ArgsParser();
