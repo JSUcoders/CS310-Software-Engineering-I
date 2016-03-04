@@ -69,6 +69,8 @@ public class ArgsParserTest{
 		p.parse(s);
 	}
     
+    
+    
     @Test(expected = HelpException.class)
     public void testHelpExceptionIsThrown(){
         ArgsParser p = new ArgsParser();
@@ -213,7 +215,33 @@ public class ArgsParserTest{
 	
 	}
     
+    @Test
+    public void testAddingOptionalArguments(){
+        ArgsParser p =  new ArgsParser();
+        String[] s = {"7", "3","2","--type","ellipsoid","--digits","1"};
+        p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+        p.addDefaultOptionalArg("--type", "box");
+        p.addDefaultOptionalArg("--digits", "4");
+        p.parse(s);
+        assertEquals("ellipsoid", p.getOptionalArg("--type"));
+        assertEquals("1", p.getOptionalArg("--digits"));
+    }
+   
+    @Test
+    public void testDefaultOptionalTypesExist(){
+        ArgsParser p =  new ArgsParser();
+        String[] s = {"7", "3","2",};
+        p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+        p.addDefaultOptionalArg("--type", "box");
+        p.addDefaultOptionalArg("--digits", "4");
+        p.parse(s);
+        assertEquals("box", p.getOptionalArg("--type"));
+        assertEquals("4", p.getOptionalArg("--digits"));
+    }
     
    
-    
 }

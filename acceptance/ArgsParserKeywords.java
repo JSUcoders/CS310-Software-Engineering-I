@@ -11,13 +11,14 @@ public class ArgsParserKeywords{
         p = new ArgsParser();
         p.setProgramName(message);
         p.setProgramDescription(description);
+        p.addDefaultOptionalArg("--type", "box");
+        p.addDefaultOptionalArg("--digits","4");
         try{
             p.addArg("length", Argument.DataType.FLOAT);
             p.addArg("width", Argument.DataType.FLOAT);
             p.addArg("height", Argument.DataType.FLOAT);
             p.addArgDescriptions(argDescripts);
-            p.parse(args);
-			
+            p.parse(args);			
 			float length = (float) p.getArg("length");
 			float width = (float) p.getArg("width");
 			float height = (float) p.getArg("height");
@@ -43,6 +44,7 @@ public class ArgsParserKeywords{
         }
 		
 	}
+    
 	
 	public Object getLength(){
 		return p.getArg("length");
@@ -89,28 +91,10 @@ public class ArgsParserKeywords{
 	
     }
     public Object getType(){
-        List<String> a = p.getOptionalArgNames();
-        List<String> b = p.getOptionalArgValues();
-        for(int i =0; i< a.size();i++){
-            if(a.get(i).equals("--type")){
-                return b.get(i);
-            }
-            
-            
-        }
-        
-        return b.get(0);
+        return p.getOptionalArg("--type");
     }
     public Object getDigits(){
-        List<String> a = p.getOptionalArgNames();
-        List<String> b = p.getOptionalArgValues();
-        for(int i =0; i< a.size();i++){
-            if(a.get(i).equals("--digits")){
-                return b.get(i);
-            }
-
-        }
-        return b.get(1);
+        return p.getOptionalArg("--digits");
     }
 	public void startProgramWithArguments(String[] args){
 		ArgsParser q = new ArgsParser();

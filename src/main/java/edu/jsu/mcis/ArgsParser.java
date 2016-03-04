@@ -1,5 +1,6 @@
 package edu.jsu.mcis;
 import java.util.*;
+import java.util.Arrays;
 
 public class ArgsParser{
 
@@ -18,12 +19,21 @@ public class ArgsParser{
     }
     
     
-    public List<String> getOptionalArgNames(){
-       return optionalArgNames; 
+    public void addDefaultOptionalArg(String name, String def){
+        optionalArgNames.add(name);
+        optionalArgValues.add(def);
     }
-    public List<String> getOptionalArgValues(){
-        return optionalArgValues;
+   
+    
+    public String getOptionalArg(String name){
+       for(int i =0; i< optionalArgNames.size();i++){
+           if(optionalArgNames.get(i).equals(name)){
+               return optionalArgValues.get(i);
+           }
+       } 
+       return "";
     }
+    
     private String makePreMessage(){
        
         String names = "";
@@ -125,30 +135,46 @@ public class ArgsParser{
 	}
     
     public void parse(String[] cla) {
-        for(int i = 0; i < cla.length;i++){
-            if(cla[i].charAt(0) == '-' && cla[i].charAt(1)=='-'){
-                optionalArgNames.add(cla[i]);
-                optionalArgValues.add(cla[i+1]);
-            }
-            else{
-                
-                optionalArgValues.add("box");
-                optionalArgValues.add("4");
-            }
-            
-        }
+        
+
         if(cla.length == 0){
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
         } 
+        for(int i =0; i < cla.length;i++){
+            for(int j =0; j < optionalArgNames.size();j++){
+                if(cla[i].contains("--")){
+                    if(cla[i].equals(optionalArgNames.get(j))){
+                      
+                      optionalArgValues.set(j, cla[i + 1]);
+                    }
+                    else{
+                      optionalArgNames.add(cla[i]);
+                      optionalArgValues.add(cla[i+1]);
+                    }
+                    
+                }
+            }
+                
+                
+                
+        }
         try{
+            
             for(int i =0; i < cla.length;i++){
-             arguments.get(i).addValue(cla[i]);
+                
+                arguments.get(i).addValue(cla[i]);
             } 
             
         }catch(IndexOutOfBoundsException e){
             
-            throw new TooManyArgsException(makePreMessage(),cla, arguments, programName);
-        }    
+           
+           if(!cla[arguments.size()].contains("--")){
+                throw new TooManyArgsException(makePreMessage(), cla, arguments, programName);
+           }
+                
+        }
+            
+        
         
         
         checkForHelp(cla, programDescription, argDescriptions);
