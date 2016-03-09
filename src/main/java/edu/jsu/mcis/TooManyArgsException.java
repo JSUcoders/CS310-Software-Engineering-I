@@ -17,7 +17,7 @@ public class TooManyArgsException extends RuntimeException{
        
          
 		exceptionOutput = preMessage + "\n" + prgmName+".java: error: unrecognized arguments:"+extraArgs;
-        System.out.println(getExceptionOutput());
+        
 
     }
 	public String getExceptionOutput(){
