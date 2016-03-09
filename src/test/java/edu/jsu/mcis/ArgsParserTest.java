@@ -182,7 +182,13 @@ public class ArgsParserTest{
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
 		
-		p.parse(s);
+        try {
+            p.parse(s);
+        }
+        catch(InvalidArgumentException e) {
+            System.out.println(e.getExceptionOutput());
+            throw e;
+        }
 	}
     
     
@@ -215,8 +221,8 @@ public class ArgsParserTest{
 	
 	}
     
-    @Test
-    public void testAddingOptionalArguments(){
+    //@Test
+    /*public void testAddingOptionalArguments(){
         ArgsParser p =  new ArgsParser();
         String[] s = {"7", "3","2","--type","ellipsoid","--digits","1"};
         p.addArg("length", Argument.DataType.FLOAT);
@@ -225,9 +231,10 @@ public class ArgsParserTest{
         p.addDefaultOptionalArg("--type", "box");
         p.addDefaultOptionalArg("--digits", "4");
         p.parse(s);
+        p.print();
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
         assertEquals("1", p.getOptionalArg("--digits"));
-    }
+    }*/
    
     @Test
     public void testDefaultOptionalTypesExist(){
@@ -242,6 +249,24 @@ public class ArgsParserTest{
         assertEquals("box", p.getOptionalArg("--type"));
         assertEquals("4", p.getOptionalArg("--digits"));
     }
-    
+    @Test
+    public void testAddingOptionalArguments(){
+        ArgsParser p =  new ArgsParser();
+        String[] s = {"--type", "ellipsoid","7","3","--digits","1","2","--6969","69"};
+        p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+        p.addDefaultOptionalArg("--type", "box");
+        p.addDefaultOptionalArg("--digits", "4");
+        try{
+            p.parse(s);
+        }catch(TooManyArgsException e){
+            p.print();
+        }
+        
+        
+        assertEquals("ellipsoid", p.getOptionalArg("--type"));
+        assertEquals("1", p.getOptionalArg("--digits"));
+    }
    
 }

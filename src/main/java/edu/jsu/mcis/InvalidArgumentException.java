@@ -19,7 +19,7 @@ public class InvalidArgumentException extends RuntimeException{
         }
         
 		exceptionOutput= preMsg +"\n"+programName+".java:"+" error: argument " + arg.getName()+": invalid " +datatype+ " value: " + arg.getValue();
-		System.out.println(getExceptionOutput());
+		
     }
     
     public String getExceptionOutput(){
