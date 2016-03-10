@@ -85,3 +85,17 @@ Library           ArgsParserKeywords
 |                              | Should Be Equal                       | ellipsoid          | ${type}      |            |            |            |            |            |
 |                              | ${digits}=                            | Get Digits         |              |            |            |            |            |            |
 |                              | Should Be Equal                       | 1                  | ${digits}    |            |            |            |            |            |
+
+
+| *Test Case*                  | *Action*                              | *Argument*         | *Argument*   | *Argument* | *Argument* | *Argument* | *Argument* | *Argument* |
+| Test Named Argument Anywhere | Start Volume Calculator With Arguments | --type             | ellipsoid    | 7          | 3          | --digits   | 1          | 2          |
+|                              | ${length}=                            | ArgsParserKeywords.Get Length         |              |            |            |            |            |            |
+|                              | Should Be Equal As Numbers            | ${length}          | 7.0          |            |            |            |            |            |
+|                              | ${width}=                             | Get Width          |              |            |            |            |            |            |
+|                              | Should Be Equal As Numbers            | ${width}           | 3.0          |            |            |            |            |            |
+|                              | ${height}=                            | Get Height         |              |            |            |            |            |            |
+|                              | Should Be Equal As Numbers            | ${height}          | 2.0          |            |            |            |            |            |
+|                              | ${type}=                              | Get Type           |              |            |            |            |            |            |
+|                              | Should Be Equal                       | ellipsoid          | ${type}      |            |            |            |            |            |
+|                              | ${digits}=                            | Get Digits         |              |            |            |            |            |            |
+|                              | Should Be Equal                       | 1                  | ${digits}    |            |            |            |            |            |

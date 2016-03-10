@@ -28,10 +28,7 @@ public class ArgsParser{
         System.out.println(optionalArgValues.toString());
     }
     
-    public void addDefaultOptionalArg(String name, String def){
-        optionalArgNames.add(name);
-        optionalArgValues.add(def);
-    }
+    
    
     
     public String getOptionalArg(String name){
@@ -94,6 +91,7 @@ public class ArgsParser{
 	}
     
     public void addArg(String name){
+        
         addArg(name, Argument.DataType.STRING);
     }
 	
@@ -101,6 +99,22 @@ public class ArgsParser{
         Argument a = new Argument(name, t);
         arguments.add(a);
 	}
+    
+    public void addArg(String name, String def){
+        if(name.contains("--")){
+            optionalArgNames.add(name);
+            optionalArgValues.add(def);
+        }
+    }
+    
+    private void checkForTooManyArgs(String [] cla){
+       if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){
+           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
+       }
+       else if(cla.length > arguments.size()){
+           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
+       }
+    }
     
     private void checkForTooFewArgs(String[] cla)  {
     
@@ -144,58 +158,35 @@ public class ArgsParser{
 	}
     
     public void parse(String[] cla) {
-        List<String> tempList = new ArrayList<String>(optionalArgNames);
+       
 
         if(cla.length == 0){
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
         } 
-        int timesLooped = 0;
-        for(int i =0; i < optionalArgNames.size();i++){
-            for(int j =0; j < cla.length;j++){
-                try{
-                    if(cla[j].contains("--") ){
-                        if(cla[j].equals(optionalArgNames.get(i))){
-                            optionalArgValues.set(i, cla[j + 1]);
-                            //grady: ++i?
-                            //cody: j and i need to be iterated correctly?
-                      
-                            i++;
-                        }
-                    
-                        else{
-                            tempList.add(cla[j]);
-                            optionalArgValues.add(cla[j+1]);
-                        }
-                    }
-                    timesLooped += 1;
-                }catch(IndexOutOfBoundsException e){
-                    System.out.println(timesLooped);
-                }
-            }    
+        for(int i = 0; i < cla.length;i++){
+            if(optionalArgNames.contains(cla[i])){
+                optionalArgValues.set(optionalArgNames.indexOf(cla[i]), cla[i + 1]);
+                i++;
+            }
+            else if(cla[i].contains("--")){
+                optionalArgNames.add(cla[i]);
+                optionalArgValues.add(cla[i+1]);
+            }
         }
-        optionalArgNames = new ArrayList<String>(tempList);
-        try{
-           //get it to look for the long name "--" values and ignore the very next cla just like the the "I++" that resolved the double issues.
-            for(int i =0; i < cla.length;i++){
-                if(!optionalArgNames.contains(cla[i]) || !optionalArgValues.contains(cla[i])){
-                     arguments.get(i).addValue(cla[i]);
+        int j = 0;
+        for(int i = 0; i < cla.length; i ++){
+            if(optionalArgNames.contains(cla[i]) || optionalArgValues.contains(cla[i])){
+                
+            }
+            else{
+                if(j < arguments.size()){
+                    arguments.get(j).addValue(cla[i]);
                 }
                 
-               
-            } 
-            
-        }catch(IndexOutOfBoundsException e){
-            
-           
-           if(!cla[arguments.size()].contains("--")){
-                throw new TooManyArgsException(makePreMessage(), cla, arguments, programName);
-           }
-                
+                j++;
+            }
         }
-            
-        
-        
-        
+        checkForTooManyArgs(cla); 
         checkForHelp(cla, programDescription, argDescriptions);
         checkForTooFewArgs(cla);
         checkForInvalidArgument();

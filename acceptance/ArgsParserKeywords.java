@@ -11,12 +11,13 @@ public class ArgsParserKeywords{
         p = new ArgsParser();
         p.setProgramName(message);
         p.setProgramDescription(description);
-        p.addDefaultOptionalArg("--type", "box");
-        p.addDefaultOptionalArg("--digits","4");
+        
         try{
             p.addArg("length", Argument.DataType.FLOAT);
             p.addArg("width", Argument.DataType.FLOAT);
             p.addArg("height", Argument.DataType.FLOAT);
+            p.addArg("--type", "box");
+            p.addArg("--digits","4");
             p.addArgDescriptions(argDescripts);
             p.parse(args);			
 			float length = (float) p.getArg("length");

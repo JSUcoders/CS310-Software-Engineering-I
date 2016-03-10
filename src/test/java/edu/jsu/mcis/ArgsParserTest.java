@@ -221,20 +221,6 @@ public class ArgsParserTest{
 	
 	}
     
-    //@Test
-    /*public void testAddingOptionalArguments(){
-        ArgsParser p =  new ArgsParser();
-        String[] s = {"7", "3","2","--type","ellipsoid","--digits","1"};
-        p.addArg("length", Argument.DataType.FLOAT);
-		p.addArg("width", Argument.DataType.FLOAT);
-		p.addArg("height", Argument.DataType.FLOAT);
-        p.addDefaultOptionalArg("--type", "box");
-        p.addDefaultOptionalArg("--digits", "4");
-        p.parse(s);
-        p.print();
-        assertEquals("ellipsoid", p.getOptionalArg("--type"));
-        assertEquals("1", p.getOptionalArg("--digits"));
-    }*/
    
     @Test
     public void testDefaultOptionalTypesExist(){
@@ -243,8 +229,8 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addDefaultOptionalArg("--type", "box");
-        p.addDefaultOptionalArg("--digits", "4");
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4");
         p.parse(s);
         assertEquals("box", p.getOptionalArg("--type"));
         assertEquals("4", p.getOptionalArg("--digits"));
@@ -252,15 +238,16 @@ public class ArgsParserTest{
     @Test
     public void testAddingOptionalArguments(){
         ArgsParser p =  new ArgsParser();
-        String[] s = {"--type", "ellipsoid","7","3","--digits","1","2","--6969","69"};
+        String[] s = {"--type", "ellipsoid","7","3","--digits","1","2", "--hello","6"};
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addDefaultOptionalArg("--type", "box");
-        p.addDefaultOptionalArg("--digits", "4");
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4");
         try{
-            p.parse(s);
+           p.parse(s); 
         }catch(TooManyArgsException e){
+            System.out.println(e.getExceptionOutput());
             p.print();
         }
         
@@ -268,5 +255,23 @@ public class ArgsParserTest{
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
         assertEquals("1", p.getOptionalArg("--digits"));
     }
+    
+    @Test(expected = TooManyArgsException.class)
+	public void testExceptionIsThrownWhenTooManyArguments2(){
+		ArgsParser p = new ArgsParser();
+		p.setProgramName("VolumeCalculator");
+		String[] s = {"--type", "ellipsoid","7","3","--digits","1","2", "--hello","6", "43","8"};
+		p.addArg("length");
+		p.addArg("width");
+		p.addArg("height");
+        try{
+            p.parse(s);
+        }catch(TooManyArgsException e){
+            p.print();
+            throw e;
+        }
+		
+        
+	}
    
 }
