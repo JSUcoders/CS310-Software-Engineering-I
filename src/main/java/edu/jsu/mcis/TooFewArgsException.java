@@ -26,7 +26,7 @@ public class TooFewArgsException extends RuntimeException {
             
         }
         exceptionOutput = preMsg+"\n"+ prgmName+".java: error: the following arguments are required: "+missingArgNames;
-        System.out.println(getExceptionOutput());
+        
     }
     public String getExceptionOutput(){
 		return exceptionOutput;

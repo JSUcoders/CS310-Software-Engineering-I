@@ -201,7 +201,13 @@ public class ArgsParserTest{
 		p.addArg("width", Argument.DataType.INT);
 		p.addArg("height", Argument.DataType.INT);
 		
-		p.parse(s);
+		try {
+            p.parse(s);
+        }
+        catch(InvalidArgumentException e) {
+            System.out.println(e.getExceptionOutput());
+            throw e;
+        }
 	}
    
 	@Test
