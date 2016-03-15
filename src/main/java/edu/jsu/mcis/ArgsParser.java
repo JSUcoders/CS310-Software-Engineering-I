@@ -111,8 +111,33 @@ public class ArgsParser{
        if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){
            throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
        }
-       else if(cla.length > arguments.size()){
-           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
+       else{
+           List<String> args = new ArrayList<String>();
+           if(cla.length > arguments.size()){
+               for(int i =0; i < cla.length; i++){
+                   args.add(cla[i]);
+               }
+               
+               for(int i =0; i < args.size();i++){
+                   if(optionalArgNames.contains(args.get(i)) ){
+                       args.remove(args.get(i));
+                   }
+                   if(optionalArgValues.contains(args.get(i))){
+                       args.remove(args.get(i));
+                   }
+               }
+               
+               for(int i =0; i < arguments.size();i++){
+                   if(args.contains(arguments.get(i).getValue())){
+                       args.remove(arguments.get(i).getValue());
+                   }
+               }
+               
+               if(args.size() > 0){
+                   
+                   throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
+               }
+           }
        }
     }
     
@@ -130,10 +155,12 @@ public class ArgsParser{
 	
     
     private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
-       
-        if(cla[0].equals("-h") || cla[0].equals("--help")){
-            throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
+        for(int i =0; i < cla.length;i++){
+            if(cla[i].equals("-h") || cla[i].equals("--help")){
+                throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
+            }
         }
+        
     }
 	
 	private void checkForInvalidArgument( ){
@@ -181,9 +208,10 @@ public class ArgsParser{
             else{
                 if(j < arguments.size()){
                     arguments.get(j).addValue(cla[i]);
+                     j++;
                 }
                 
-                j++;
+               
             }
         }
         checkForTooManyArgs(cla); 

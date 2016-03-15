@@ -250,14 +250,8 @@ public class ArgsParserTest{
 		p.addArg("height", Argument.DataType.FLOAT);
         p.addArg("--type", "box");
         p.addArg("--digits", "4");
-        try{
-           p.parse(s); 
-        }catch(TooManyArgsException e){
-            System.out.println(e.getExceptionOutput());
-            p.print();
-        }
-        
-        
+        p.parse(s);   
+        assertEquals("6", p.getOptionalArg("--hello"));
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
         assertEquals("1", p.getOptionalArg("--digits"));
     }
@@ -279,5 +273,17 @@ public class ArgsParserTest{
 		
         
 	}
+    
+    @Test(expected = TooManyArgsException.class)
+    public void testTooManyArgsWithDefault(){
+        ArgsParser p =  new ArgsParser();
+        String[] s = {"7", "3","2","43"};
+        p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4");
+        p.parse(s);
+    }
    
 }
