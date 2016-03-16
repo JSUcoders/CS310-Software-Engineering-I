@@ -110,6 +110,7 @@ public class ArgsParserKeywords{
             q.addArg("length", Argument.DataType.FLOAT);
             q.addArg("width", Argument.DataType.FLOAT);
             q.addArg("height",Argument.DataType.FLOAT);
+            q.addArg("--help","false");
             q.addArgDescriptions(argDescripts);
             q.parse(args);
 		}

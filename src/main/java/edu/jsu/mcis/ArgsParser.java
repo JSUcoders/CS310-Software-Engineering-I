@@ -155,11 +155,17 @@ public class ArgsParser{
 	
     
     private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
-        for(int i =0; i < cla.length;i++){
-            if(cla[i].equals("-h") || cla[i].equals("--help")){
-                throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
+        if(cla[0].equals("-h") || cla[0].equals("--help")){
+            throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
+        }
+        else{
+            for(int i =0; i < optionalArgNames.size();i++){
+                if(optionalArgNames.get(i).equals("--help") && optionalArgValues.get(i).equals("true")){
+                    throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
+                }
             }
         }
+        
         
     }
 	
@@ -192,8 +198,14 @@ public class ArgsParser{
         } 
         for(int i = 0; i < cla.length;i++){
             if(optionalArgNames.contains(cla[i])){
-                optionalArgValues.set(optionalArgNames.indexOf(cla[i]), cla[i + 1]);
-                i++;
+                if(optionalArgValues.get(optionalArgNames.indexOf(cla[i])) == "false"){
+                    optionalArgValues.set(optionalArgNames.indexOf(cla[i]), "true");
+                }
+                else{
+                    optionalArgValues.set(optionalArgNames.indexOf(cla[i]), cla[i + 1]);
+                    i++;
+                }
+                
             }
             else if(cla[i].contains("--")){
                 optionalArgNames.add(cla[i]);

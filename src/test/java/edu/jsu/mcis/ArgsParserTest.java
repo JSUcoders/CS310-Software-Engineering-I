@@ -286,4 +286,33 @@ public class ArgsParserTest{
         p.parse(s);
     }
    
+   @Test
+   public void testAddFlagArgumentAndNamedArgs(){
+       ArgsParser p = new ArgsParser();
+       String[] s = {"7", "--myArg","3","--otherArg","6","2","--defArg","things"};
+       p.addArg("--myArg", "false");
+       p.addArg("length");
+       p.addArg("width");
+       p.addArg("height");
+       p.addArg("--defArg", "stuff");
+       p.parse(s);
+       assertEquals("true", p.getOptionalArg("--myArg"));
+       assertEquals("6", p.getOptionalArg("--otherArg"));
+       assertEquals("things", p.getOptionalArg("--defArg"));
+   }
+   
+   @Test(expected = HelpException.class)
+   public void testHelpExceptionIsThrownNotAtBeginningOfCommandLine(){
+       ArgsParser p = new ArgsParser();
+        p.setProgramName("VolumeCalculator");
+        p.setProgramDescription("Calculate the volume of a box");
+        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
+        String[] s = {"7", "--help","3","2"};
+        p.addArg("length");
+        p.addArg("width");
+        p.addArg("height");
+        p.addArg("--help","false");
+        p.addArgDescriptions(argDescripts);
+        p.parse(s);
+   }
 }
