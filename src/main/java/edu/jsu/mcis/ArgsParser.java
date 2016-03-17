@@ -10,7 +10,12 @@ public class ArgsParser{
     private String[] argDescriptions;
     private List<String> optionalArgValues;
     private List<String> optionalArgNames;
-    public ArgsParser(){
+    private HashMap longShortArgNames = new HashMap();
+	
+	
+	
+	
+	public ArgsParser(){
         arguments = new ArrayList<Argument>();
         programName = "";
         programDescription = "";
@@ -106,6 +111,11 @@ public class ArgsParser{
             optionalArgValues.add(def);
         }
     }
+	public void addArg(String name, String def, String shortName){
+		addArg(name,def);
+		longShortArgNames.put(shortName,name);
+	}
+	
     
     private void checkForTooManyArgs(String [] cla){
        if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){
@@ -115,9 +125,37 @@ public class ArgsParser{
            List<String> args = new ArrayList<String>();
            if(cla.length > arguments.size()){
                for(int i =0; i < cla.length; i++){
-                   args.add(cla[i]);
+                   int shortnamesUsed=0;
+					if(cla[i].contains("-")){
+						if (cla[i].charAt(1)!=('-')){ 
+							for(int j=1;j<cla[i].length();j++){
+								shortnamesUsed++;
+								args.add(("-"+ cla[i].substring(j,j+1)).toString());
+								
+								if(optionalArgNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
+									args.remove(("-"+ cla[i].substring(j,j+1)).toString());
+									
+								}	 
+							}
+						}
+						else {
+							args.add(cla[i]);
+							
+						}
+					}
+					else { 
+						args.add(cla[i]); 
+						
+					}
+					i= i + shortnamesUsed;
                }
-               
+			   //check for shortname longname association then remove from list
+			   for(int i =0; i < args.size();i++){
+                   if(longShortArgNames.containsKey(args.get(i))){
+                       args.remove(args.get(i));
+                   }
+               }
+		   
                for(int i =0; i < args.size();i++){
                    if(optionalArgNames.contains(args.get(i)) ){
                        args.remove(args.get(i));
@@ -155,16 +193,14 @@ public class ArgsParser{
 	
     
     private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){
-        if(cla[0].equals("-h") || cla[0].equals("--help")){
-            throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
-        }
-        else{
+        
+        
             for(int i =0; i < optionalArgNames.size();i++){
                 if(optionalArgNames.get(i).equals("--help") && optionalArgValues.get(i).equals("true")){
                     throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
                 }
             }
-        }
+        
         
         
     }
@@ -191,12 +227,11 @@ public class ArgsParser{
 	}
     
     public void parse(String[] cla) {
-       
-
         if(cla.length == 0){
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
         } 
         for(int i = 0; i < cla.length;i++){
+
             if(optionalArgNames.contains(cla[i])){
                 if(optionalArgValues.get(optionalArgNames.indexOf(cla[i])) == "false"){
                     optionalArgValues.set(optionalArgNames.indexOf(cla[i]), "true");
@@ -205,32 +240,48 @@ public class ArgsParser{
                     optionalArgValues.set(optionalArgNames.indexOf(cla[i]), cla[i + 1]);
                     i++;
                 }
-                
-            }
+			}	  
+
             else if(cla[i].contains("--")){
                 optionalArgNames.add(cla[i]);
                 optionalArgValues.add(cla[i+1]);
             }
-        }
+			else if(cla[i].contains("-") && (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){
+				int shortnamesUsed=0;
+				for(int j=1;j<cla[i].length();j++){					
+					if (cla[i].equals("-h")){
+						throw new HelpException(makePreMessage(), programDescription, argDescriptions); 
+					}
+					
+					else if(cla[i].substring(j,j+1) != "-"){
+						shortnamesUsed++;	 
+						if(optionalArgNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
+							optionalArgValues.set(optionalArgNames.indexOf(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString()), cla[i + shortnamesUsed]);
+						}
+					} 
+				}
+				i= i + shortnamesUsed;
+			}
+		}
         int j = 0;
         for(int i = 0; i < cla.length; i ++){
-            if(optionalArgNames.contains(cla[i]) || optionalArgValues.contains(cla[i])){
-                
+            if(optionalArgNames.contains(cla[i]) || optionalArgValues.contains(cla[i]) || (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){ 
+            
             }
+
             else{
                 if(j < arguments.size()){
                     arguments.get(j).addValue(cla[i]);
                      j++;
                 }
                 
-               
+              
             }
         }
-        checkForTooManyArgs(cla); 
-        checkForHelp(cla, programDescription, argDescriptions);
+        checkForTooManyArgs(cla);
+        checkForHelp(cla, programDescription, argDescriptions);    
         checkForTooFewArgs(cla);
         checkForInvalidArgument();
-        
     }
 	
 	
@@ -261,7 +312,9 @@ public class ArgsParser{
         
     }
 	
-
+	
+	
+	
     
     
 }

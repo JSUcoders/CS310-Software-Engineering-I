@@ -301,6 +301,27 @@ public class ArgsParserTest{
        assertEquals("things", p.getOptionalArg("--defArg"));
    }
    
+    @Test
+    public void testAddingOptionalArgumentsShortNames(){
+        ArgsParser p =  new ArgsParser();
+        String[] s = {"-t", "ellipsoid","7","3","-d","1","2"};
+        p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+        p.addArg("--type", "box","-t");
+        p.addArg("--digits", "4","-d");
+        p.parse(s);
+         
+        assertEquals("ellipsoid", p.getOptionalArg("--type"));
+        assertEquals("1", p.getOptionalArg("--digits"));
+        assertEquals((float) 7, p.getArg("length"));
+        assertEquals((float) 3, p.getArg("width"));
+        assertEquals((float) 2, p.getArg("height"));
+       
+        
+    }
+   
+   
    @Test(expected = HelpException.class)
    public void testHelpExceptionIsThrownNotAtBeginningOfCommandLine(){
        ArgsParser p = new ArgsParser();
@@ -315,4 +336,6 @@ public class ArgsParserTest{
         p.addArgDescriptions(argDescripts);
         p.parse(s);
    }
+   
+   
 }

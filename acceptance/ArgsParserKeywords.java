@@ -16,8 +16,8 @@ public class ArgsParserKeywords{
             p.addArg("length", Argument.DataType.FLOAT);
             p.addArg("width", Argument.DataType.FLOAT);
             p.addArg("height", Argument.DataType.FLOAT);
-            p.addArg("--type", "box");
-            p.addArg("--digits","4");
+            p.addArg("--type", "box","-t");
+            p.addArg("--digits","4", "-d");
             p.addArgDescriptions(argDescripts);
             p.parse(args);			
 			float length = (float) p.getArg("length");
