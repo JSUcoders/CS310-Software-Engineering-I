@@ -10,7 +10,7 @@ public class ArgsParser{
     private String[] argDescriptions;
     private List<String> optionalArgValues;
     private List<String> optionalArgNames;
-    private HashMap longShortArgNames = new HashMap();
+    private HashMap<String, String> longShortArgNames;
 	
 	
 	
@@ -21,6 +21,7 @@ public class ArgsParser{
         programDescription = "";
         optionalArgValues = new ArrayList<String>();
         optionalArgNames = new ArrayList<String>();
+		longShortArgNames = new HashMap();
     }
     
     public void print(){
