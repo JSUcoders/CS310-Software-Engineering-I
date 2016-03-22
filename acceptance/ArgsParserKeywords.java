@@ -13,11 +13,11 @@ public class ArgsParserKeywords{
         p.setProgramDescription(description);
         
         try{
-            p.addArg("length", Argument.DataType.FLOAT);
-            p.addArg("width", Argument.DataType.FLOAT);
-            p.addArg("height", Argument.DataType.FLOAT);
-            p.addArg("--type", "box","-t");
-            p.addArg("--digits","4", "-d");
+            p.addArg("length","length the length of the box", Argument.DataType.FLOAT);
+            p.addArg("width","width the width of the box", Argument.DataType.FLOAT);
+            p.addArg("height","height the height of the box", Argument.DataType.FLOAT);
+            p.addOptionalArg("--type", "box","-t");
+            p.addOptionalArg("--digits","4", "-d");
             p.addArgDescriptions(argDescripts);
             p.parse(args);			
 			float length = (float) p.getArg("length");
@@ -110,7 +110,7 @@ public class ArgsParserKeywords{
             q.addArg("length", Argument.DataType.FLOAT);
             q.addArg("width", Argument.DataType.FLOAT);
             q.addArg("height",Argument.DataType.FLOAT);
-            q.addArg("--help","false");
+            p.addOptionalArg("--help","false");
             q.addArgDescriptions(argDescripts);
             q.parse(args);
 		}

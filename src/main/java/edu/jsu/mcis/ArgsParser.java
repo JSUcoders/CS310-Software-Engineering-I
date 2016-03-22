@@ -11,7 +11,8 @@ public class ArgsParser{
     private List<String> optionalArgValues;
     private List<String> optionalArgNames;
     private HashMap<String, String> longShortArgNames;
-	
+	private String noDescription;
+
 	
 	
 	
@@ -22,6 +23,7 @@ public class ArgsParser{
         optionalArgValues = new ArrayList<String>();
         optionalArgNames = new ArrayList<String>();
 		longShortArgNames = new HashMap();
+		noDescription = "";
     }
     
     public void print(){
@@ -96,24 +98,36 @@ public class ArgsParser{
 		return Argument.DataType.STRING;
 	}
     
-    public void addArg(String name){
-        
-        addArg(name, Argument.DataType.STRING);
-    }
-	
-	public void addArg(String name, Argument.DataType t){
-        Argument a = new Argument(name, t);
+   
+
+
+
+	public void addArg(String name,String description, Argument.DataType t){
+        Argument a = new Argument(name, description, t);
         arguments.add(a);
 	}
+	public void addArg(String name){
+        addArg(name, noDescription, Argument.DataType.STRING);
+    }
+	public void addArg(String name, String description){
+        addArg(name, description, Argument.DataType.STRING);
+    }
+	public void addArg(String name,Argument.DataType t ){
+		addArg(name, noDescription, t);
+	}
+	
+	
+	
+	
     
-    public void addArg(String name, String def){
+    public void addOptionalArg(String name, String defaultValue){ //instead of dumping into string list, use optionalArgument<list>
         if(name.contains("--")){
             optionalArgNames.add(name);
-            optionalArgValues.add(def);
+            optionalArgValues.add(defaultValue);
         }
     }
-	public void addArg(String name, String def, String shortName){
-		addArg(name,def);
+	public void addOptionalArg(String name, String defaultValue, String shortName){
+		addOptionalArg(name,defaultValue);
 		longShortArgNames.put(shortName,name);
 	}
 	
@@ -243,25 +257,31 @@ public class ArgsParser{
                 }
 			}	  
 
-            else if(cla[i].contains("--")){
-                optionalArgNames.add(cla[i]);
-                optionalArgValues.add(cla[i+1]);
+            else if(cla[i].contains("--")){//longname help 
+				if(cla[i] == "--help" || cla[i] == "--HELP" || cla[i] == "--Help"){
+					throw new HelpException(makePreMessage(), programDescription, argDescriptions); 
+				}
+				else{//regular long name
+					optionalArgNames.add(cla[i]);
+					optionalArgValues.add(cla[i+1]);
+				}
+                
             }
-			else if(cla[i].contains("-") && (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){
+			else if(cla[i].contains("-") && (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){ //shortname
 				int shortnamesUsed=0;
 				for(int j=1;j<cla[i].length();j++){					
-					if (cla[i].equals("-h")){
+					if (cla[i].equals("-h")){//shortname help
 						throw new HelpException(makePreMessage(), programDescription, argDescriptions); 
 					}
 					
-					else if(cla[i].substring(j,j+1) != "-"){
+					else if(cla[i].substring(j,j+1) != "-"){//regular shortname
 						shortnamesUsed++;	 
 						if(optionalArgNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
 							optionalArgValues.set(optionalArgNames.indexOf(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString()), cla[i + shortnamesUsed]);
 						}
 					} 
 				}
-				i= i + shortnamesUsed;
+				i= i + shortnamesUsed;//skips index of values in cla associated with shortnames
 			}
 		}
         int j = 0;

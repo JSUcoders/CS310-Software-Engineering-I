@@ -78,9 +78,9 @@ public class ArgsParserTest{
         p.setProgramDescription("Calculate the volume of a box");
         String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"-h"};
-        p.addArg("length");
-        p.addArg("width");
-        p.addArg("height");
+        p.addArg("length","length the length of the box(float)");
+        p.addArg("width","width the width of the box(float)");
+        p.addArg("height","height the height of the box(float)");
         p.addArgDescriptions(argDescripts);
         p.parse(s);
     }
@@ -235,8 +235,8 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box");
-        p.addArg("--digits", "4");
+        p.addOptionalArg("--type", "box");
+        p.addOptionalArg("--digits", "4");
         p.parse(s);
         assertEquals("box", p.getOptionalArg("--type"));
         assertEquals("4", p.getOptionalArg("--digits"));
@@ -248,8 +248,8 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box");
-        p.addArg("--digits", "4");
+        p.addOptionalArg("--type", "box");
+        p.addOptionalArg("--digits", "4");
         p.parse(s);   
         assertEquals("6", p.getOptionalArg("--hello"));
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
@@ -264,6 +264,8 @@ public class ArgsParserTest{
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");
+		p.addOptionalArg("--type", "box");
+		p.addOptionalArg("--digits", "4");
         try{
             p.parse(s);
         }catch(TooManyArgsException e){
@@ -281,8 +283,8 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box");
-        p.addArg("--digits", "4");
+        p.addOptionalArg("--type", "box");
+        p.addOptionalArg("--digits", "4");
         p.parse(s);
     }
    
@@ -290,11 +292,11 @@ public class ArgsParserTest{
    public void testAddFlagArgumentAndNamedArgs(){
        ArgsParser p = new ArgsParser();
        String[] s = {"7", "--myArg","3","--otherArg","6","2","--defArg","things"};
-       p.addArg("--myArg", "false");
+       p.addOptionalArg("--myArg", "false");
        p.addArg("length");
        p.addArg("width");
        p.addArg("height");
-       p.addArg("--defArg", "stuff");
+       p.addOptionalArg("--defArg", "stuff");
        p.parse(s);
        assertEquals("true", p.getOptionalArg("--myArg"));
        assertEquals("6", p.getOptionalArg("--otherArg"));
@@ -308,8 +310,8 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box","-t");
-        p.addArg("--digits", "4","-d");
+        p.addOptionalArg("--type", "box","-t");
+        p.addOptionalArg("--digits", "4","-d");
         p.parse(s);
          
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
@@ -329,10 +331,10 @@ public class ArgsParserTest{
         p.setProgramDescription("Calculate the volume of a box");
         String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"7", "--help","3","2"};
-        p.addArg("length");
-        p.addArg("width");
-        p.addArg("height");
-        p.addArg("--help","false");
+        p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+        p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
+        p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
+        p.addOptionalArg("--help","false");
         p.addArgDescriptions(argDescripts);
         p.parse(s);
    }
