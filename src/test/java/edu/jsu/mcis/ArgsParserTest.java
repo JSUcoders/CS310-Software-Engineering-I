@@ -329,13 +329,11 @@ public class ArgsParserTest{
        ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
         p.setProgramDescription("Calculate the volume of a box.");
-        //String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"7", "--help","3","2"};
         p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
         p.addOptionalArg("--help","false");
-        //p.addArgDescriptions(argDescripts);
         try{
             p.parse(s);
         }catch(HelpException e){
