@@ -64,13 +64,23 @@ public class ArgsParser{
             
         
     }
-    public void addArgDescriptions(String[] positionalArgs){
-        argDescriptions = new String[arguments.size()];
+	
+	
+	
+	
+	
+    /* public void addArgDescriptions(String[] positionalArgs){
+        argDescriptions = new String[arguments.size()]; //positional Argument sized array
         for(int i =0; i < positionalArgs.length;i++){
             argDescriptions[i] = positionalArgs[i];
         }
-    }
+    } */
     
+	
+	
+	
+	
+	
     public void setProgramDescription(String d){
       programDescription = d; 
     }
@@ -107,7 +117,7 @@ public class ArgsParser{
 
 
 	public void addArg(String name,String description, Argument.DataType t){
-        Argument a = new Argument(name, description, t);
+        PositionalArgument a = new PositionalArgument(name, description, t);
         arguments.add(a);
 	}
 	public void addArg(String name){
@@ -143,7 +153,8 @@ public class ArgsParser{
 	
     
     private void checkForTooManyArgs(String [] cla){
-       if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){
+       //if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){
+		 if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){  
            throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
        }
        else{
@@ -222,7 +233,7 @@ public class ArgsParser{
         
             for(int i =0; i < optionalArgNames.size();i++){
                 if(optionalArgNames.get(i).equals("--help") && optionalArgValues.get(i).equals("true")){
-                    throw new HelpException(makePreMessage(), prgmDescript, argDescript); 
+                    throw new HelpException(makePreMessage(), prgmDescript, arguments); 
                 }
             }
         
@@ -269,7 +280,7 @@ public class ArgsParser{
 
             else if(cla[i].contains("--")){//longname help 
 				if(cla[i] == "--help" || cla[i] == "--HELP" || cla[i] == "--Help"){
-					throw new HelpException(makePreMessage(), programDescription, argDescriptions); 
+					throw new HelpException(makePreMessage(), programDescription, arguments); 
 				}
 				else{//regular long name
 					optionalArgNames.add(cla[i]);
@@ -281,7 +292,7 @@ public class ArgsParser{
 				int shortnamesUsed=0;
 				for(int j=1;j<cla[i].length();j++){					
 					if (cla[i].equals("-h")){//shortname help
-						throw new HelpException(makePreMessage(), programDescription, argDescriptions); 
+						throw new HelpException(makePreMessage(), programDescription, arguments); 
 					}
 					
 					else if(cla[i].substring(j,j+1) != "-"){//regular shortname

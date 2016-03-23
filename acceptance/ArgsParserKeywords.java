@@ -7,7 +7,7 @@ public class ArgsParserKeywords{
 	public void startVolumeCalculatorWithArguments(String[] args){
         String message = "VolumeCalculator";
         String description = "Calculate the volume of a box";
-        String[] argDescripts = {"length the length of the box" , "width the width of the box", "height the height of the box"};
+        //String[] argDescripts = {"length the length of the box" , "width the width of the box", "height the height of the box"};
         p = new ArgsParser();
         p.setProgramName(message);
         p.setProgramDescription(description);
@@ -18,7 +18,7 @@ public class ArgsParserKeywords{
             p.addArg("height","height the height of the box", Argument.DataType.FLOAT);
             p.addOptionalArg("--type", "box","-t");
             p.addOptionalArg("--digits","4", "-d");
-            p.addArgDescriptions(argDescripts);
+            //p.addArgDescriptions(argDescripts);
             p.parse(args);			
 			float length = (float) p.getArg("length");
 			float width = (float) p.getArg("width");
@@ -102,14 +102,14 @@ public class ArgsParserKeywords{
 		setProgramOutput(" ");
 		String message = "VolumeCalculator";
         String description = "Calculate the volume of a box.";
-        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
+        //String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         p.setProgramName(message);
         p.setProgramDescription(description);
-        p.addArg("length", Argument.DataType.FLOAT);
-		p.addArg("width", Argument.DataType.FLOAT);
-		p.addArg("height",Argument.DataType.FLOAT);
+        p.addArg("length","length the length of the box(float)", Argument.DataType.FLOAT);
+		p.addArg("width","width the width of the box(float)", Argument.DataType.FLOAT);
+		p.addArg("height","height the height of the box(float)", Argument.DataType.FLOAT);
 		p.addOptionalArg("--help","false");
-		p.addArgDescriptions(argDescripts);
+		//p.addArgDescriptions(argDescripts);
 		try{
             p.parse(args);
 		}
