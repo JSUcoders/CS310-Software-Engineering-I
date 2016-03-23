@@ -98,21 +98,20 @@ public class ArgsParserKeywords{
         return p.getOptionalArg("--digits");
     }
 	public void startProgramWithArguments(String[] args){
-		ArgsParser q = new ArgsParser();
+		ArgsParser p = new ArgsParser();
 		setProgramOutput(" ");
 		String message = "VolumeCalculator";
         String description = "Calculate the volume of a box.";
         String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
-        q.setProgramName(message);
-        q.setProgramDescription(description);
-        
+        p.setProgramName(message);
+        p.setProgramDescription(description);
+        p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height",Argument.DataType.FLOAT);
+		p.addOptionalArg("--help","false");
+		p.addArgDescriptions(argDescripts);
 		try{
-            q.addArg("length", Argument.DataType.FLOAT);
-            q.addArg("width", Argument.DataType.FLOAT);
-            q.addArg("height",Argument.DataType.FLOAT);
-            p.addOptionalArg("--help","false");
-            q.addArgDescriptions(argDescripts);
-            q.parse(args);
+            p.parse(args);
 		}
 		catch(HelpException e){
 			setProgramOutput(e.getExceptionOutput());

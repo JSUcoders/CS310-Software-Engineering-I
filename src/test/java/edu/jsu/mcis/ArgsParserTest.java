@@ -328,7 +328,7 @@ public class ArgsParserTest{
    public void testHelpExceptionIsThrownNotAtBeginningOfCommandLine(){
        ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
-        p.setProgramDescription("Calculate the volume of a box");
+        p.setProgramDescription("Calculate the volume of a box.");
         String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"7", "--help","3","2"};
         p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
@@ -336,8 +336,12 @@ public class ArgsParserTest{
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
         p.addOptionalArg("--help","false");
         p.addArgDescriptions(argDescripts);
-        p.parse(s);
+        try{
+            p.parse(s);
+        }catch(HelpException e){
+            assertEquals("usage: java VolumeCalculator length width height\nCalculate the volume of a box.\npositional arguments:\nlength the length of the box(float)\nwidth the width of the box(float)\nheight the height of the box(float)", e.getExceptionOutput());
+            throw e;
+        }
    }
-   
-   
+
 }

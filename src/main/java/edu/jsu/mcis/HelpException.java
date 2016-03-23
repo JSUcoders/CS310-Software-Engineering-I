@@ -6,10 +6,10 @@ public class HelpException extends RuntimeException{
     public HelpException(String preMessage, String prgmDescript, String[] argDescripts){
         String argD = "";        
         for(int i = 0; i < argDescripts.length;i++){
-            argD +=   argDescripts[i] + "\n";
+            argD += "\n" + argDescripts[i];
         }
         String argDSub = argD.substring(0, argD.length() - 1);        
-		exceptionOutput = preMessage+"\n"+prgmDescript+"\n"+"positional arguments:"+"\n"+ argDSub;
+		exceptionOutput = preMessage+"\n"+prgmDescript+"\n"+"positional arguments:"+argD;//argDSub
         
     }
 	public String getExceptionOutput(){
