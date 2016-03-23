@@ -5,12 +5,15 @@ import java.util.Arrays;
 public class ArgsParser{
 
     private List<Argument> arguments;
+	private List<Argument> optionalArguments;
+	
+	
     private String programName;
     private String programDescription;
     private String[] argDescriptions;
     private List<String> optionalArgValues;
     private List<String> optionalArgNames;
-    private HashMap<String, String> longShortArgNames;
+    private Map<String, String> longShortArgNames;
 	private String noDescription;
 
 	
@@ -18,11 +21,12 @@ public class ArgsParser{
 	
 	public ArgsParser(){
         arguments = new ArrayList<Argument>();
+		optionalArguments = new ArrayList<Argument>();
         programName = "";
         programDescription = "";
         optionalArgValues = new ArrayList<String>();
         optionalArgNames = new ArrayList<String>();
-		longShortArgNames = new HashMap();
+		longShortArgNames = new HashMap<String, String>();
 		noDescription = "";
     }
     
@@ -119,11 +123,17 @@ public class ArgsParser{
 	
 	
 	
-    
+    public void addOptionalArg(String name,String description,String value, Argument.DataType t){
+		OptionalArgument a = new OptionalArgument(name,description,value, t);
+		optionalArguments.add(a);
+	}
+	
     public void addOptionalArg(String name, String defaultValue){ //instead of dumping into string list, use optionalArgument<list>
         if(name.contains("--")){
-            optionalArgNames.add(name);
-            optionalArgValues.add(defaultValue);
+            addOptionalArg(name,noDescription,defaultValue, Argument.DataType.STRING);
+			
+			optionalArgNames.add(name);//needs to go
+            optionalArgValues.add(defaultValue);//needs to go
         }
     }
 	public void addOptionalArg(String name, String defaultValue, String shortName){
@@ -291,7 +301,7 @@ public class ArgsParser{
             }
 
             else{
-                if(j < arguments.size()){
+                if(j < arguments.size()){ //add positional arg values
                     arguments.get(j).addValue(cla[i]);
                      j++;
                 }

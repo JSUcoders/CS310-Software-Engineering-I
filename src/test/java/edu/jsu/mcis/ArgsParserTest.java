@@ -86,7 +86,7 @@ public class ArgsParserTest{
     }
     
     @Test
-    public void testDescriptionIsAdded(){
+    public void testProgramDescriptionIsAdded(){
         ArgsParser p = new ArgsParser();
         p.setProgramDescription("This is a test");
         assertEquals("This is a test", p.getProgramDescription());

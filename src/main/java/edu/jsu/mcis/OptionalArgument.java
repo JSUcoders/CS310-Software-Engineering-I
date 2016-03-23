@@ -2,8 +2,9 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class OptionalArgument extends Argument{
-    public OptionalArgument(String n, String d, DataType t){
-        super(n,d,t); 
+    public OptionalArgument(String n, String d, String v, DataType t){
+        super(n,d,t);
+		addValue(v);
     }
     public String getName(){
         return name;

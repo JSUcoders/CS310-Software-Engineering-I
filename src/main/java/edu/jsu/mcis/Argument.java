@@ -13,7 +13,8 @@ public class Argument {
     public Argument(String n, String d, DataType t){
         name = n;
         type = t;
-       
+		description = d;
+		value = "";
     }
     
     
