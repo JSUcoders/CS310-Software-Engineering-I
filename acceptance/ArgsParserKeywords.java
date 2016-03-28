@@ -7,18 +7,16 @@ public class ArgsParserKeywords{
 	public void startVolumeCalculatorWithArguments(String[] args){
         String message = "VolumeCalculator";
         String description = "Calculate the volume of a box";
-        String[] argDescripts = {"length the length of the box" , "width the width of the box", "height the height of the box"};
         p = new ArgsParser();
         p.setProgramName(message);
         p.setProgramDescription(description);
         
         try{
-            p.addArg("length", Argument.DataType.FLOAT);
-            p.addArg("width", Argument.DataType.FLOAT);
-            p.addArg("height", Argument.DataType.FLOAT);
-            p.addArg("--type", "box","-t");
-            p.addArg("--digits","4", "-d");
-            p.addArgDescriptions(argDescripts);
+            p.addArg("length","length the length of the box", Argument.DataType.FLOAT);
+            p.addArg("width","width the width of the box", Argument.DataType.FLOAT);
+            p.addArg("height","height the height of the box", Argument.DataType.FLOAT);
+            p.addOptionalArg("--type", "box","-t");
+            p.addOptionalArg("--digits","4", "-d");
             p.parse(args);			
 			float length = (float) p.getArg("length");
 			float width = (float) p.getArg("width");
@@ -40,25 +38,18 @@ public class ArgsParserKeywords{
         catch(InvalidArgumentException e){
             setProgramOutput(e.getExceptionOutput());
         }
-		catch(RuntimeException r){
-            
-        }
-		
-	}
-    
-	
+		catch(RuntimeException r){           
+        }		
+	}	
 	public Object getLength(){
 		return p.getArg("length");
-	}
-	
+	}	
 	public Object getWidth(){
 		return p.getArg("width");
-	}
-	
+	}	
 	public Object getHeight(){
 		return p.getArg("height");
-	}
-	
+	}	
 	public String getProgramOutput(){        		
 		return programOutput;
 	}
@@ -98,21 +89,18 @@ public class ArgsParserKeywords{
         return p.getOptionalArg("--digits");
     }
 	public void startProgramWithArguments(String[] args){
-		ArgsParser q = new ArgsParser();
+		ArgsParser p = new ArgsParser();
 		setProgramOutput(" ");
 		String message = "VolumeCalculator";
         String description = "Calculate the volume of a box.";
-        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
-        q.setProgramName(message);
-        q.setProgramDescription(description);
-        
+        p.setProgramName(message);
+        p.setProgramDescription(description);
+        p.addArg("length","length the length of the box(float)", Argument.DataType.FLOAT);
+		p.addArg("width","width the width of the box(float)", Argument.DataType.FLOAT);
+		p.addArg("height","height the height of the box(float)", Argument.DataType.FLOAT);
+		p.addOptionalArg("--help","false");
 		try{
-            q.addArg("length", Argument.DataType.FLOAT);
-            q.addArg("width", Argument.DataType.FLOAT);
-            q.addArg("height",Argument.DataType.FLOAT);
-            q.addArg("--help","false");
-            q.addArgDescriptions(argDescripts);
-            q.parse(args);
+            p.parse(args);
 		}
 		catch(HelpException e){
 			setProgramOutput(e.getExceptionOutput());

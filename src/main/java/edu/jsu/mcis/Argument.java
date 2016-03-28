@@ -4,15 +4,17 @@ import java.util.*;
 public class Argument {
 	public enum DataType{INT, FLOAT, BOOL, STRING};
 
-    private String name;
-    private String value;
-    private DataType type;
+    protected String name;
+    protected String value;
+    protected DataType type;
+	protected String description;
    
     
-    public Argument(String n, DataType t){
+    public Argument(String n, String d, DataType t){
         name = n;
         type = t;
-       
+		description = d;
+		value = "";
     }
     
     
@@ -31,6 +33,8 @@ public class Argument {
     public DataType getType(){
         return type;
     }
-    
+    public String getDescription(){
+		return description;
+	}
     
 }

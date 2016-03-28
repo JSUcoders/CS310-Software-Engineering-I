@@ -76,17 +76,17 @@ public class ArgsParserTest{
         ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
         p.setProgramDescription("Calculate the volume of a box");
-        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
+        //String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"-h"};
-        p.addArg("length");
-        p.addArg("width");
-        p.addArg("height");
-        p.addArgDescriptions(argDescripts);
+        p.addArg("length","length the length of the box(float)");
+        p.addArg("width","width the width of the box(float)");
+        p.addArg("height","height the height of the box(float)");
+        //p.addArgDescriptions(argDescripts);
         p.parse(s);
     }
     
     @Test
-    public void testDescriptionIsAdded(){
+    public void testProgramDescriptionIsAdded(){
         ArgsParser p = new ArgsParser();
         p.setProgramDescription("This is a test");
         assertEquals("This is a test", p.getProgramDescription());
@@ -227,29 +227,7 @@ public class ArgsParserTest{
 	
 	}
     
-    //modify after merge
-    @Test(expected = HelpException.class)
-    public void testHelpExceptionIsThrownWhenArgNameDoesNotExist(){
-        ArgsParser p = new ArgsParser();
-		String[] s = {"7", "true", "bob"};
-        p.setProgramName("VolumeCalculator");
-        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
-        p.addArgDescriptions(argDescripts);
-		p.addArg("Int", Argument.DataType.INT);
-		p.addArg("Bool", Argument.DataType.BOOL);
-		p.addArg("String");
-		p.parse(s);
-        try{
-             p.getArg("nit");
-        }
-        catch(HelpException e){
-            System.out.println(e.getExceptionOutput());
-            throw e;
-        }
-        
-    }    
    
-    //modify
     @Test
     public void testDefaultOptionalTypesExist(){
         ArgsParser p =  new ArgsParser();
@@ -257,14 +235,12 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box");
-        p.addArg("--digits", "4");
+        p.addOptionalArg("--type", "box");
+        p.addOptionalArg("--digits", "4");
         p.parse(s);
         assertEquals("box", p.getOptionalArg("--type"));
         assertEquals("4", p.getOptionalArg("--digits"));
     }
-    
-    //modify
     @Test
     public void testAddingOptionalArguments(){
         ArgsParser p =  new ArgsParser();
@@ -272,15 +248,14 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box");
-        p.addArg("--digits", "4");
+        p.addOptionalArg("--type", "box");
+        p.addOptionalArg("--digits", "4");
         p.parse(s);   
         assertEquals("6", p.getOptionalArg("--hello"));
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
         assertEquals("1", p.getOptionalArg("--digits"));
     }
     
-    //modify
     @Test(expected = TooManyArgsException.class)
 	public void testExceptionIsThrownWhenTooManyArguments2(){
 		ArgsParser p = new ArgsParser();
@@ -289,6 +264,8 @@ public class ArgsParserTest{
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");
+		p.addOptionalArg("--type", "box");
+		p.addOptionalArg("--digits", "4");
         try{
             p.parse(s);
         }catch(TooManyArgsException e){
@@ -306,28 +283,26 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box");
-        p.addArg("--digits", "4");
+        p.addOptionalArg("--type", "box");
+        p.addOptionalArg("--digits", "4");
         p.parse(s);
     }
    
-   //modify
    @Test
    public void testAddFlagArgumentAndNamedArgs(){
        ArgsParser p = new ArgsParser();
        String[] s = {"7", "--myArg","3","--otherArg","6","2","--defArg","things"};
-       p.addArg("--myArg", "false");
+       p.addOptionalArg("--myArg", "false");
        p.addArg("length");
        p.addArg("width");
        p.addArg("height");
-       p.addArg("--defArg", "stuff");
+       p.addOptionalArg("--defArg", "stuff");
        p.parse(s);
        assertEquals("true", p.getOptionalArg("--myArg"));
        assertEquals("6", p.getOptionalArg("--otherArg"));
        assertEquals("things", p.getOptionalArg("--defArg"));
    }
    
-    //modify
     @Test
     public void testAddingOptionalArgumentsShortNames(){
         ArgsParser p =  new ArgsParser();
@@ -335,8 +310,8 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--type", "box","-t");
-        p.addArg("--digits", "4","-d");
+        p.addOptionalArg("--type", "box","-t");
+        p.addOptionalArg("--digits", "4","-d");
         p.parse(s);
          
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
@@ -348,21 +323,23 @@ public class ArgsParserTest{
         
     }
    
-   //moify
+   
    @Test(expected = HelpException.class)
    public void testHelpExceptionIsThrownNotAtBeginningOfCommandLine(){
        ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
-        p.setProgramDescription("Calculate the volume of a box");
-        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
+        p.setProgramDescription("Calculate the volume of a box.");
         String[] s = {"7", "--help","3","2"};
-        p.addArg("length");
-        p.addArg("width");
-        p.addArg("height");
-        p.addArg("--help","false");
-        p.addArgDescriptions(argDescripts);
-        p.parse(s);
+        p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+        p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
+        p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
+        p.addOptionalArg("--help","false");
+        try{
+            p.parse(s);
+        }catch(HelpException e){
+            assertEquals("usage: java VolumeCalculator length width height\nCalculate the volume of a box.\npositional arguments:\nlength the length of the box(float)\nwidth the width of the box(float)\nheight the height of the box(float)", e.getExceptionOutput());
+            throw e;
+        }
    }
-   
-   
+
 }
