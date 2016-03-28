@@ -10,7 +10,7 @@ public class ArgsParser{
     private String[] argDescriptions;
     private List<String> optionalArgValues;
     private List<String> optionalArgNames;
-    private HashMap<String, String> longShortArgNames;
+    private HashMap longShortArgNames; 
 	
 	
 	
@@ -21,7 +21,7 @@ public class ArgsParser{
         programDescription = "";
         optionalArgValues = new ArrayList<String>();
         optionalArgNames = new ArrayList<String>();
-		longShortArgNames = new HashMap();
+        longShortArgNames = new HashMap();
     }
     
     public void print(){
@@ -36,14 +36,15 @@ public class ArgsParser{
     
     
    
-    
+    //needs test
     public String getOptionalArg(String name){
-       for(int i =0; i< optionalArgNames.size();i++){
-           if(optionalArgNames.get(i).equals(name)){
-               return optionalArgValues.get(i);
-           }
-       } 
-       return "";
+       if(optionalArgNames.contains(name)){
+           return optionalArgValues.get(optionalArgNames.indexOf(name));
+       }
+       else{
+           throw new ThatArgumentDoesNotExistException(name, optionalArgNames, arguments);
+       }
+       
     }
     
     private String makePreMessage(){
@@ -86,14 +87,18 @@ public class ArgsParser{
     }
     
     
-    
+   //needs test 
     public Argument.DataType getDataType(String name){
-        for(int i = 0; i < getNumOfArguments();i++){
-			if(name.equals(arguments.get(i).getName())){
-				return arguments.get(i).getType();
-			}
-		}
-		return Argument.DataType.STRING;
+        List<String> tempNames = new ArrayList<String>();
+        for(int i = 0; i < getNumOfArguments(); i++){
+            tempNames.add(arguments.get(i).getName());
+        }
+        if(tempNames.contains(name)){
+            return arguments.get(tempNames.indexOf(name)).getType();
+        }
+        else{
+            throw new ThatArgumentDoesNotExistException(name, optionalArgNames, arguments);
+        }
 	}
     
     public void addArg(String name){
@@ -150,13 +155,7 @@ public class ArgsParser{
 					}
 					i= i + shortnamesUsed;
                }
-			   //check for shortname longname association then remove from list
-			   for(int i =0; i < args.size();i++){
-                   if(longShortArgNames.containsKey(args.get(i))){
-                       args.remove(args.get(i));
-                   }
-               }
-		   
+			
                for(int i =0; i < args.size();i++){
                    if(optionalArgNames.contains(args.get(i)) ){
                        args.remove(args.get(i));
@@ -285,37 +284,33 @@ public class ArgsParser{
         checkForInvalidArgument();
     }
 	
-	
+	//needs test
     public Object getArg(String name){
-        int j =0;
-        for(int i =0;i < getNumOfArguments();i++){
-            if(name.equals(arguments.get(i).getName())){
-                if(arguments.get(i).getType() == Argument.DataType.INT){
-					return Integer.parseInt(arguments.get(i).getValue());
-				}
-				
-				else if(arguments.get(i).getType() == Argument.DataType.FLOAT){
-					return Float.parseFloat(arguments.get(i).getValue());
-				}
-				
-				else if(arguments.get(i).getType() == Argument.DataType.BOOL){
-					return Boolean.parseBoolean(arguments.get(i).getValue());
-				}
-				
-				else{
-					return (String)arguments.get(i).getValue();
-				}
-            }
-            j = i;
+        List<String> tempNames = new ArrayList<String>();
+        for(int i=0; i < getNumOfArguments(); i++){
+            tempNames.add(arguments.get(i).getName());
         }
-        throw new InvalidArgumentException(makePreMessage(),programName, arguments.get(j));
-       
         
-    }
-	
-	
-	
-	
-    
+        if(tempNames.contains(name)){
+            if(arguments.get(tempNames.indexOf(name)).getType() == Argument.DataType.INT){
+                return Integer.parseInt(arguments.get(tempNames.indexOf(name)).getValue());
+            }
+            else if(arguments.get(tempNames.indexOf(name)).getType() == Argument.DataType.FLOAT){
+                return Float.parseFloat(arguments.get(tempNames.indexOf(name)).getValue());
+            }
+            else if(arguments.get(tempNames.indexOf(name)).getType() == Argument.DataType.BOOL){
+                return Boolean.parseBoolean(arguments.get(tempNames.indexOf(name)).getValue());
+            }
+            else{
+                return (String)arguments.get(tempNames.indexOf(name)).getValue();
+            }
+            
+        }
+        else{
+            throw new HelpException(makePreMessage(), programDescription, argDescriptions);
+        }
+            
+               
+    }   
     
 }
