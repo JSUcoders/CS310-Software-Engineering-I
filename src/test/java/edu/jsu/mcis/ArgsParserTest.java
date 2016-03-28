@@ -227,7 +227,29 @@ public class ArgsParserTest{
 	
 	}
     
+    //modify after merge
+    @Test(expected = HelpException.class)
+    public void testHelpExceptionIsThrownWhenArgNameDoesNotExist(){
+        ArgsParser p = new ArgsParser();
+		String[] s = {"7", "true", "bob"};
+        p.setProgramName("VolumeCalculator");
+        String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
+        p.addArgDescriptions(argDescripts);
+		p.addArg("Int", Argument.DataType.INT);
+		p.addArg("Bool", Argument.DataType.BOOL);
+		p.addArg("String");
+		p.parse(s);
+        try{
+             p.getArg("nit");
+        }
+        catch(HelpException e){
+            System.out.println(e.getExceptionOutput());
+            throw e;
+        }
+        
+    }    
    
+    //modify
     @Test
     public void testDefaultOptionalTypesExist(){
         ArgsParser p =  new ArgsParser();
@@ -241,6 +263,8 @@ public class ArgsParserTest{
         assertEquals("box", p.getOptionalArg("--type"));
         assertEquals("4", p.getOptionalArg("--digits"));
     }
+    
+    //modify
     @Test
     public void testAddingOptionalArguments(){
         ArgsParser p =  new ArgsParser();
@@ -256,6 +280,7 @@ public class ArgsParserTest{
         assertEquals("1", p.getOptionalArg("--digits"));
     }
     
+    //modify
     @Test(expected = TooManyArgsException.class)
 	public void testExceptionIsThrownWhenTooManyArguments2(){
 		ArgsParser p = new ArgsParser();
@@ -289,6 +314,7 @@ public class ArgsParserTest{
         p.parse(s);
     }
    
+   //modify
    @Test
    public void testFlagArgumentIsTrue(){
        ArgsParser p = new ArgsParser();
@@ -301,6 +327,7 @@ public class ArgsParserTest{
        assertEquals("true", p.getOptionalArg("--myArg"));
    }
    
+    //modify
     @Test
     public void testAddingOptionalArgumentsShortNames(){
         ArgsParser p =  new ArgsParser();
@@ -321,7 +348,7 @@ public class ArgsParserTest{
         
     }
    
-   
+   //moify
    @Test(expected = HelpException.class)
    public void testHelpExceptionIsThrownNotAtBeginningOfCommandLine(){
        ArgsParser p = new ArgsParser();
