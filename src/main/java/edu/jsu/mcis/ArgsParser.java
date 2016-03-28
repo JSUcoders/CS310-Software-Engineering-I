@@ -10,6 +10,8 @@ public class ArgsParser{
     private String[] argDescriptions;
     private List<String> optionalArgValues;
     private List<String> optionalArgNames;
+	private List<String> unknownArgNames;
+	private List<String> unknownArgVals;
     private HashMap longShortArgNames = new HashMap();
 	
 	
@@ -21,6 +23,8 @@ public class ArgsParser{
         programDescription = "";
         optionalArgValues = new ArrayList<String>();
         optionalArgNames = new ArrayList<String>();
+		unknownArgNames = new ArrayList<String>();
+		unknownArgVals = new ArrayList<String>();
     }
     
     public void print(){
@@ -118,8 +122,8 @@ public class ArgsParser{
 	
     
     private void checkForTooManyArgs(String [] cla){
-       if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size())){
-           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
+       if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size() + unknownArgNames.size() + unknownArgVals.size())){
+           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues, unknownArgNames, unknownArgVals);
        }
        else{
            List<String> args = new ArrayList<String>();
@@ -164,6 +168,15 @@ public class ArgsParser{
                        args.remove(args.get(i));
                    }
                }
+			   
+			   for(int i = 0; i < args.size(); i++){
+					if(unknownArgNames.contains(args.get(i))){
+						args.remove(args.get(i));
+					}
+					if(unknownArgVals.contains(args.get(i))){
+						args.remove(args.get(i));
+					}
+			   }
                
                for(int i =0; i < arguments.size();i++){
                    if(args.contains(arguments.get(i).getValue())){
@@ -173,7 +186,7 @@ public class ArgsParser{
                
                if(args.size() > 0){
                    
-                   throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues);
+                   throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues, unknownArgNames, unknownArgVals);
                }
            }
        }
@@ -225,6 +238,12 @@ public class ArgsParser{
         
 		
 	}
+	
+	private void checkForUnknownArg(){
+		if(unknownArgNames.size() > 0){
+			throw new UnknownArgumentException(makePreMessage(), programName, unknownArgNames);
+		}
+	}
     
     public void parse(String[] cla) {
         if(cla.length == 0){
@@ -243,8 +262,9 @@ public class ArgsParser{
 			}	  
 
             else if(cla[i].contains("--")){
-                optionalArgNames.add(cla[i]);
-                optionalArgValues.add(cla[i+1]);
+                unknownArgNames.add(cla[i]);
+				unknownArgVals.add(cla[i + 1]);
+				i++;
             }
 			else if(cla[i].contains("-") && (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){
 				int shortnamesUsed=0;
@@ -265,7 +285,8 @@ public class ArgsParser{
 		}
         int j = 0;
         for(int i = 0; i < cla.length; i ++){
-            if(optionalArgNames.contains(cla[i]) || optionalArgValues.contains(cla[i]) || (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){ 
+            if(optionalArgNames.contains(cla[i]) || optionalArgValues.contains(cla[i]) ||
+			unknownArgNames.contains(cla[i])|| unknownArgVals.contains(cla[i]) ||(cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){ 
             
             }
 
@@ -279,6 +300,7 @@ public class ArgsParser{
             }
         }
         checkForTooManyArgs(cla);
+		checkForUnknownArg();
         checkForHelp(cla, programDescription, argDescriptions);    
         checkForTooFewArgs(cla);
         checkForInvalidArgument();

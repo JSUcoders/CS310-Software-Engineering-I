@@ -5,7 +5,7 @@ public class TooManyArgsException extends RuntimeException{
 	private String exceptionOutput= "";
 	
 
-	public TooManyArgsException(String preMessage,String[] cla, List<Argument> arguments, String prgmName, List<String> oAN, List<String> oAV){
+	public TooManyArgsException(String preMessage,String[] cla, List<Argument> arguments, String prgmName, List<String> oAN, List<String> oAV, List<String> unknownAN, List<String> unknownAV){
 
 		String extraArgs = "";
 		if(oAN.size() == 0){
@@ -20,7 +20,7 @@ public class TooManyArgsException extends RuntimeException{
                 temp.add(arguments.get(i).getValue());
             } 
             for(int i = 0; i < cla.length;i++){
-                if(!oAN.contains(cla[i]) && !oAV.contains(cla[i]) && !temp.contains(cla[i])){
+                if(!oAN.contains(cla[i]) && !oAV.contains(cla[i]) && !temp.contains(cla[i]) && !unknownAN.contains(cla[i]) && !unknownAV.contains(cla[i])){
                     extraArgs = extraArgs + " " + cla[i];
                     
                 }

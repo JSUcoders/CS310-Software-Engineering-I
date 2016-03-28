@@ -244,14 +244,14 @@ public class ArgsParserTest{
     @Test
     public void testAddingOptionalArguments(){
         ArgsParser p =  new ArgsParser();
-        String[] s = {"--type", "ellipsoid","7","3","--digits","1","2", "--hello","6"};
+        String[] s = {"--type", "ellipsoid","7","3","--digits","1","2"};
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
         p.addArg("--type", "box");
         p.addArg("--digits", "4");
         p.parse(s);   
-        assertEquals("6", p.getOptionalArg("--hello"));
+        //assertEquals("6", p.getOptionalArg("--hello"));
         assertEquals("ellipsoid", p.getOptionalArg("--type"));
         assertEquals("1", p.getOptionalArg("--digits"));
     }
@@ -264,10 +264,13 @@ public class ArgsParserTest{
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");
+		p.addArg("--type", "box");
+		p.addArg("--digits", "4");
         try{
             p.parse(s);
         }catch(TooManyArgsException e){
             p.print();
+			System.out.println(e.getExceptionOutput());
             throw e;
         }
 		
@@ -287,18 +290,15 @@ public class ArgsParserTest{
     }
    
    @Test
-   public void testAddFlagArgumentAndNamedArgs(){
+   public void testFlagArgumentIsTrue(){
        ArgsParser p = new ArgsParser();
-       String[] s = {"7", "--myArg","3","--otherArg","6","2","--defArg","things"};
+       String[] s = {"7", "--myArg","3","2"};
        p.addArg("--myArg", "false");
        p.addArg("length");
        p.addArg("width");
        p.addArg("height");
-       p.addArg("--defArg", "stuff");
        p.parse(s);
        assertEquals("true", p.getOptionalArg("--myArg"));
-       assertEquals("6", p.getOptionalArg("--otherArg"));
-       assertEquals("things", p.getOptionalArg("--defArg"));
    }
    
     @Test
@@ -337,5 +337,41 @@ public class ArgsParserTest{
         p.parse(s);
    }
    
+   @Test(expected = UnknownArgumentException.class)
+	public void testUnknownArgumentException(){
+		ArgsParser p = new ArgsParser();
+		String[] s = {"7", "--myArg", "myval", "3", "2"};
+		p.setProgramName("VolumeCalculator");
+		p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+		try{
+			p.parse(s);
+		}catch(UnknownArgumentException e){
+			System.out.println(e.getExceptionOutput());
+			p.print();
+			throw e;
+		}
+		
+		
+   }
    
+   @Test(expected = UnknownArgumentException.class)
+	public void testMultipleUnknownArguments(){
+		ArgsParser p = new ArgsParser();
+		String[] s = {"7", "--myArg", "myval", "3", "--otherArg", "otherValue", "2"};
+		p.setProgramName("VolumeCalculator");
+		p.addArg("length", Argument.DataType.FLOAT);
+		p.addArg("width", Argument.DataType.FLOAT);
+		p.addArg("height", Argument.DataType.FLOAT);
+		try{
+			p.parse(s);
+		}catch(UnknownArgumentException e){
+			System.out.println(e.getExceptionOutput());
+			p.print();
+			throw e;
+		}
+		
+		
+   }
 }
