@@ -5,31 +5,29 @@ import java.util.Arrays;
 public class ArgsParser{
 
     private List<Argument> arguments;
-	private List<Argument> optionalArguments;
-	
-	
+	private List<OptionalArgument> optionalArguments;
     private String programName;
     private String programDescription;
-    private String[] argDescriptions;
-    private List<String> optionalArgValues;
-    private List<String> optionalArgNames;
+    //private String[] argDescriptions;
+    //private List<String> optionalArgValues;
+    //private List<String> optionalArgNames;
 	private List<String> unknownArgNames;
 	private List<String> unknownArgVals;
     private Map<String, String> longShortArgNames;
 	private String noDescription;
 	public ArgsParser(){
         arguments = new ArrayList<Argument>();
-		optionalArguments = new ArrayList<Argument>();
+		optionalArguments = new ArrayList<OptionalArgument>();
         programName = "";
         programDescription = "";
-        optionalArgValues = new ArrayList<String>();
-        optionalArgNames = new ArrayList<String>();
+        //optionalArgValues = new ArrayList<String>();
+        //optionalArgNames = new ArrayList<String>();
 		unknownArgNames = new ArrayList<String>();
 		unknownArgVals = new ArrayList<String>();
 		longShortArgNames = new HashMap<String, String>();
 		noDescription = "";
     }
-    public void print(){
+   /*  public void print(){
         List<String> s = new ArrayList<String>();
         for(int i = 0; i < arguments.size();i++){
             s.add(arguments.get(i).getValue());
@@ -37,15 +35,16 @@ public class ArgsParser{
         System.out.println(s.toString());
         System.out.println(optionalArgNames.toString());
         System.out.println(optionalArgValues.toString());
-    }
-    public String getOptionalArg(String name){
-       for(int i =0; i< optionalArgNames.size();i++){
+    } */
+    /* public String getOptionalArg(String name){
+        
+        for(int i =0; i< optionalArgNames.size();i++){
            if(optionalArgNames.get(i).equals(name)){
                return optionalArgValues.get(i);
            }
        } 
-       return "";
-    }
+       return ""; 
+    } */
     private String makePreMessage(){
         String names = "";
         for(int i =0; i < arguments.size();i++){
@@ -71,47 +70,80 @@ public class ArgsParser{
        return arguments.size(); 
     }
     public Argument.DataType getDataType(String name){
-        for(int i = 0; i < getNumOfArguments();i++){
+        if(name.contains("--")){
+            List<String> tempOptNames = new ArrayList<String>();
+            for(int i = 0; i < optionalArguments.size(); i++){
+                tempOptNames.add(optionalArguments.get(i).getName());
+            }
+            if(tempOptNames.contains(name)){
+                return optionalArguments.get(tempOptNames.indexOf(name)).getType();
+            }
+            else{
+                throw new ThatArgumentDoesNotExistException(name, optionalArguments, arguments);
+            }
+        }
+        else{
+            List<String> tempNames = new ArrayList<String>();
+            for(int i = 0; i < getNumOfArguments(); i++){
+                tempNames.add(arguments.get(i).getName());
+            }
+            if(tempNames.contains(name)){
+                return arguments.get(tempNames.indexOf(name)).getType();
+            }
+            else{
+                throw new ThatArgumentDoesNotExistException(name, optionalArguments, arguments);
+            }
+        }
+        /* for(int i = 0; i < getNumOfArguments();i++){
 			if(name.equals(arguments.get(i).getName())){
 				return arguments.get(i).getType();
 			}
 		}
-		return Argument.DataType.STRING;
+		return Argument.DataType.STRING; */
 	}
 	public void addArg(String name,String description, Argument.DataType t){
-        PositionalArgument a = new PositionalArgument(name, description, t);
+        
+        Argument a = new Argument(name, description, t);
         arguments.add(a);
 	}
 	public void addArg(String name){
         addArg(name, noDescription, Argument.DataType.STRING);
     }
 	public void addArg(String name, String description){
-        addArg(name, description, Argument.DataType.STRING);
+        if(name.contains("--")){
+            OptionalArgument o = new OptionalArgument(name, noDescription, description, Argument.DataType.STRING);
+            optionalArguments.add(o);
+        }
+        else{
+             addArg(name, description, Argument.DataType.STRING);
+        }
+       
     }
 	public void addArg(String name,Argument.DataType t ){
 		addArg(name, noDescription, t);
 	}
-    public void addOptionalArg(String name,String description,String value, Argument.DataType t){
-		OptionalArgument a = new OptionalArgument(name,description,value, t);
-		optionalArguments.add(a);
+    public void addArg(String name,String description,String value, Argument.DataType t){
+		OptionalArgument o = new OptionalArgument(name,description,value, t);
+		optionalArguments.add(o);
 	}
-    public void addOptionalArg(String name, String defaultValue){ //instead of dumping into string list, use optionalArgument<list>
-        if(name.contains("--")){
-            addOptionalArg(name,noDescription,defaultValue, Argument.DataType.STRING);
-			optionalArgNames.add(name);//needs to go
-            optionalArgValues.add(defaultValue);//needs to go
-        }
-    }
-	public void addOptionalArg(String name, String defaultValue, String shortName){
-		addOptionalArg(name,defaultValue);
+	public void addArg(String name, String defaultValue, String shortName){
+		addArg(name,defaultValue);
 		longShortArgNames.put(shortName,name);
-	}
+	} 
     private void checkForTooManyArgs(String [] cla){
-       if(cla.length > (arguments.size() + optionalArgNames.size() + optionalArgValues.size() + unknownArgNames.size() + unknownArgVals.size())){
-           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues, unknownArgNames, unknownArgVals);
+       if(cla.length > (arguments.size() + optionalArguments.size()*2 + unknownArgNames.size() + unknownArgVals.size())){
+           throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArguments, unknownArgNames, unknownArgVals);
 
        }
        else{
+           List<String> tempOptNames = new ArrayList<String>();
+            for(int i = 0; i < optionalArguments.size(); i++){
+                tempOptNames.add(optionalArguments.get(i).getName());
+            }
+           List<String> tempOptValues = new ArrayList<String>();
+            for(int i = 0; i < optionalArguments.size();i++ ){
+                tempOptValues.add(optionalArguments.get(i).getValue());
+            }      
            List<String> args = new ArrayList<String>();
            if(cla.length > arguments.size()){
                for(int i =0; i < cla.length; i++){
@@ -121,7 +153,7 @@ public class ArgsParser{
 							for(int j=1;j<cla[i].length();j++){
 								shortnamesUsed++;
 								args.add(("-"+ cla[i].substring(j,j+1)).toString());
-								if(optionalArgNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
+								if(tempOptNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
 									args.remove(("-"+ cla[i].substring(j,j+1)).toString());
 								}	 
 							}
@@ -142,10 +174,10 @@ public class ArgsParser{
                    }
                }		   
                for(int i =0; i < args.size();i++){
-                   if(optionalArgNames.contains(args.get(i)) ){
+                   if(tempOptNames.contains(args.get(i)) ){
                        args.remove(args.get(i));
                    }
-                   if(optionalArgValues.contains(args.get(i))){
+                   if(tempOptValues.contains(args.get(i))){
                        args.remove(args.get(i));
                    }
 
@@ -170,7 +202,7 @@ public class ArgsParser{
                
                if(args.size() > 0){
                    
-                   throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArgNames, optionalArgValues, unknownArgNames, unknownArgVals);
+                   throw new TooManyArgsException(makePreMessage(), cla, arguments, programName,optionalArguments, unknownArgNames, unknownArgVals);
 
                }
            }
@@ -181,10 +213,10 @@ public class ArgsParser{
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);            
         }       
     }   
-    private void checkForHelp(String[] cla, String prgmDescript, String[] argDescript){      
-            for(int i =0; i < optionalArgNames.size();i++){
-                if(optionalArgNames.get(i).equals("--help") && optionalArgValues.get(i).equals("true")){
-                    throw new HelpException(makePreMessage(), prgmDescript, arguments); 
+    private void checkForHelp(String[] cla){      
+            for(int i =0; i < optionalArguments.size();i++){
+                if(optionalArguments.get(i).getName().equals("--help") && optionalArguments.get(i).getValue().equals("true")){
+                    throw new HelpException(makePreMessage(), programDescription, arguments); 
                 }
             }    
     }	
@@ -217,17 +249,21 @@ public class ArgsParser{
         if(cla.length == 0){
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);
         } 
+        List<String> tempNames = new ArrayList<String>();
+        for(int i =0; i < optionalArguments.size();i++){
+            tempNames.add(optionalArguments.get(i).getName());
+        }
         for(int i = 0; i < cla.length;i++){
-            if(optionalArgNames.contains(cla[i])){
-                if(optionalArgValues.get(optionalArgNames.indexOf(cla[i])) == "false"){
-                    optionalArgValues.set(optionalArgNames.indexOf(cla[i]), "true");
+            if(tempNames.contains(cla[i])){
+                if(optionalArguments.get(tempNames.indexOf(cla[i])).getValue() == "false"){
+                    optionalArguments.get(tempNames.indexOf(cla[i])).setValue("true");
                 }
                 else{
-                    optionalArgValues.set(optionalArgNames.indexOf(cla[i]), cla[i + 1]);
+                    optionalArguments.get(tempNames.indexOf(cla[i])).setValue(cla[i + 1]);
                     i++;
                 }
 			}
-            else if(cla[i].contains("--")){//longname help 
+            else if(cla[i].contains("--") && !tempNames.contains(cla[i])){//longname help 
 				if(cla[i] == "--help" || cla[i] == "--HELP" || cla[i] == "--Help"){
 					throw new HelpException(makePreMessage(), programDescription, arguments); 
 				}
@@ -246,17 +282,21 @@ public class ArgsParser{
 					}					
 					else if(cla[i].substring(j,j+1) != "-"){//regular shortname
 						shortnamesUsed++;	 
-						if(optionalArgNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
-							optionalArgValues.set(optionalArgNames.indexOf(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString()), cla[i + shortnamesUsed]);
+						if(tempNames.contains(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())){
+							optionalArguments.get(tempNames.indexOf(longShortArgNames.get("-"+ cla[i].substring(j,j+1)).toString())).setValue(cla[i + shortnamesUsed]);
 						}
 					} 
 				}
 				i= i + shortnamesUsed;//skips index of values in cla associated with shortnames
 			}
 		}
+        List<String> tempValues = new ArrayList<String>();
+        for(int i = 0; i < optionalArguments.size();i++ ){
+            tempValues.add(optionalArguments.get(i).getValue());
+        }    
         int j = 0;
         for(int i = 0; i < cla.length; i ++){
-            if(optionalArgNames.contains(cla[i]) || optionalArgValues.contains(cla[i]) ||
+            if(tempNames.contains(cla[i]) || tempValues.contains(cla[i]) ||
 			unknownArgNames.contains(cla[i])|| unknownArgVals.contains(cla[i]) ||(cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){ 
             
             }
@@ -269,29 +309,60 @@ public class ArgsParser{
         }
         checkForTooManyArgs(cla);
 		checkForUnknownArg();
-        checkForHelp(cla, programDescription, argDescriptions);    
+        checkForHelp(cla);    
         checkForTooFewArgs(cla);
         checkForInvalidArgument();
     }		
     public Object getArg(String name){
-        int j =0;
-        for(int i =0;i < getNumOfArguments();i++){
-            if(name.equals(arguments.get(i).getName())){
-                if(arguments.get(i).getType() == Argument.DataType.INT){
-					return Integer.parseInt(arguments.get(i).getValue());
-				}				
-				else if(arguments.get(i).getType() == Argument.DataType.FLOAT){
-					return Float.parseFloat(arguments.get(i).getValue());
-				}				
-				else if(arguments.get(i).getType() == Argument.DataType.BOOL){
-					return Boolean.parseBoolean(arguments.get(i).getValue());
-				}				
-				else{
-					return (String)arguments.get(i).getValue();
-				}
+        if(name.contains("--")){
+            List<String> tempOptNames = new ArrayList<String>();
+            for(int i =0; i < optionalArguments.size();i++){
+                tempOptNames.add(optionalArguments.get(i).getName());
             }
-            j = i;
+            if(tempOptNames.contains(name)){
+                if(optionalArguments.get(tempOptNames.indexOf(name)).getType() == Argument.DataType.INT){
+                    return Integer.parseInt(optionalArguments.get(tempOptNames.indexOf(name)).getValue());
+                }
+                else if(optionalArguments.get(tempOptNames.indexOf(name)).getType() == Argument.DataType.FLOAT){
+                    return Float.parseFloat(optionalArguments.get(tempOptNames.indexOf(name)).getValue());
+                }
+                else if(optionalArguments.get(tempOptNames.indexOf(name)).getType() == Argument.DataType.BOOL){
+                    return Boolean.parseBoolean(optionalArguments.get(tempOptNames.indexOf(name)).getValue());
+                }
+                else{
+                    return (String)optionalArguments.get(tempOptNames.indexOf(name)).getValue();
+                }
+            }
+            else{
+                throw new ThatArgumentDoesNotExistException(name, optionalArguments, arguments);
+            }
         }
-        throw new InvalidArgumentException(makePreMessage(),programName, arguments.get(j));              
-    }   
+        else{
+            List<String> tempNames = new ArrayList<String>();
+            for(int i=0; i < getNumOfArguments(); i++){
+                tempNames.add(arguments.get(i).getName());
+            }
+        
+            if(tempNames.contains(name)){
+                if(arguments.get(tempNames.indexOf(name)).getType() == Argument.DataType.INT){
+                    return Integer.parseInt(arguments.get(tempNames.indexOf(name)).getValue());
+                }
+                else if(arguments.get(tempNames.indexOf(name)).getType() == Argument.DataType.FLOAT){
+                    return Float.parseFloat(arguments.get(tempNames.indexOf(name)).getValue());
+                }
+                else if(arguments.get(tempNames.indexOf(name)).getType() == Argument.DataType.BOOL){
+                    return Boolean.parseBoolean(arguments.get(tempNames.indexOf(name)).getValue());
+                }
+                else{
+                    return (String)arguments.get(tempNames.indexOf(name)).getValue();
+                }
+            
+            }
+            else{
+                throw new ThatArgumentDoesNotExistException(name, optionalArguments, arguments);
+            }
+        }
+          
+    }
+    
 }

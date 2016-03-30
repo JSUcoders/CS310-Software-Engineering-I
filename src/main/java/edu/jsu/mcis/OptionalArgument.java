@@ -6,7 +6,11 @@ public class OptionalArgument extends Argument{
         super(n,d,t);
 		addValue(v);
     }
-    public String getName(){
+    
+    public void setValue(String v){
+        addValue(v);
+    }
+    /* public String getName(){
         return name;
     }
 	
@@ -19,5 +23,5 @@ public class OptionalArgument extends Argument{
 
 	public String getDescription(){
 		return description;
-	}
+	} */
 }
