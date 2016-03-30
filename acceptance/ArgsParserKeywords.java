@@ -15,8 +15,8 @@ public class ArgsParserKeywords{
             p.addArg("length","length the length of the box", Argument.DataType.FLOAT);
             p.addArg("width","width the width of the box", Argument.DataType.FLOAT);
             p.addArg("height","height the height of the box", Argument.DataType.FLOAT);
-            p.addOptionalArg("--type", "box","-t");
-            p.addOptionalArg("--digits","4", "-d");
+            p.addArg("--type", "box","-t");
+            p.addArg("--digits","4", "-d");
             p.parse(args);			
 			float length = (float) p.getArg("length");
 			float width = (float) p.getArg("width");
@@ -83,10 +83,10 @@ public class ArgsParserKeywords{
 	
     }
     public Object getType(){
-        return p.getOptionalArg("--type");
+        return p.getArg("--type");
     }
     public Object getDigits(){
-        return p.getOptionalArg("--digits");
+        return p.getArg("--digits");
     }
 	public void startProgramWithArguments(String[] args){
 		ArgsParser p = new ArgsParser();
@@ -98,7 +98,7 @@ public class ArgsParserKeywords{
         p.addArg("length","length the length of the box(float)", Argument.DataType.FLOAT);
 		p.addArg("width","width the width of the box(float)", Argument.DataType.FLOAT);
 		p.addArg("height","height the height of the box(float)", Argument.DataType.FLOAT);
-		p.addOptionalArg("--help","false");
+		p.addArg("--help","false");
 		try{
             p.parse(args);
 		}

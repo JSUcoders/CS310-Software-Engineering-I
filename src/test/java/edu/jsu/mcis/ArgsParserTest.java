@@ -76,12 +76,11 @@ public class ArgsParserTest{
         ArgsParser p = new ArgsParser();
         p.setProgramName("VolumeCalculator");
         p.setProgramDescription("Calculate the volume of a box");
-        //String[] argDescripts = {"length the length of the box(float)" , "width the width of the box(float)", "height the height of the box(float)"};
         String[] s = {"-h"};
         p.addArg("length","length the length of the box(float)");
         p.addArg("width","width the width of the box(float)");
         p.addArg("height","height the height of the box(float)");
-        //p.addArgDescriptions(argDescripts);
+        
         p.parse(s);
     }
     
@@ -235,11 +234,11 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addOptionalArg("--type", "box");
-        p.addOptionalArg("--digits", "4");
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4");
         p.parse(s);
-        assertEquals("box", p.getOptionalArg("--type"));
-        assertEquals("4", p.getOptionalArg("--digits"));
+        assertEquals("box", p.getArg("--type"));
+        assertEquals("4", p.getArg("--digits"));
     }
     @Test
     public void testAddingOptionalArguments(){
@@ -248,12 +247,12 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addOptionalArg("--type", "box");
-        p.addOptionalArg("--digits", "4");
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4");
         p.parse(s);   
-        //assertEquals("6", p.getOptionalArg("--hello"));
-        assertEquals("ellipsoid", p.getOptionalArg("--type"));
-        assertEquals("1", p.getOptionalArg("--digits"));
+        //assertEquals("6", p.getArg("--hello"));
+        assertEquals("ellipsoid", p.getArg("--type"));
+        assertEquals("1", p.getArg("--digits"));
     }
     
     @Test(expected = TooManyArgsException.class)
@@ -264,12 +263,13 @@ public class ArgsParserTest{
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");
-		p.addOptionalArg("--type", "box");
-		p.addOptionalArg("--digits", "4");
+		p.addArg("--type", "box");
+		p.addArg("--digits", "4");
+        p.addArg("--hello", "3");
         try{
             p.parse(s);
         }catch(TooManyArgsException e){
-            p.print();
+            //p.print();
 			System.out.println(e.getExceptionOutput());
             throw e;
         }
@@ -284,12 +284,12 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addOptionalArg("--type", "box");
-        p.addOptionalArg("--digits", "4");
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4");
         p.parse(s);
     }
    
-   /*@Test
+   @Test
    public void testFlagArgumentIsTrue(){
        ArgsParser p = new ArgsParser();
        String[] s = {"7", "--myArg","3","2"};
@@ -298,8 +298,10 @@ public class ArgsParserTest{
        p.addArg("width");
        p.addArg("height");
        p.parse(s);
-       assertEquals("true", p.getOptionalArg("--myArg"));*/
-   //}
+
+       assertEquals("true", p.getArg("--myArg"));
+   }
+
    
     @Test
     public void testAddingOptionalArgumentsShortNames(){
@@ -308,12 +310,12 @@ public class ArgsParserTest{
         p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addOptionalArg("--type", "box","-t");
-        p.addOptionalArg("--digits", "4","-d");
+        p.addArg("--type", "box","-t");
+        p.addArg("--digits", "4","-d");
         p.parse(s);
          
-        assertEquals("ellipsoid", p.getOptionalArg("--type"));
-        assertEquals("1", p.getOptionalArg("--digits"));
+        assertEquals("ellipsoid", p.getArg("--type"));
+        assertEquals("1", p.getArg("--digits"));
         assertEquals((float) 7, p.getArg("length"));
         assertEquals((float) 3, p.getArg("width"));
         assertEquals((float) 2, p.getArg("height"));
@@ -331,7 +333,7 @@ public class ArgsParserTest{
         p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
-        p.addOptionalArg("--help","false");
+        p.addArg("--help","false");
         try{
             p.parse(s);
         }catch(HelpException e){
@@ -352,7 +354,7 @@ public class ArgsParserTest{
 			p.parse(s);
 		}catch(UnknownArgumentException e){
 			System.out.println(e.getExceptionOutput());
-			p.print();
+			//p.print();
 			throw e;
 		}
 		
@@ -371,7 +373,7 @@ public class ArgsParserTest{
 			p.parse(s);
 		}catch(UnknownArgumentException e){
 			System.out.println(e.getExceptionOutput());
-			p.print();
+			//p.print();
 			throw e;
 		}
 		

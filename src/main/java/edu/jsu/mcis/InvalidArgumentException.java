@@ -5,7 +5,7 @@ public class InvalidArgumentException extends RuntimeException{
 	
 	private String exceptionOutput="";
 	
-	public InvalidArgumentException(String preMsg, String programName, Argument arg/*String badArgValue, String badArgName, Argument.DataType d*/){
+	public InvalidArgumentException(String preMsg, String programName, Argument arg){
         String datatype = "";
 		if(arg.getType() == Argument.DataType.INT){
             datatype = "integer";
