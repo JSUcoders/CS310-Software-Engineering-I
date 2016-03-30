@@ -289,7 +289,7 @@ public class ArgsParserTest{
         p.parse(s);
     }
    
-   @Test
+   /*@Test
    public void testFlagArgumentIsTrue(){
        ArgsParser p = new ArgsParser();
        String[] s = {"7", "--myArg","3","2"};
@@ -298,8 +298,8 @@ public class ArgsParserTest{
        p.addArg("width");
        p.addArg("height");
        p.parse(s);
-       assertEquals("true", p.getOptionalArg("--myArg"));
-   }
+       assertEquals("true", p.getOptionalArg("--myArg"));*/
+   //}
    
     @Test
     public void testAddingOptionalArgumentsShortNames(){
@@ -377,3 +377,5 @@ public class ArgsParserTest{
 		
 		
    }
+   
+}

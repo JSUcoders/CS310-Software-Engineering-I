@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="edu.jsu.mcis.ArgsParserTest" tests="26" skipped="0" failures="0" errors="0" timestamp="2016-03-30T16:37:09" hostname="Avery" time="0.048">
+  <properties/>
+  <testcase name="testExceptionIsThrownWhenNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.016"/>
+  <testcase name="testUnknownArgumentException" classname="edu.jsu.mcis.ArgsParserTest" time="0.003"/>
+  <testcase name="testDefaultOptionalTypesExist" classname="edu.jsu.mcis.ArgsParserTest" time="0.002"/>
+  <testcase name="testAllDataTypesGetParsed" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testHelpExceptionIsThrownNotAtBeginningOfCommandLine" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testArgumentIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testArgumentValueIsParsedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testGetArgParsesArgumentsOfTypeString" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testProgramNameIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testDataTypeIsAddedCorrectly" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testExceptionIsThrownWhenTooManyArguments2" classname="edu.jsu.mcis.ArgsParserTest" time="0.002"/>
+  <testcase name="testGetArgParsesArgumentsOfTypeBoolean" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testNewInstanceHasNoArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testInvalidArgExceptionIsThrownForNonInts" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testInvalidArgExceptionIsThrownForNonFloats" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testGetArgParsesArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testExceptionIsThrownWhenTooManyArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testGetArgParsesArgumentsOfTypeInt" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testHelpExceptionIsThrown" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testAddingOptionalArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testTooManyArgsWithDefault" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testDefaultDataTypeIsString" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testMultipleUnknownArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <testcase name="testExceptionIsThrownWhenTooFewArguments" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testProgramDescriptionIsAdded" classname="edu.jsu.mcis.ArgsParserTest" time="0.0"/>
+  <testcase name="testAddingOptionalArgumentsShortNames" classname="edu.jsu.mcis.ArgsParserTest" time="0.001"/>
+  <system-out><![CDATA[usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: argument --myArg is an unknown argument
+[7, 3, 2]
+[]
+[]
+[7, 3, 2]
+[--type, --digits]
+[ellipsoid, 1]
+usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: unrecognized arguments: 43 8
+usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: argument height: invalid integer value: bob
+usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: argument width: invalid float value: something
+usage: java VolumeCalculator length width height
+VolumeCalculator.java: error: arguments --myArg, --otherArg are unknown arguments
+[7, 3, 2]
+[]
+[]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

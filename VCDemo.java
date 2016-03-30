@@ -9,6 +9,12 @@ public class VCDemo{
         p.addArg("height");
         p.parse(args);
         System.out.println(p.getArg("width"));
+		
+		
+		
+		
+		
+		
     }
 }
 
