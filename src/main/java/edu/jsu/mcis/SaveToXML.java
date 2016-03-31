@@ -145,27 +145,24 @@ public class SaveToXML extends DefaultHandler{
 		}	
 	};
 	
-	public ArgParser getArgParser(){
+	public ArgsParser getArgsParser(){
 		return p;
 	}
 				
-	public static void main(String argv[]) {
-		SaveToXML readWrite = new SaveToXML();
-	    try{
-			InputStream xmlInput = new FileInputStream("readXML.xsl");
-		    SAXParserFactory factory = SAXParserFactory.newInstance();
-		    SAXParser saxParser = factory.newSAXParser();
-
-		    saxParser.parse(xmlInput,readWrite.handler);
-
-		    //DefaultHandler handler = new DefaultHandler() {
-		}catch (Exception e) {
+	public ArgsParser parseXML(String filepath){
+		try {
+			InputStream xmlInput = new FileInputStream(filepath);
+			SAXParserFactory factory = SAXParserFactory.newInstance();
+			SAXParser saxParser = factory.newSAXParser();
+			saxParser.parse(xmlInput,handler);
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(readWrite.getNames());
-		System.out.println(readWrite.getType());
-		  
-   }
+		return getArgsParser();
+	}
+
+}
 
 
 }
