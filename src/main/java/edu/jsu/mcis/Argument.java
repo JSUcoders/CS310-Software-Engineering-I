@@ -8,6 +8,7 @@ public class Argument {
     protected String value;
     protected DataType type;
 	protected String description;
+    protected String XMLData;
    
     
     public Argument(String n, String d, DataType t){
@@ -15,6 +16,8 @@ public class Argument {
         type = t;
 		description = d;
 		value = "";
+        XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
+                          "<type>" + t + "</type>\n" + "<positionalArgument>\n";
     }
     
     
@@ -37,5 +40,9 @@ public class Argument {
     public String getDescription(){
 		return description;
 	}
+    
+    public String getXMLDataForArg(){
+        return XMLData; 
+    }
     
 }

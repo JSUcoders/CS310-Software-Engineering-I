@@ -2,26 +2,26 @@ package edu.jsu.mcis;
 import java.util.*;
 
 public class OptionalArgument extends Argument{
-    public OptionalArgument(String n, String d, String v, DataType t){
+    protected String shortName;
+    public OptionalArgument(String n, String d, String v, DataType t, String shortName){
         super(n,d,t);
 		addValue(v);
+        this.shortName = shortName;
+        XMLData = "<optionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
+                         "<defaultValue>" + value + "</defaultValue>\n" +"<type>" + type + "</type>\n" +"<shortName>" + this.shortName + 
+                         "</shortName>\n" + "<optionalArgument>\n";
     }
     
     public void setValue(String v){
         addValue(v);
     }
-    /* public String getName(){
-        return name;
+    
+    public String getShortName(){
+        return this.shortName;
     }
-	
-    public String getValue(){
-        return value;
+    
+    public String getXMLDataForOptArg(){
+       return XMLData; 
+        
     }
-    public DataType getType(){
-        return type;
-    }
-
-	public String getDescription(){
-		return description;
-	} */
 }
