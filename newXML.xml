@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <program>
 <name>VolumeCalculator</name>
-<arguments>
 <description>Calculate the volume of a box.</description>
 <arguments>
 <positionalArgument>
 <name>length</name>
+<description></description>
 <type>FLOAT</type>
-<description>length the length of the box(float)</description>
+<position>1</position>
 </positionalArgument>
 <positionalArgument>
 <name>width</name>
-<type>FLOAT</type>
 <description>width the width of the box(float)</description>
+<type>FLOAT</type>
+<position>2</position>
 </positionalArgument>
 <positionalArgument>
 <name>height</name>
-<type>FLOAT</type>
 <description>height the height of the box(float)</description>
+<type>FLOAT</type>
+<position>3</position>
 </positionalArgument>
-<namedArgument>
+<optionalArgument>
 <name>--help</name>
+<description></description>
+<defaultValue>false</defaultValue>
 <type>STRING</type>
-<description>false</description>
-<shorthand>-t</shorthand>
-<shorthand>-d</shorthand>
-</namedArgument>
-<namedArgument>
+<shortName></shortName>
+</optionalArgument>
+<optionalArgument>
 <name>--type</name>
+<description></description>
+<defaultValue>box</defaultValue>
 <type>STRING</type>
-<description>box</description>
-<shorthand>-t</shorthand>
-<shorthand>-d</shorthand>
-</namedArgument>
-<namedArgument>
+<shortName>-t</shortName>
+</optionalArgument>
+<optionalArgument>
 <name>--digits</name>
+<description></description>
+<defaultValue>4</defaultValue>
 <type>STRING</type>
-<description>4</description>
-<shorthand>-d</shorthand>
-</namedArgument>
+<shortName>-d</shortName>
+</optionalArgument>
 </arguments>
 </program>

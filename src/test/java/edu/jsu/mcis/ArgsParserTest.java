@@ -269,7 +269,7 @@ public class ArgsParserTest{
         try{
             p.parse(s);
         }catch(TooManyArgsException e){
-            //p.print();
+            
 			System.out.println(e.getExceptionOutput());
             throw e;
         }
@@ -333,7 +333,7 @@ public class ArgsParserTest{
         p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
-        //p.addArg("--help","false");
+        
         try{
             p.parse(s);
         }catch(HelpException e){
@@ -354,7 +354,7 @@ public class ArgsParserTest{
 			p.parse(s);
 		}catch(UnknownArgumentException e){
 			System.out.println(e.getExceptionOutput());
-			//p.print();
+			
 			throw e;
 		}
    }
@@ -371,7 +371,7 @@ public class ArgsParserTest{
 			p.parse(s);
 		}catch(UnknownArgumentException e){
 			System.out.println(e.getExceptionOutput());
-			//p.print();
+			
 			throw e;
 		}
    }
@@ -518,12 +518,12 @@ public class ArgsParserTest{
 
    
    
-   @Test
+    @Test
 	public void testSavingtoXMLFile(){
 		ArgsParser p = new ArgsParser();
 		p.setProgramName("VolumeCalculator");
 		p.setProgramDescription("Calculate the volume of a box.");
-        p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+        p.addArg("length",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
         p.addArg("--help","false");
@@ -534,5 +534,13 @@ public class ArgsParserTest{
 	
     }
    
+    @Test
+    public void testLoadingFromXMLFile(){
+        ArgsParser p = new ArgsParser();
+        SaveToXML rw = new SaveToXML();
+        String[] args = new String[] {"s","5","4"};    
+        p=rw.parseXML("newXML.xml");
+        assertEquals(Argument.DataType.FLOAT,p.getDataType("length"));
 
+    }
 }

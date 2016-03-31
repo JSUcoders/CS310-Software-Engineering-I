@@ -9,6 +9,7 @@ public class Argument {
     protected DataType type;
 	protected String description;
     protected String XMLData;
+    protected int position;
    
     
     public Argument(String n, String d, DataType t){
@@ -16,8 +17,8 @@ public class Argument {
         type = t;
 		description = d;
 		value = "";
-         XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
-                          "<type>" + t + "</type>\n" + "<positionalArgument>\n"; */
+        XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
+                          "<type>" + t + "</type>\n" +  "</positionalArgument>\n"; 
     }
     
     
@@ -33,6 +34,15 @@ public class Argument {
         return value;
     }
     
+    public void setPosition(int index){
+        position = index;
+        updateXMLData();
+    }
+    
+    public void updateXMLData(){
+        XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
+                          "<type>" + type + "</type>\n" + "<position>" + position + "</position>\n" + "</positionalArgument>\n"; 
+    }
     
     public DataType getType(){
         return type;

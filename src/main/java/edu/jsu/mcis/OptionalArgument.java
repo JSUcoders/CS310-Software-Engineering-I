@@ -9,7 +9,7 @@ public class OptionalArgument extends Argument{
         this.shortName = shortName;
          XMLData = "<optionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
                          "<defaultValue>" + value + "</defaultValue>\n" +"<type>" + type + "</type>\n" +"<shortName>" + this.shortName + 
-                         "</shortName>\n" + "<optionalArgument>\n"; */
+                         "</shortName>\n" + "</optionalArgument>\n"; 
     }
     
     public void setValue(String v){

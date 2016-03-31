@@ -107,7 +107,7 @@ public class SaveToXML extends DefaultHandler{
 				
 			}
 
-			if (type) {//float int bool sting
+			if (type) {
 				
 				if (new String(ch, start, length).equals("STRING")){
 					stringType=Argument.DataType.STRING;
@@ -115,7 +115,7 @@ public class SaveToXML extends DefaultHandler{
 				else if(new String(ch, start, length).equals("FLOAT")){
 					stringType=Argument.DataType.FLOAT;
 				}
-				else if (new String(ch, start, length).equals("INTEGER")){//maybe an || "int"
+				else if (new String(ch, start, length).equals("INT")){
 					stringType=Argument.DataType.INT;
 				}
 				else{
@@ -155,7 +155,7 @@ public class SaveToXML extends DefaultHandler{
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
 			saxParser.parse(xmlInput,handler);
-		}
+		}   
 		catch (Exception e) {
 			e.printStackTrace();
 		}
