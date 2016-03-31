@@ -15,6 +15,7 @@ public class ArgsParser{
 	private List<String> unknownArgVals;
     private Map<String, String> longShortArgNames;
 	private String noDescription;
+	private String XMLData;
 	public ArgsParser(){
         arguments = new ArrayList<Argument>();
 		optionalArguments = new ArrayList<OptionalArgument>();
@@ -26,6 +27,7 @@ public class ArgsParser{
 		unknownArgVals = new ArrayList<String>();
 		longShortArgNames = new HashMap<String, String>();
 		noDescription = "";
+		XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+"<program>\n"; "
     }
    /*  public void print(){
         List<String> s = new ArrayList<String>();
@@ -56,12 +58,15 @@ public class ArgsParser{
     }	
     public void setProgramDescription(String d){
       programDescription = d; 
+	  XMLData += "<description>" + description + "</description>\n" + "<arguments>\n";
     }
     public String getProgramDescription(){
         return programDescription;
+		
     }
     public void setProgramName(String s){
         programName = s;
+		XMLData += "<name>" + name + "</name>\n" + "<arguments>\n";
     }
     public String getProgramName(){
         return programName;
@@ -105,6 +110,10 @@ public class ArgsParser{
         
         Argument a = new Argument(name, description, t);
         arguments.add(a);
+		XMLData += "<positionalArgument>\n" + 
+					"<name>" + name + "</name>\n" + 
+					"<type>" + t + "</type>\n" + 
+					"<description>" + description + "</description>\n</positionalArgument>\n";
 	}
 	public void addArg(String name){
         addArg(name, noDescription, Argument.DataType.STRING);
@@ -113,7 +122,12 @@ public class ArgsParser{
         if(name.contains("--")){
             OptionalArgument o = new OptionalArgument(name, noDescription, description, Argument.DataType.STRING);
             optionalArguments.add(o);
-        }
+			XMLData += "<namedArgument>\n" + 
+						"<name>" + name + "</name>\n" + 
+						"<type>" + t + "</type>\n" + 
+						"<description>" + description + "</description>\n</namedArgument>\n";
+        
+			}
         else{
              addArg(name, description, Argument.DataType.STRING);
         }
@@ -125,10 +139,18 @@ public class ArgsParser{
     public void addArg(String name,String description,String value, Argument.DataType t){
 		OptionalArgument o = new OptionalArgument(name,description,value, t);
 		optionalArguments.add(o);
+		XMLData += "<namedArgument>\n" + 
+					"<name>" + name + "</name>\n" +
+					"<type>" + t + "</type>\n" + 
+					"<description>" + description + "</description>\n" +
+					"<default>" + value + "</default>\n</namedArgument>\n";
+        
 	}
 	public void addArg(String name, String defaultValue, String shortName){
 		addArg(name,defaultValue);
 		longShortArgNames.put(shortName,name);
+		String replaceEnd = "\n" + "<shorthand>" + Shorthand + "</shorthand>\n</namedArgument>\n"
+		XMLData = XMLData.replace("\n</namedArgument>\n", replaceEnd);
 	} 
     private void checkForTooManyArgs(String [] cla){
        if(cla.length > (arguments.size() + optionalArguments.size()*2 + unknownArgNames.size() + unknownArgVals.size())){
@@ -364,5 +386,20 @@ public class ArgsParser{
         }
           
     }
+	public void saveXML(String filepath){
+		XMLData+= "</arguments>\n</program>";
+		File outfile = new File(filepath);	
+		try{
+		Writer writer = new BufferedWriter(new OutputStreamWriter(
+		new FileOutputStream(outfile), "utf-8")); 
+		writer.write(XMLData);
+		writer.close();
+		}
+		catch(IOException e){
+			throw new HelpMessageException("");
+		}
+		
+		
+	}
     
 }
