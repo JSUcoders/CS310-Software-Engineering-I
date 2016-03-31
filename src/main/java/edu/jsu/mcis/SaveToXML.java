@@ -10,10 +10,6 @@ import java.io.*;
 
 
 
-
-
-
-
 public class SaveToXML extends DefaultHandler{
 	private boolean name;
     private boolean value;
