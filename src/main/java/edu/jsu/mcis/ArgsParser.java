@@ -1,6 +1,8 @@
 package edu.jsu.mcis;
 import java.util.*;
 import java.util.Arrays;
+import java.io.*;
+import java.lang.*;
 
 public class ArgsParser{
 
@@ -27,7 +29,7 @@ public class ArgsParser{
 		unknownArgVals = new ArrayList<String>();
 		longShortArgNames = new HashMap<String, String>();
 		noDescription = "";
-		XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+"<program>\n"; "
+		XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+"<program>\n"; 
     }
    /*  public void print(){
         List<String> s = new ArrayList<String>();
@@ -58,7 +60,7 @@ public class ArgsParser{
     }	
     public void setProgramDescription(String d){
       programDescription = d; 
-	  XMLData += "<description>" + description + "</description>\n" + "<arguments>\n";
+	  XMLData += "<description>" + d + "</description>\n" + "<arguments>\n";
     }
     public String getProgramDescription(){
         return programDescription;
@@ -66,7 +68,7 @@ public class ArgsParser{
     }
     public void setProgramName(String s){
         programName = s;
-		XMLData += "<name>" + name + "</name>\n" + "<arguments>\n";
+		XMLData += "<name>" + s + "</name>\n" + "<arguments>\n";
     }
     public String getProgramName(){
         return programName;
@@ -124,7 +126,7 @@ public class ArgsParser{
             optionalArguments.add(o);
 			XMLData += "<namedArgument>\n" + 
 						"<name>" + name + "</name>\n" + 
-						"<type>" + t + "</type>\n" + 
+						"<type>" + Argument.DataType.STRING + "</type>\n" + 
 						"<description>" + description + "</description>\n</namedArgument>\n";
         
 			}
@@ -149,7 +151,7 @@ public class ArgsParser{
 	public void addArg(String name, String defaultValue, String shortName){
 		addArg(name,defaultValue);
 		longShortArgNames.put(shortName,name);
-		String replaceEnd = "\n" + "<shorthand>" + Shorthand + "</shorthand>\n</namedArgument>\n"
+		String replaceEnd = "\n" + "<shorthand>" + shortName + "</shorthand>\n</namedArgument>\n";
 		XMLData = XMLData.replace("\n</namedArgument>\n", replaceEnd);
 	} 
     private void checkForTooManyArgs(String [] cla){
@@ -396,7 +398,7 @@ public class ArgsParser{
 		writer.close();
 		}
 		catch(IOException e){
-			throw new HelpMessageException("");
+			throw new RuntimeException("Issue in saveXML()");
 		}
 		
 		

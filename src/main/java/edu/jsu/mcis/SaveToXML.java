@@ -1,4 +1,4 @@
-package edu.jsu.mcis.*;
+package edu.jsu.mcis;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -18,12 +18,12 @@ public class SaveToXML extends DefaultHandler{
 	private boolean shorthand;
 	private boolean defaultValue;
 	
-	private StringBuilder nameString;
-	private StringBuilder valueString;
-	private StringBuilder typeString;
-	private StringBuilder descriptionString;
-	private StringBuilder shorthandString;
-	private StringBuilder defaultValueString;
+	private StringBuilder nameStringbuild;
+	private StringBuilder valueStringbuild;
+	private StringBuilder typeStringbuild;
+	private StringBuilder descriptionStringbuild;
+	private StringBuilder shorthandStringbuild;
+	private StringBuilder defaultValueStringbuild;
 	
 	private ArgsParser p; 
 	
@@ -31,7 +31,7 @@ public class SaveToXML extends DefaultHandler{
 	private String stringDescription;
 	private String stringShorthand;
 	private String stringDefault;
-	private Argument.Type stringType;
+	private Argument.DataType stringType;
 	
 	
 	
@@ -52,11 +52,11 @@ public class SaveToXML extends DefaultHandler{
 		
 		p = new ArgsParser();
 		
-		stringNames = "" ; 
+		stringName = "" ; 
 		stringDescription = "" ; 
 		stringShorthand = "" ; 
 		stringDefault = "" ; 
-		argType = Argument.Type.STRING; 
+		stringType = Argument.DataType.STRING; 
 	
 	}
 	
@@ -91,8 +91,8 @@ public class SaveToXML extends DefaultHandler{
 			if(qName.equals("positionalArgument")){
 				p.addArg(stringName,stringDescription,stringType);
 			}
-			else(qName.equals("namedArgument")){
-				p.addArg(stringName,stringDescription,stringType,stringDefault,stringType);
+			else if(qName.equals("namedArgument")){
+				p.addArg(stringName,stringDescription,stringDefault,stringType);
 			}
 			System.out.println("End Element :" + qName);
 		}
@@ -110,16 +110,16 @@ public class SaveToXML extends DefaultHandler{
 			if (type) {//float int bool sting
 				
 				if (new String(ch, start, length).equals("STRING")){
-					argType=ARGUMENT.Type.STRING;
+					stringType=Argument.DataType.STRING;
 				}
 				else if(new String(ch, start, length).equals("FLOAT")){
-					argType=Argument.Type.FLOAT;
+					stringType=Argument.DataType.FLOAT;
 				}
-				else if (new String(ch, start, length).equals("INTEGER")){
-					argType=ARGUMENT.Type.INTEGER;
+				else if (new String(ch, start, length).equals("INTEGER")){//maybe an || "int"
+					stringType=Argument.DataType.INT;
 				}
 				else{
-					argType=ARGUMENT.Type.BOOLEAN;
+					stringType=Argument.DataType.BOOL;
 				}
 				System.out.println("type : " + new String(ch, start, length));
 				type = false;
@@ -131,10 +131,10 @@ public class SaveToXML extends DefaultHandler{
 				description = false;
 			}
 			
-			if (defaults) {
+			if (defaultValue) {
 				stringDefault=new String(ch, start, length);
 				System.out.println("defaults : " + new String(ch, start, length));
-				defaults = false;
+				defaultValue = false;
 			}
 			
 			if (shorthand) {
@@ -162,15 +162,4 @@ public class SaveToXML extends DefaultHandler{
 		return getArgsParser();
 	}
 
-}
-
-
-}
-	
-	
-	
-	
-	
-	
-	
 }
