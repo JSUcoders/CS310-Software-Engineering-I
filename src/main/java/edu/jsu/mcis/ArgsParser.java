@@ -1,6 +1,8 @@
 package edu.jsu.mcis;
 import java.util.*;
 import java.util.Arrays;
+import java.io.*;
+import java.lang.*;
 
 public class ArgsParser{
 
@@ -19,9 +21,11 @@ public class ArgsParser{
         programDescription = "";
 		unknownArgNames = new ArrayList<String>();
 		unknownArgVals = new ArrayList<String>();
+
 		longShortArgNames = new HashMap<String, String>(); 
         XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+ "<program>\n";
             
+
     }
    
     private String makePreMessage(){
@@ -36,13 +40,16 @@ public class ArgsParser{
     public void setProgramDescription(String d){
       XMLData += "<description>" + d + "</description>\n" + "<arguments>\n"; 
       programDescription = d; 
+	  XMLData += "<description>" + d + "</description>\n" + "<arguments>\n";
     }
     public String getProgramDescription(){
         return programDescription;
+		
     }
     public void setProgramName(String s){
         XMLData += "<name>" + s + "</name>\n";
         programName = s;
+		XMLData += "<name>" + s + "</name>\n" + "<arguments>\n";
     }
     public String getProgramName(){
         return programName;
@@ -87,6 +94,7 @@ public class ArgsParser{
             arguments.add(a);
         }
         
+
 	}
 	public void addArg(String name){
         addArg(name, "", Argument.DataType.STRING);
@@ -95,7 +103,12 @@ public class ArgsParser{
         if(name.contains("--")){
             OptionalArgument o = new OptionalArgument(name, "", descriptionOrDefaultValue, Argument.DataType.STRING,"");
             optionalArguments.add(o);
-        }
+			XMLData += "<namedArgument>\n" + 
+						"<name>" + name + "</name>\n" + 
+						"<type>" + Argument.DataType.STRING + "</type>\n" + 
+						"<description>" + description + "</description>\n</namedArgument>\n";
+        
+			}
         else{
              addArg(name, descriptionOrDefaultValue, Argument.DataType.STRING);
         }
@@ -107,7 +120,14 @@ public class ArgsParser{
     public void addArg(String name,String description,String value, Argument.DataType t){
 		OptionalArgument o = new OptionalArgument(name,description,value, t,"");
 		optionalArguments.add(o);
+		XMLData += "<namedArgument>\n" + 
+					"<name>" + name + "</name>\n" +
+					"<type>" + t + "</type>\n" + 
+					"<description>" + description + "</description>\n" +
+					"<default>" + value + "</default>\n</namedArgument>\n";
+        
 	}
+
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
         if(shortNameOrDescription.length() == 2){
             OptionalArgument o = new OptionalArgument(name, "", defaultValue,Argument.DataType.STRING ,shortNameOrDescription);
@@ -120,6 +140,7 @@ public class ArgsParser{
         }
 		
 		
+
 	} 
     public void addArg(String name, String description, String defaultValue, String shortName){
         OptionalArgument o = new OptionalArgument(name, description, defaultValue,Argument.DataType.STRING ,shortName);
@@ -368,5 +389,20 @@ public class ArgsParser{
         }
           
     }
+	public void saveXML(String filepath){
+		XMLData+= "</arguments>\n</program>";
+		File outfile = new File(filepath);	
+		try{
+		Writer writer = new BufferedWriter(new OutputStreamWriter(
+		new FileOutputStream(outfile), "utf-8")); 
+		writer.write(XMLData);
+		writer.close();
+		}
+		catch(IOException e){
+			throw new RuntimeException("Issue in saveXML()");
+		}
+		
+		
+	}
     
 }

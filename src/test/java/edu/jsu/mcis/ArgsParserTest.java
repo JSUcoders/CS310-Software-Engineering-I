@@ -298,8 +298,10 @@ public class ArgsParserTest{
        p.addArg("width");
        p.addArg("height");
        p.parse(s);
+
        assertEquals("true", p.getArg("--myArg"));
    }
+
    
     @Test
     public void testAddingOptionalArgumentsShortNames(){
@@ -496,6 +498,7 @@ public class ArgsParserTest{
 		
    }
    
+
    @Test
    public void testThatDifferentAddArgsWork(){
        ArgsParser p = new ArgsParser();
@@ -512,4 +515,24 @@ public class ArgsParserTest{
    }
    
    
+
+   
+   
+   @Test
+	public void testSavingtoXMLFile(){
+		ArgsParser p = new ArgsParser();
+		p.setProgramName("VolumeCalculator");
+		p.setProgramDescription("Calculate the volume of a box.");
+        p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+        p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
+        p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
+        p.addArg("--help","false");
+		p.addArg("--type", "box","-t");
+        p.addArg("--digits", "4","-d");
+		
+		p.saveXML("newXML.xml");
+	
+    }
+   
+
 }
