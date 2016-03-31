@@ -5,7 +5,7 @@
 <arguments>
 <positionalArgument>
 <name>length</name>
-<description></description>
+<description>length the length of the box(float)</description>
 <type>FLOAT</type>
 <position>1</position>
 </positionalArgument>
@@ -30,16 +30,16 @@
 </optionalArgument>
 <optionalArgument>
 <name>--type</name>
-<description></description>
+<description>the type</description>
 <defaultValue>box</defaultValue>
 <type>STRING</type>
 <shortName>-t</shortName>
 </optionalArgument>
 <optionalArgument>
 <name>--digits</name>
-<description></description>
+<description>the digits</description>
 <defaultValue>4</defaultValue>
-<type>STRING</type>
+<type>INT</type>
 <shortName>-d</shortName>
 </optionalArgument>
 </arguments>

@@ -523,12 +523,12 @@ public class ArgsParserTest{
 		ArgsParser p = new ArgsParser();
 		p.setProgramName("VolumeCalculator");
 		p.setProgramDescription("Calculate the volume of a box.");
-        p.addArg("length",Argument.DataType.FLOAT );
+        p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
         p.addArg("--help","false");
-		p.addArg("--type", "box","-t");
-        p.addArg("--digits", "4","-d");
+		p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
+        p.addArg("--digits", "the digits","4",OptionalArgument.DataType.INT,"-d");
 		
 		p.saveXML("newXML.xml");
 	
