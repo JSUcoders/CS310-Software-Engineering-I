@@ -1,10 +1,0 @@
-xusage: java VolumeCalculator length width height
-VolumeCalculator.java: error: argument --myArg is an unknown argument
-musage: java VolumeCalculator length width height
-VolumeCalculator.java: error: unrecognized arguments: 43 8
-|usage: java VolumeCalculator length width height
-VolumeCalculator.java: error: argument height: invalid integer value: bob
-usage: java VolumeCalculator length width height
-VolumeCalculator.java: error: argument width: invalid float value: something
-„usage: java VolumeCalculator length width height
-VolumeCalculator.java: error: arguments --myArg, --otherArg are unknown arguments
