@@ -6,35 +6,22 @@ public class VCDemo{
         ArgsParser p = new ArgsParser();
         String message = "VolumeCalculator";
         String description = "Calculate the volume of a box";
-        String[] argDescripts = {"length the length of the box" , "width the width of the box", "height the height of the box"};
-        p.addArg("length");
-        p.addArg("width");
-        p.addArg("height");
-        p.addArgDescriptions(argDescripts);
+        p.addArg("length","length the length of the box",Argument.DataType.FLOAT);
+        p.addArg("width","width the width of the box",Argument.DataType.FLOAT);
+        p.addArg("height","height the height of the box",Argument.DataType.FLOAT);
+        p.addArg("--type","the shape of the object","box",OptionalArgument.DataType.STRING,"-t");
+        p.addArg("--digits","the amount of digits in the volume","4",OptionalArgument.DataType.INT,"-d");
         p.setProgramName(message);
         p.setProgramDescription(description);
-        try{
-            p.parse(args);
-        }
-        catch(HelpException e){
-			System.out.println(e.getExceptionOutput());
-		}
-		
-		catch(TooFewArgsException e){
-			System.out.println(e.getExceptionOutput());
-		}
-		
-		catch(TooManyArgsException e){
-			System.out.println(e.getExceptionOutput());
-		}
-        catch(InvalidArgumentException e){
-            System.out.println(e.getExceptionOutput());
-        }
+        p.parse(args);
         
-        //System.out.println(p.getArg("length"));
+        System.out.println("The length is: "+ p.getArg("length"));
+        System.out.println("The datatype of width is: " + p.getDataType("width"));
+        System.out.println("The optional argument type has the default value of: " + p.getArg("--type"));
+        System.out.println("The optional argument digits has the datatype of: " + p.getDataType("--digits"));
+        System.out.println("The volume is: " + ( (float)p.getArg("length") * (float)p.getArg("width") * (float)p.getArg("height")));
+        
     }
 }
 
 
-//javac -cp .;../build/libs/CS310-Software-Engineering-I-1.0.jar VCDemo.java
-//java -cp .;../build/libs/CS310-Software-Engineering-I-1.0.jar VCDemo 7 9 3

@@ -63,7 +63,6 @@ public class SaveToXML extends DefaultHandler{
 	DefaultHandler handler = new DefaultHandler(){
 	
 		public void startElement(String uri, String localName,String qName, Attributes attributes) throws SAXException {
-			System.out.println("Start Element :" + qName);
 			if(qName.equals("arguments")){
 				p.setProgramName(stringName);
 				p.setProgramDescription(stringDescription);
@@ -94,7 +93,6 @@ public class SaveToXML extends DefaultHandler{
 			else if(qName.equals("optionalArgument")){
 				p.addArg(stringName,stringDescription,stringDefault,stringType);
 			}
-			System.out.println("End Element :" + qName);
 		}
 			
 		
@@ -102,7 +100,6 @@ public class SaveToXML extends DefaultHandler{
 
 			if (name) {
 				stringName=new String(ch, start, length);
-				System.out.println("name : " + new String(ch, start, length));
 				name = false;
 				
 			}
@@ -121,25 +118,21 @@ public class SaveToXML extends DefaultHandler{
 				else{
 					stringType=Argument.DataType.BOOL;
 				}
-				System.out.println("type : " + new String(ch, start, length));
 				type = false;
 			}
 
 			if (description) {
 				stringDescription=new String(ch, start, length);
-				System.out.println("description : " + new String(ch, start, length));
 				description = false;
 			}
 			
 			if (defaultValue) {
 				stringDefault=new String(ch, start, length);
-				System.out.println("defaultValue : " + new String(ch, start, length));
 				defaultValue = false;
 			}
 			
 			if (shorthand) {
 				stringShorthand= new String(ch, start, length);
-				System.out.println("shorthand : " + new String(ch, start, length));
 				shorthand= false;
 			}
 		}	
