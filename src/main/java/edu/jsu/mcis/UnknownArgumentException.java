@@ -5,9 +5,12 @@ public class UnknownArgumentException extends RuntimeException{
 	
 	private String exceptionOutput="";
 	
-	public UnknownArgumentException(String preMessage, String prgrmName, List<String> unknownArgumentNames){
+	public UnknownArgumentException(String preMessage, String prgrmName, 
+    List<String> unknownArgumentNames){
 		if(unknownArgumentNames.size() == 1){
-			exceptionOutput = preMessage + "\n" + prgrmName + ".java:" + " error: argument " + unknownArgumentNames.get(0) + " is an unknown argument";
+			exceptionOutput = preMessage + "\n" + prgrmName + ".java:" 
+            + " error: argument "+ unknownArgumentNames.get(0) 
+            + " is an unknown argument";
 		}
 		
 		else{
@@ -18,7 +21,9 @@ public class UnknownArgumentException extends RuntimeException{
 					temp += ", ";
 				}
 			}
-			exceptionOutput = preMessage + "\n" + prgrmName + ".java:" + " error: arguments " + temp + " are unknown arguments";
+			exceptionOutput = preMessage + "\n" + prgrmName + ".java:" 
+            + " error: arguments " + 
+            temp + " are unknown arguments";
 		}
 	}
 	

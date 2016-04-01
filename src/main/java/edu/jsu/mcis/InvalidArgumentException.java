@@ -18,7 +18,8 @@ public class InvalidArgumentException extends RuntimeException{
             datatype = "boolean";
         }
         
-		exceptionOutput= preMsg +"\n"+programName+".java:"+" error: argument " + arg.getName()+": invalid " +datatype+ " value: " + arg.getValue();
+		exceptionOutput= preMsg +"\n"+programName+".java:"+" error: argument " + arg.getName()
+        +": invalid " +datatype+ " value: " + arg.getValue();
 		
     }
     
