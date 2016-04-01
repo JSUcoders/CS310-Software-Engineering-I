@@ -91,7 +91,7 @@ public class SaveToXML extends DefaultHandler{
 			if(qName.equals("positionalArgument")){
 				p.addArg(stringName,stringDescription,stringType);
 			}
-			else if(qName.equals("namedArgument")){
+			else if(qName.equals("optionalArgument")){
 				p.addArg(stringName,stringDescription,stringDefault,stringType);
 			}
 			System.out.println("End Element :" + qName);
@@ -133,7 +133,7 @@ public class SaveToXML extends DefaultHandler{
 			
 			if (defaultValue) {
 				stringDefault=new String(ch, start, length);
-				System.out.println("defaults : " + new String(ch, start, length));
+				System.out.println("defaultValue : " + new String(ch, start, length));
 				defaultValue = false;
 			}
 			

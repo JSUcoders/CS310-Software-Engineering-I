@@ -37,10 +37,10 @@
 </optionalArgument>
 <optionalArgument>
 <name>--digits</name>
-<description>the digits</description>
+<description></description>
 <defaultValue>4</defaultValue>
-<type>INT</type>
-<shortName>-d</shortName>
+<type>STRING</type>
+<shortName></shortName>
 </optionalArgument>
 </arguments>
 </program>

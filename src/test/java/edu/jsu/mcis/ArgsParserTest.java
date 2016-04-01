@@ -528,8 +528,7 @@ public class ArgsParserTest{
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
         p.addArg("--help","false");
 		p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
-        p.addArg("--digits", "the digits","4",OptionalArgument.DataType.INT,"-d");
-		
+        p.addArg("--digits","4");
 		p.saveXML("newXML.xml");
 	
     }
@@ -537,10 +536,18 @@ public class ArgsParserTest{
     @Test
     public void testLoadingFromXMLFile(){
         ArgsParser p = new ArgsParser();
-        SaveToXML rw = new SaveToXML();
-        String[] args = new String[] {"s","5","4"};    
+        SaveToXML rw = new SaveToXML();   
         p=rw.parseXML("newXML.xml");
         assertEquals(Argument.DataType.FLOAT,p.getDataType("length"));
+    
+    }
+    
+    @Test
+    public void testLoadingFromXMLFile2(){
+        ArgsParser p = new ArgsParser();
+        SaveToXML rw = new SaveToXML();   
+        p=rw.parseXML("newXML.xml");
+        assertEquals("4",p.getArg("--digits"));
 
     }
 }
