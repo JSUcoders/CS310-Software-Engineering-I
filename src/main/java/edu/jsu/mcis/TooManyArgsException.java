@@ -5,7 +5,7 @@ public class TooManyArgsException extends RuntimeException{
 	private String exceptionOutput= "";
 	
 
-	public TooManyArgsException(String preMessage,String[] cla, List<Argument> arguments, String prgmName, List<OptionalArgument> optArgs, List<String> unknownAN, List<String> unknownAV){
+	public TooManyArgsException(String preMessage,String[] cla, Map<String, Argument> arguments, String prgmName, Map<String, OptionalArgument> optArgs, Map<String,String> unknownArgs){
 
 		String extraArgs = "";
 		if(optArgs.size() == 0){
@@ -16,32 +16,35 @@ public class TooManyArgsException extends RuntimeException{
 		
         else{
             List<String> temp = new ArrayList<String>();
-            for(int i =0; i < arguments.size();i++){
-                temp.add(arguments.get(i).getValue());
-            } 
-            List<String> oAN = new ArrayList<String>();
-            List<String> oAV = new ArrayList<String>();
-            for(int i = 0; i < optArgs.size();i++){
-                oAN.add(optArgs.get(i).getName());
-                oAV.add(optArgs.get(i).getValue());
+            for (Map.Entry<String, Argument> entry : arguments.entrySet()) {
+                String key = entry.getKey();
+                Argument value = entry.getValue();
+                temp.add(key);
+                temp.add(value.getValue());
             }
+            for (Map.Entry<String, OptionalArgument> entry : optArgs.entrySet()) {
+                String key = entry.getKey();
+                Argument value = entry.getValue();
+                temp.add(key);
+                temp.add(value.getValue());
+               
+            }
+            for (Map.Entry<String, String> entry : unknownArgs.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                temp.add(key);
+                temp.add(value);
+            }
+
             for(int i = 0; i < cla.length;i++){
-                if(!oAN.contains(cla[i]) && !oAV.contains(cla[i]) && !temp.contains(cla[i]) && !unknownAN.contains(cla[i]) && !unknownAV.contains(cla[i])){
+                if(!temp.contains(cla[i])){
                     extraArgs = extraArgs + " " + cla[i];
                     
                 }
                
             }
         }
-        
-        
-
-
-       
-         
 		exceptionOutput = preMessage + "\n" + prgmName+".java: error: unrecognized arguments:"+extraArgs;
-        
-
     }
 	public String getExceptionOutput(){
 		return exceptionOutput;

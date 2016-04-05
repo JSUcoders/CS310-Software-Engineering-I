@@ -22,18 +22,18 @@
 <position>3</position>
 </positionalArgument>
 <optionalArgument>
-<name>--help</name>
-<description></description>
-<defaultValue>false</defaultValue>
-<type>STRING</type>
-<shortName></shortName>
-</optionalArgument>
-<optionalArgument>
 <name>--type</name>
 <description>the type</description>
 <defaultValue>box</defaultValue>
 <type>STRING</type>
 <shortName>-t</shortName>
+</optionalArgument>
+<optionalArgument>
+<name>--help</name>
+<description></description>
+<defaultValue>false</defaultValue>
+<type>STRING</type>
+<shortName></shortName>
 </optionalArgument>
 <optionalArgument>
 <name>--digits</name>

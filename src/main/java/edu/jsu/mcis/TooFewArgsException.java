@@ -3,22 +3,31 @@ import java.util.*;
 public class TooFewArgsException extends RuntimeException {
     private String exceptionOutput= "";
     
-    public TooFewArgsException(String preMsg,  String[] cla, List<Argument> arguments, String prgmName){
+    public TooFewArgsException(String preMsg,  String[] cla, Map<String, Argument> arguments, String prgmName){
         String args = "";
         String missingArgNames = "";
         
         if(cla.length == 0){
             
-            for(int i = 0; i < arguments.size(); i++){
-                args += arguments.get(i).getName() + " ";
-            }
+            for (String key : arguments.keySet()) {
+                args += key + " ";
+            }    
+
             String argsSub = args.substring(0, args.length()- 1);
             missingArgNames = argsSub;
         }
         else{
             args = "";
-            for(int i = cla.length; i < arguments.size() ;i++){
-               args += (arguments.get(i).getName() + " "); 
+            int i = cla.length;
+            int count =0;
+            for (String key : arguments.keySet()) {
+                if(count < cla.length){
+                    count++;
+                }
+                else{
+                   args += key + " "; 
+                }
+                
             }
             String argsSub = args.substring(0, args.length() - 1);
             missingArgNames = argsSub;    
