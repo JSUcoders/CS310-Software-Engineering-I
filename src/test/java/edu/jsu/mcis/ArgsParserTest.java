@@ -2,6 +2,7 @@ package edu.jsu.mcis;
 
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.*;
 
 public class ArgsParserTest{
     
@@ -550,4 +551,60 @@ public class ArgsParserTest{
         assertEquals("4",p.getArg("--digits"));
 
     }
+	
+	@Test
+	public void testParsingAllowedValueOfRestrictedSet(){
+		String[] s = {"3", "4", "--type", "ellipsoid", "5"};
+		ArgsParser p = new ArgsParser();
+		List<String> restrictedLengthValues = new ArrayList<String>();
+		List<String> restrictedTypeValues = new ArrayList<String>();
+		restrictedLengthValues.add("3");
+		restrictedLengthValues.add("6");
+		restrictedLengthValues.add("9");
+		
+		restrictedTypeValues.add("box");
+		restrictedTypeValues.add("ellipsoid");
+		restrictedTypeValues.add("pyramid");
+		p.addArg("length");
+		p.addArg("width");
+		p.addArg("height");
+		p.addArg("--type", "box");
+		
+		p.setRestricted("length", restrictedLengthValues);
+		p.setRestricted("--type", restrictedTypeValues);
+		p.parse(s);
+		
+		assertEquals("3", p.getArg("length"));
+		assertEquals("ellipsoid", p.getArg("--type"));
+	}
+	
+	@Test(expected = RestrictedArgumentException.class)
+	public void testParsedUnallowedValueOfRestrictedSet(){
+		String[] s = {"7", "3", "--type", "frustum", "2"};
+		ArgsParser p = new ArgsParser();
+		p.setProgramName("VolumeCalculator");
+		List<String> restrictedLengthValues = new ArrayList<String>();
+		List<String> restrictedTypeValues = new ArrayList<String>();
+		restrictedLengthValues.add("7");
+		restrictedLengthValues.add("6");
+		restrictedLengthValues.add("9");
+		
+		restrictedTypeValues.add("box");
+		restrictedTypeValues.add("ellipsoid");
+		restrictedTypeValues.add("pyramid");
+		p.addArg("length");
+		p.addArg("width");
+		p.addArg("height");
+		p.addArg("--type", "box");
+		
+		p.setRestricted("length", restrictedLengthValues);
+		p.setRestricted("--type", restrictedTypeValues);
+		
+		try{
+			p.parse(s);
+		}catch(RestrictedArgumentException e){
+            System.out.println(e.getExceptionOutput());
+			throw e;
+		}
+	}
 }

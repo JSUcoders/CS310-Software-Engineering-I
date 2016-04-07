@@ -8,6 +8,7 @@ public class Argument {
     protected String value;
     protected DataType type;
 	protected String description;
+	protected List<String> restrictedValues;
     protected String XMLData;
     protected int position;
    
@@ -17,8 +18,9 @@ public class Argument {
         type = t;
 		description = d;
 		value = "";
+		restrictedValues = new ArrayList<String>();
         XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
-                          "<type>" + t + "</type>\n" +  "</positionalArgument>\n"; 
+                          "<type>" + t + "</type>\n" + "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" +  "</positionalArgument>\n"; 
     }
     
     
@@ -41,7 +43,8 @@ public class Argument {
     
     public void updateXMLData(){
         XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
-                          "<type>" + type + "</type>\n" + "<position>" + position + "</position>\n" + "</positionalArgument>\n"; 
+                          "<type>" + type + "</type>\n" + "<position>" + position + "</position>\n" +
+						  "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" +"</positionalArgument>\n"; 
     }
     
     public DataType getType(){
@@ -55,4 +58,4 @@ public class Argument {
         return XMLData; 
     }
     
-}
+}€

@@ -102,8 +102,6 @@ public class ArgsParser{
 		OptionalArgument o = new OptionalArgument(name,description,value, t,"");
         optionalArgNames.add(name);
 		optionalArguments.put(name, o);
-		
-        
 	}
 
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
@@ -118,10 +116,8 @@ public class ArgsParser{
             optionalArgNames.add(name);
             optionalArguments.put(name,o);
         }
-		
-		
-
-	} 
+	}
+	
     public void addArg(String name, String description, String defaultValue, String shortName){
         OptionalArgument o = new OptionalArgument(name, description, defaultValue,Argument.DataType.STRING ,shortName);
         optionalArgNames.add(name);
@@ -141,6 +137,15 @@ public class ArgsParser{
         optionalArguments.put(name, o);
         longShortArgNames.put(shortName,name);
     }
+	
+	public void setRestricted(String name, List<String> restrictedValue){
+		if(name.contains("--")){
+			optionalArguments.get(name).restrictedValues = restrictedValue;
+		}
+		else{
+			arguments.get(name).restrictedValues = restrictedValue;
+		}
+	}
     
     private void checkForTooManyArgs(String [] cla){
        if(cla.length > (arguments.size() + optionalArguments.size()*2 + unknownArguments.size()*2)){
@@ -253,6 +258,10 @@ public class ArgsParser{
                 optionalArguments.get(cla[i]).setValue("true");
         }
         else{
+			if(!optionalArguments.get(cla[i]).restrictedValues.contains(cla[i + 1]) && optionalArguments.get(cla[i]).restrictedValues.size() != 0){
+				String invalidValue = cla[i + 1];
+				throw new RestrictedArgumentException(makePreMessage(), programName, invalidValue, optionalArguments.get(cla[i]));
+			}
                 optionalArguments.get(cla[i]).setValue(cla[i + 1]);
                 i++;
             }
@@ -299,9 +308,15 @@ public class ArgsParser{
 			unknownArguments.containsKey(cla[i])|| unknownArguments.containsValue(cla[i]) ||(cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){}
             else{
                  if(j < arguments.size()){
-                     arguments.get(argNames.get(j)).addValue(cla[i]); 
-                     j++;  
-                 }
+					if(!arguments.get(argNames.get(j)).restrictedValues.contains(cla[i]) && arguments.get(argNames.get(j)).restrictedValues.size() != 0){
+						String invalidValue = cla[i];
+						throw new RestrictedArgumentException(makePreMessage(), programName, invalidValue, arguments.get(argNames.get(j)));
+					}
+					else{
+						arguments.get(argNames.get(j)).addValue(cla[i]); 
+						j++;  
+					}
+				 }
                  
             }
         }
