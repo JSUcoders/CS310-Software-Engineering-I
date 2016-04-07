@@ -52,6 +52,17 @@ public class ArgsParser{
 	private List<String> unknownArgVals;
     private Map<String, String> longShortArgNames;
     private String XMLData;
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public ArgsParser(){
         arguments = new ArrayList<Argument>();
 		optionalArguments = new ArrayList<OptionalArgument>();
@@ -66,6 +77,17 @@ public class ArgsParser{
 
     }
    
+   
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	 
     private String makePreMessage(){
         String names = "";
         for(int i =0; i < arguments.size();i++){
@@ -75,25 +97,91 @@ public class ArgsParser{
         String preMessage = "usage: java "+ programName+" "+ namesSub; 
         return preMessage;   
     }	
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public void setProgramDescription(String d){
       XMLData += "<description>" + d + "</description>\n" + "<arguments>\n"; 
       programDescription = d; 
 	  
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public String getProgramDescription(){
         return programDescription;
 		
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public void setProgramName(String s){
         programName = s;
 		XMLData += "<name>" + s + "</name>\n" ;
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public String getProgramName(){
         return programName;
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public int getNumOfArguments(){
        return arguments.size(); 
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public Argument.DataType getDataType(String name){
         if(name.contains("--")){
             List<String> tempOptNames = new ArrayList<String>();
@@ -121,6 +209,17 @@ public class ArgsParser{
         }
         
 	}
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public void addArg(String name,String descriptionOrDefaultValue, Argument.DataType t){
         if(name.contains("--")){
            OptionalArgument o = new OptionalArgument(name, "", descriptionOrDefaultValue, t,"");
@@ -133,9 +232,31 @@ public class ArgsParser{
         
 
 	}
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public void addArg(String name){
         addArg(name, "", Argument.DataType.STRING);
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public void addArg(String name, String descriptionOrDefaultValue){
         if(name.contains("--")){
             OptionalArgument o = new OptionalArgument(name, "", descriptionOrDefaultValue, Argument.DataType.STRING,"");
@@ -148,9 +269,31 @@ public class ArgsParser{
         }
        
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public void addArg(String name,Argument.DataType t ){
 		addArg(name, "", t);
 	}
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public void addArg(String name,String description,String value, Argument.DataType t){
 		OptionalArgument o = new OptionalArgument(name,description,value, t,"");
 		optionalArguments.add(o);
@@ -158,6 +301,16 @@ public class ArgsParser{
         
 	}
 
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
         if(shortNameOrDescription.length() == 2){
             OptionalArgument o = new OptionalArgument(name, "", defaultValue,Argument.DataType.STRING ,shortNameOrDescription);
@@ -172,24 +325,65 @@ public class ArgsParser{
 		
 
 	} 
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public void addArg(String name, String description, String defaultValue, String shortName){
         OptionalArgument o = new OptionalArgument(name, description, defaultValue,Argument.DataType.STRING ,shortName);
         optionalArguments.add(o);
         longShortArgNames.put(shortName,name);
     }
     
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public void addArg(String name, String defaultValue,Argument.DataType t,String shortName){
         OptionalArgument o = new OptionalArgument(name, "", defaultValue,t ,shortName);
         optionalArguments.add(o);
         longShortArgNames.put(shortName,name);
     }
     
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public void addArg(String name,String description, String defaultValue,Argument.DataType t,String shortName){
         OptionalArgument o = new OptionalArgument(name, description, defaultValue,t ,shortName);
         optionalArguments.add(o);
         longShortArgNames.put(shortName,name);
     }
     
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     private void checkForTooManyArgs(String [] cla){
        if(cla.length > (arguments.size() + optionalArguments.size()*2 + unknownArgNames.size() + unknownArgVals.size())){
            throw new TooManyArgsException(makePreMessage(), cla, arguments, programName, optionalArguments, unknownArgNames, unknownArgVals);
@@ -262,12 +456,34 @@ public class ArgsParser{
                }
            }
        }
-    }   
+    }  
+
+	/**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     private void checkForTooFewArgs(String[] cla)  {   
         if(cla.length < arguments.size()){          
             throw new TooFewArgsException(makePreMessage(), cla, arguments, programName);            
         }       
-    }   
+    }
+
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     private void checkForHelp(String[] cla){      
             for(int i =0; i < optionalArguments.size();i++){
                 if(optionalArguments.get(i).getName().equals("--help") && optionalArguments.get(i).getValue().equals("true")){
@@ -275,6 +491,17 @@ public class ArgsParser{
                 }
             }    
     }	
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	private void checkForInvalidArgument( ){
         int i =0; 
         try{
@@ -294,11 +521,31 @@ public class ArgsParser{
 		
 	}
 	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	private void checkForUnknownArg(){
 		if(unknownArgNames.size() > 0){
 			throw new UnknownArgumentException(makePreMessage(), programName, unknownArgNames);
 		}
 	}
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
 	
     public void parse(String[] cla) {
         if(cla.length == 0){
@@ -367,7 +614,18 @@ public class ArgsParser{
         checkForHelp(cla);    
         checkForTooFewArgs(cla);
         checkForInvalidArgument();
-    }		
+    }	
+
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public Object getArg(String name){
         if(name.contains("--")){
             List<String> tempOptNames = new ArrayList<String>();
@@ -419,6 +677,17 @@ public class ArgsParser{
         }
           
     }
+	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public void saveXML(String filepath){
             for(int i =0; i < arguments.size();i++){
                 arguments.get(i).setPosition(i + 1);

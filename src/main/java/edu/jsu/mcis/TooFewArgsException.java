@@ -1,8 +1,30 @@
 package edu.jsu.mcis;
 import java.util.*;
+
+/**<p>
+ * This class allows the user to ...
+ *<p>
+ *@author Avery Whitecotton
+ *@author Adam Butler
+ *@author Colby Morris
+ *@author Grady Houlditch
+ *@author Colby Hilyer
+ *@author Cody McGee
+ */
+
 public class TooFewArgsException extends RuntimeException {
     private String exceptionOutput= "";
     
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public TooFewArgsException(String preMsg,  String[] cla, List<Argument> arguments, String prgmName){
         String args = "";
         String missingArgNames = "";
@@ -28,6 +50,17 @@ public class TooFewArgsException extends RuntimeException {
         exceptionOutput = preMsg+"\n"+ prgmName+".java: error: the following arguments are required: "+missingArgNames;
         
     }
+	 
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
     public String getExceptionOutput(){
 		return exceptionOutput;
 	}

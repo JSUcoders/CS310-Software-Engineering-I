@@ -8,7 +8,16 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.*;
 import java.io.*;
 
-
+/**<p>
+ * This class allows the user to ...
+ *<p>
+ *@author Avery Whitecotton
+ *@author Adam Butler
+ *@author Colby Morris
+ *@author Grady Houlditch
+ *@author Colby Hilyer
+ *@author Cody McGee
+ */
 
 public class SaveToXML extends DefaultHandler{
 	private boolean name;
@@ -33,7 +42,15 @@ public class SaveToXML extends DefaultHandler{
 	private String stringDefault;
 	private Argument.DataType stringType;
 	
-	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
 	
 	public SaveToXML(){
 		
@@ -138,10 +155,30 @@ public class SaveToXML extends DefaultHandler{
 		}	
 	};
 	
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+	
 	public ArgsParser getArgsParser(){
 		return p;
 	}
-				
+			
+	 /**
+	 *This method adds a named argument to the program.
+	 *
+	 *@param <name> <description>  
+	 *@throws <exception name>
+	 *@returns <return value name>
+	 
+	 or @ <no value here> for void functions
+	 */
+			
 	public ArgsParser parseXML(String filepath){
 		try {
 			InputStream xmlInput = new FileInputStream(filepath);
