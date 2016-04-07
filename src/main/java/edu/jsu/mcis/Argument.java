@@ -38,10 +38,10 @@ public class Argument {
     
     public void setPosition(int index){
         position = index;
-        updateXMLData();
+        updateXMLDataForPArg();
     }
     
-    public void updateXMLData(){
+    private void updateXMLDataForPArg(){
         XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
                           "<type>" + type + "</type>\n" + "<position>" + position + "</position>\n" +
 						  "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" +"</positionalArgument>\n"; 

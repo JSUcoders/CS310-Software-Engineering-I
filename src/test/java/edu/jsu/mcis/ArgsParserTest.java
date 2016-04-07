@@ -527,8 +527,8 @@ public class ArgsParserTest{
         p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
-        p.addArg("--help","false");
 		p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
+        p.setOptArgToRequired("--type");
         p.addArg("--digits","4");
 		p.saveXML("newXML.xml");
 	
@@ -607,4 +607,54 @@ public class ArgsParserTest{
 			throw e;
 		}
 	}
+    
+    @Test(expected = RequiredArgumentsNeededException.class)
+    public void testNotHavingARequiredNamedArgumentThrowsAnException(){
+        ArgsParser p = new ArgsParser();
+        String [] s = {"7","3", "2"};
+        p.addArg("length", Argument.DataType.INT);
+        p.addArg("width" , Argument.DataType.INT);
+        p.addArg("height", Argument.DataType.INT);
+        p.addArg("--type", "box");
+        p.setOptArgToRequired("--type");
+        try{
+          p.parse(s);  
+        }catch(RequiredArgumentsNeededException e){
+            System.out.println(e.getExceptionOutput());
+            throw e;
+        }  
+    }
+    
+    @Test(expected = RequiredArgumentsNeededException.class)
+    public void testNotHavingARequiredNamedArgumentThrowsAnException2(){
+        ArgsParser p = new ArgsParser();
+        String [] s = {"7","3", "2"};
+        p.addArg("length", Argument.DataType.INT);
+        p.addArg("width" , Argument.DataType.INT);
+        p.addArg("height", Argument.DataType.INT);
+        p.addArg("--type", "box");
+        p.setOptArgToRequired("--type");
+        p.addArg("--digits", "5");
+        p.setOptArgToRequired("--digits");
+        try{
+          p.parse(s);  
+        }catch(RequiredArgumentsNeededException e){
+            System.out.println(e.getExceptionOutput());
+            throw e;
+        }  
+    }
+    
+    @Test
+    public void testHavingARequiredNamedArgument(){
+        ArgsParser p = new ArgsParser();
+        String [] s = {"7","3", "2","--type", "ellipsoid"};
+        p.addArg("length", Argument.DataType.INT);
+        p.addArg("width" , Argument.DataType.INT);
+        p.addArg("height", Argument.DataType.INT);
+        p.addArg("--type", "box");
+        p.addArg("--digits", "4", OptionalArgument.DataType.FLOAT);
+        p.setOptArgToRequired("--type");
+        p.parse(s);
+        assertEquals("ellipsoid", p.getArg("--type"));   
+    }
 }

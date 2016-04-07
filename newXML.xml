@@ -27,13 +27,7 @@
 <defaultValue>box</defaultValue>
 <type>STRING</type>
 <shortName>-t</shortName>
-</optionalArgument>
-<optionalArgument>
-<name>--help</name>
-<description></description>
-<defaultValue>false</defaultValue>
-<type>STRING</type>
-<shortName></shortName>
+<required>true</required>
 </optionalArgument>
 <optionalArgument>
 <name>--digits</name>
@@ -41,6 +35,7 @@
 <defaultValue>4</defaultValue>
 <type>STRING</type>
 <shortName></shortName>
+<required>false</required>
 </optionalArgument>
 </arguments>
 </program>

@@ -5,8 +5,7 @@ import java.io.*;
 import java.lang.*;
 
 public class ArgsParser{
-    private List<String> argNames;
-    private List<String> optionalArgNames;
+    List<String> argNames;
     private Map<String, Argument> arguments;
 	private Map<String, OptionalArgument> optionalArguments;
     private String programName;
@@ -16,15 +15,13 @@ public class ArgsParser{
     private String XMLData;
 	public ArgsParser(){
         argNames = new ArrayList<String>();
-        optionalArgNames = new ArrayList<String>();
         unknownArguments = new HashMap<String,String>();
         arguments = new HashMap<String, Argument>();
 		optionalArguments = new HashMap<String, OptionalArgument>();
         programName = "";
         programDescription = "";
 		longShortArgNames = new HashMap<String, String>(); 
-        XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+ "<program>\n";
-            
+        XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+ "<program>\n";      
 
     }
    
@@ -72,7 +69,6 @@ public class ArgsParser{
 	public void addArg(String name,String descriptionOrDefaultValue, Argument.DataType t){
         if(name.contains("--")){
            OptionalArgument o = new OptionalArgument(name, "", descriptionOrDefaultValue, t,"");
-           optionalArgNames.add(name);
            optionalArguments.put(name, o); 
         }
         else{
@@ -100,34 +96,29 @@ public class ArgsParser{
 	}
     public void addArg(String name,String description,String value, Argument.DataType t){
 		OptionalArgument o = new OptionalArgument(name,description,value, t,"");
-        optionalArgNames.add(name);
 		optionalArguments.put(name, o);
 	}
 
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
         if(shortNameOrDescription.length() == 2){
             OptionalArgument o = new OptionalArgument(name, "", defaultValue,Argument.DataType.STRING ,shortNameOrDescription);
-            optionalArgNames.add(name);
             optionalArguments.put(name, o);
             longShortArgNames.put(shortNameOrDescription,name);
         }
         else{
             OptionalArgument o = new OptionalArgument(name, shortNameOrDescription, defaultValue,Argument.DataType.STRING, "");
-            optionalArgNames.add(name);
             optionalArguments.put(name,o);
         }
 	}
 	
     public void addArg(String name, String description, String defaultValue, String shortName){
         OptionalArgument o = new OptionalArgument(name, description, defaultValue,Argument.DataType.STRING ,shortName);
-        optionalArgNames.add(name);
         optionalArguments.put(name, o);
         longShortArgNames.put(shortName,name);
     }
     
     public void addArg(String name, String defaultValue,Argument.DataType t,String shortName){
         OptionalArgument o = new OptionalArgument(name, "", defaultValue,t ,shortName);
-        optionalArgNames.add(name);
         optionalArguments.put(name,o);
         longShortArgNames.put(shortName,name);
     }
@@ -146,6 +137,11 @@ public class ArgsParser{
 			arguments.get(name).restrictedValues = restrictedValue;
 		}
 	}
+    
+    public void setOptArgToRequired(String name){
+        optionalArguments.get(name).setRequired();
+    }
+  
     
     private void checkForTooManyArgs(String [] cla){
        if(cla.length > (arguments.size() + optionalArguments.size()*2 + unknownArguments.size()*2)){
@@ -187,7 +183,6 @@ public class ArgsParser{
                        }
                    }
                    
-
                }
 			   
 			   for(int i = 0; i < args.size(); i++){
@@ -205,11 +200,9 @@ public class ArgsParser{
                        }
                    }
                
-               
                if(args.size() > 0){
                    
                    throw new TooManyArgsException(makePreMessage(), cla, arguments, programName,optionalArguments, unknownArguments);
-
                }
            }
        }
@@ -242,9 +235,7 @@ public class ArgsParser{
         }
         catch(NumberFormatException n){
             throw new InvalidArgumentException(makePreMessage(),programName, arguments.get(argKey));
-        } 
-        
-		
+        } 	
 	}
 	
 	private void checkForUnknownArg(){
@@ -252,6 +243,19 @@ public class ArgsParser{
 			throw new UnknownArgumentException(makePreMessage(), programName, unknownArguments);
 		}
 	}
+    
+    private void checkForRequiredArguments(String [] cla){
+        List<String> tempCLA = new ArrayList<String>();
+        for(int i =0; i < cla.length;i++){
+            tempCLA.add(cla[i]);
+        }
+        for(OptionalArgument o: optionalArguments.values()){
+            if(o.required && !tempCLA.contains(o.getName())){
+                throw new RequiredArgumentsNeededException(optionalArguments);
+            }
+        }
+        
+    }
     
     private void setTheValuesOfOptionalArguments(String [] cla, int i){
         if(optionalArguments.get(cla[i]).getValue() == "false"){
@@ -317,13 +321,13 @@ public class ArgsParser{
 						j++;  
 					}
 				 }
-                 
             }
         }
         checkForExceptions(cla);
     }
 
     private void checkForExceptions(String [] cla){
+        checkForRequiredArguments(cla);
         checkForTooManyArgs(cla);
 		checkForUnknownArg();  
         checkForTooFewArgs(cla);
@@ -371,8 +375,7 @@ public class ArgsParser{
             else{
                 throw new ThatArgumentDoesNotExistException(name, optionalArguments, arguments);
             }
-        }
-          
+        }     
     }
 	public void saveXML(String filepath){
             int i = 1;
@@ -390,15 +393,11 @@ public class ArgsParser{
 		try{
             Writer writer = new BufferedWriter(new OutputStreamWriter(
             new FileOutputStream(outfile), "utf-8")); 
-            
             writer.write(XMLData);
             writer.close();
 		}
 		catch(IOException e){
 			throw new RuntimeException("Issue in saveXML()");
-		}
-		
-		
-	}
-    
+		}	
+	} 
 }
