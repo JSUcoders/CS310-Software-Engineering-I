@@ -610,6 +610,36 @@ public class ArgsParserTest{
 			throw e;
 		}
 	}
+	
+	@Test(expected = RestrictedArgumentException.class)
+	public void testParsedUnallowedValueOfRestrictedSet2(){
+		String[] s = {"5", "3", "--type", "pyramid", "2"};
+		ArgsParser p = new ArgsParser();
+		p.setProgramName("VolumeCalculator");
+		List<String> restrictedLengthValues = new ArrayList<String>();
+		List<String> restrictedTypeValues = new ArrayList<String>();
+		restrictedLengthValues.add("7");
+		restrictedLengthValues.add("6");
+		restrictedLengthValues.add("9");
+		
+		restrictedTypeValues.add("box");
+		restrictedTypeValues.add("ellipsoid");
+		restrictedTypeValues.add("pyramid");
+		p.addArg("length");
+		p.addArg("width");
+		p.addArg("height");
+		p.addArg("--type", "box");
+		
+		p.setRestricted("length", restrictedLengthValues);
+		p.setRestricted("--type", restrictedTypeValues);
+		
+		try{
+			p.parse(s);
+		}catch(RestrictedArgumentException e){
+            System.out.println(e.getExceptionOutput());
+			throw e;
+		}
+	}
     
     @Test(expected = RequiredArgumentsNeededException.class)
     public void testNotHavingARequiredNamedArgumentThrowsAnException(){
