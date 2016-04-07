@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program>
+<name>VolumeCalculator</name>
+<description>Calculate the volume of a box</description>
+<arguments>
+<positionalArgument>
+<name>length</name>
+<description>length the length of the box</description>
+<type>FLOAT</type>
+<position>1</position>
+<restrictedValues>[5, 8, 10]</restrictedValues>
+</positionalArgument>
+<positionalArgument>
+<name>width</name>
+<description>width the width of the box</description>
+<type>FLOAT</type>
+<position>2</position>
+<restrictedValues>[]</restrictedValues>
+</positionalArgument>
+<positionalArgument>
+<name>height</name>
+<description>height the height of the box</description>
+<type>FLOAT</type>
+<position>3</position>
+<restrictedValues>[]</restrictedValues>
+</positionalArgument>
+<optionalArgument>
+<name>--type</name>
+<description>the shape of the object</description>
+<defaultValue>box</defaultValue>
+<type>STRING</type>
+<shortName>-t</shortName>
+<required>true</required>
+<restrictedValues>[]</restrictedValues>
+</optionalArgument>
+<optionalArgument>
+<name>--digits</name>
+<description>the amount of digits in the volume</description>
+<defaultValue>4</defaultValue>
+<type>INT</type>
+<shortName>-d</shortName>
+<required>false</required>
+<restrictedValues>[]</restrictedValues>
+</optionalArgument>
+</arguments>
+</program>
