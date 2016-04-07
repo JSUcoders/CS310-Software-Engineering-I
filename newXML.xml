@@ -8,18 +8,21 @@
 <description>length the length of the box(float)</description>
 <type>FLOAT</type>
 <position>1</position>
+<restrictedValues>[7]</restrictedValues>
 </positionalArgument>
 <positionalArgument>
 <name>width</name>
 <description>width the width of the box(float)</description>
 <type>FLOAT</type>
 <position>2</position>
+<restrictedValues>[]</restrictedValues>
 </positionalArgument>
 <positionalArgument>
 <name>height</name>
 <description>height the height of the box(float)</description>
 <type>FLOAT</type>
 <position>3</position>
+<restrictedValues>[]</restrictedValues>
 </positionalArgument>
 <optionalArgument>
 <name>--type</name>
@@ -28,6 +31,7 @@
 <type>STRING</type>
 <shortName>-t</shortName>
 <required>true</required>
+<restrictedValues>[]</restrictedValues>
 </optionalArgument>
 <optionalArgument>
 <name>--digits</name>
@@ -36,6 +40,7 @@
 <type>STRING</type>
 <shortName></shortName>
 <required>false</required>
+<restrictedValues>[]</restrictedValues>
 </optionalArgument>
 </arguments>
 </program>

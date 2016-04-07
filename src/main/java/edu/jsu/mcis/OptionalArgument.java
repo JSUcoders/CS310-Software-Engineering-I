@@ -11,7 +11,8 @@ public class OptionalArgument extends Argument{
         this.shortName = shortName;
          XMLData = "<optionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
                          "<defaultValue>" + value + "</defaultValue>\n" +"<type>" + type + "</type>\n" +"<shortName>" + this.shortName + 
-                         "</shortName>\n" + "<required>" + Boolean.toString(required) + "</required>\n" + "</optionalArgument>\n";
+                         "</shortName>\n" + "<required>" + Boolean.toString(required) + "</required>\n" + 
+						 "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" + "</optionalArgument>\n";
                             
     }
     
@@ -27,7 +28,8 @@ public class OptionalArgument extends Argument{
     private void updateXMLDataForOArg(){
         XMLData = "<optionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
                          "<defaultValue>" + value + "</defaultValue>\n" +"<type>" + type + "</type>\n" +"<shortName>" + this.shortName + 
-                         "</shortName>\n" + "<required>" + Boolean.toString(required) + "</required>\n" + "</optionalArgument>\n";
+                         "</shortName>\n" + "<required>" + Boolean.toString(required) + "</required>\n" + 
+						 "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" + "</optionalArgument>\n";
         
     }
     

@@ -522,12 +522,15 @@ public class ArgsParserTest{
     @Test
 	public void testSavingtoXMLFile(){
 		ArgsParser p = new ArgsParser();
+		List<String> restrictedValue = new ArrayList<String>();
+		restrictedValue.add("7");
 		p.setProgramName("VolumeCalculator");
 		p.setProgramDescription("Calculate the volume of a box.");
         p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
         p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
         p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
 		p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
+		p.setRestricted("length", restrictedValue);
         p.setOptArgToRequired("--type");
         p.addArg("--digits","4");
 		p.saveXML("newXML.xml");
@@ -657,4 +660,6 @@ public class ArgsParserTest{
         p.parse(s);
         assertEquals("ellipsoid", p.getArg("--type"));   
     }
+	
+	
 }
