@@ -17,13 +17,7 @@ public class InvalidArgumentException extends RuntimeException{
 	private String exceptionOutput="";
 	
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *Class constructor. 
 	 */
 	
 	public InvalidArgumentException(String preMsg, String programName, Argument arg){

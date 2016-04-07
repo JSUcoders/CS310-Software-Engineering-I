@@ -16,13 +16,7 @@ public class TooManyArgsException extends RuntimeException{
 	private String exceptionOutput= "";
 	
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *Class constructor. 
 	 */
 
 	public TooManyArgsException(String preMessage,String[] cla, List<Argument> arguments, String prgmName, List<OptionalArgument> optArgs, List<String> unknownAN, List<String> unknownAV){

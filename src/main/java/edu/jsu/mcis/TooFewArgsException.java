@@ -17,12 +17,6 @@ public class TooFewArgsException extends RuntimeException {
     
 	 /**
 	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
 	 */
 	
     public TooFewArgsException(String preMsg,  String[] cla, List<Argument> arguments, String prgmName){

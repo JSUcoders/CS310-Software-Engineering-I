@@ -16,13 +16,7 @@ public class ThatArgumentDoesNotExistException extends RuntimeException{
     private String exceptionOutput;
 	
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *Class constructor. 
 	 */
 	
     public ThatArgumentDoesNotExistException(String name, List<OptionalArgument> optionalArguments, List<Argument> arguments){

@@ -54,13 +54,7 @@ public class ArgsParser{
     private String XMLData;
 	
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *Class constructor. 
 	 */
 	
 	public ArgsParser(){
@@ -79,13 +73,9 @@ public class ArgsParser{
    
    
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method creates a pre-message that is used with certain exceptions.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@returns preMessage text
 	 */
 	 
     private String makePreMessage(){
@@ -99,13 +89,9 @@ public class ArgsParser{
     }	
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a description for this program that will be used.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param d Text that will state the description of the program used.   
 	 */
 	
     public void setProgramDescription(String d){
@@ -115,13 +101,9 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method returns the description of this program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@returns programDescription
 	 */
 	
     public String getProgramDescription(){
@@ -130,13 +112,9 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a name to identify this program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param s Name of the program.  
 	 */
 	
     public void setProgramName(String s){
@@ -145,13 +123,9 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method returns the name of this program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@returns programName
 	 */
 	
     public String getProgramName(){
@@ -159,13 +133,9 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method returns the number of arguments involved with this program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@returns The number of arguments in this list.
 	 */
 	
     public int getNumOfArguments(){
@@ -173,13 +143,13 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method returns the data type for an argument value.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
+	 *@param name The name of this argument.
+	 *@returns the data type associated with this argument's value if it is an optional argument.
+	 *@returns the data type associated with this argument's value if it is a primary argument.
+	 *@throws ThatArgumentDoesNotExistException
 	 
-	 or @ <no value here> for void functions
 	 */
 	
     public Argument.DataType getDataType(String name){
@@ -213,11 +183,9 @@ public class ArgsParser{
 	 /**
 	 *This method adds a named argument to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name   
+	 *@param descriptionOrDefaultValue 
+	 *@param t <Data Type identifier 
 	 */
 	
 	public void addArg(String name,String descriptionOrDefaultValue, Argument.DataType t){
@@ -234,13 +202,9 @@ public class ArgsParser{
 	}
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to this program whoes data type will be automatically set to a string value.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name   
 	 */
 	
 	public void addArg(String name){
@@ -248,13 +212,10 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to this program whoes data type will be automatically set to a string value.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name 
+	 *@param descriptionOrDefaultValue
 	 */
 	
 	public void addArg(String name, String descriptionOrDefaultValue){
@@ -271,13 +232,10 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to this program with a specified data type.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name 
+	 *@param t Data type identifier
 	 */
 	
 	public void addArg(String name,Argument.DataType t ){
@@ -285,13 +243,12 @@ public class ArgsParser{
 	}
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to this program with a specified description, value, and data type.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name 
+	 *@param description
+	 *@param value
+	 *@param t Data type identifier
 	 */
 	
     public void addArg(String name,String description,String value, Argument.DataType t){
@@ -302,13 +259,10 @@ public class ArgsParser{
 	}
 
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *This method adds an argument to this program with a specified default value, and shortname or description.
+	 *@param name
+	 *@param defaultValue
+	 *@param shortNameOrDescription
 	 */
 	
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
@@ -327,13 +281,12 @@ public class ArgsParser{
 	} 
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to this program with a specified description, defaultValue, and shortName that will have a data type value of string.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name  
+	 *@param description
+	 *@param defaultValue
+	 *@param shortName
 	 */
 	
     public void addArg(String name, String description, String defaultValue, String shortName){
@@ -343,13 +296,12 @@ public class ArgsParser{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name
+	 *@param defaultValue
+	 *@param t Data Type identifier
+	 *@param shortName
 	 */
 	
     public void addArg(String name, String defaultValue,Argument.DataType t,String shortName){
@@ -359,13 +311,13 @@ public class ArgsParser{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds an argument to the program with a specified description, default value, data type, and shortname.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name
+	 *@param description
+	 *@param defaultValue
+	 *@param t Data type identifier
+	 *@param shortName
 	 */
 	
     public void addArg(String name,String description, String defaultValue,Argument.DataType t,String shortName){
@@ -375,13 +327,10 @@ public class ArgsParser{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method checks the arguments list to ensure the command line arguments supplied do not exceed the proper amount.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param cla Command line argument  
+	 *@throws TooManyArgsException
 	 */
 	
     private void checkForTooManyArgs(String [] cla){
@@ -459,13 +408,10 @@ public class ArgsParser{
     }  
 
 	/**
-	 *This method adds a named argument to the program.
+	 *This method checks the arguments list to ensure the command line arguments supplied are not less than the proper amount.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param cla Command line argument  
+	 *@throws TooFewArgsException
 	 */
 	
     private void checkForTooFewArgs(String[] cla)  {   
@@ -475,13 +421,10 @@ public class ArgsParser{
     }
 
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method throws a help exception if a help flag is invoked.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param cla Command line argument  
+	 *@throws HelpException
 	 */
 	
     private void checkForHelp(String[] cla){      
@@ -492,14 +435,10 @@ public class ArgsParser{
             }    
     }	
 	
-	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	/**
+	 *This method throws an invalid argument exception a value does not match a data type.
+	 *  
+	 *@throws InvalidArgumentException
 	 */
 	
 	private void checkForInvalidArgument( ){
@@ -522,13 +461,9 @@ public class ArgsParser{
 	}
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method checks for arguments that this program is not equiped to deal with.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@throws UnknownArgumentException
 	 */
 	
 	private void checkForUnknownArg(){
@@ -538,13 +473,16 @@ public class ArgsParser{
 	}
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method parses the command line arguments and inputs them into this program for logic handling.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param cla Command line arguments  
+	 *@throws TooFewArgsException
+	 *@throws HelpException
+	 *@see #checkForTooManyArgs(String[] cla)
+	 *@see #checkForUnknownArg()
+	 *@see #checkForHelp(String[] cla)
+	 *@see #checkForTooFewArgs(String[] cla)
+	 *@see #checkForInvalidArgument()
 	 */
 	
     public void parse(String[] cla) {
@@ -617,13 +555,11 @@ public class ArgsParser{
     }	
 
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method returns this object's value   
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param name  
+	 *@throws ThatArgumentDoesNotExistException
+	 *@returns This object's value
 	 */
 	
     public Object getArg(String name){
@@ -679,13 +615,10 @@ public class ArgsParser{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method creats XML data for current arguments and saves them to the specified file.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param filepath  
+	 *@throws RuntimeException	 
 	 */
 	
 	public void saveXML(String filepath){

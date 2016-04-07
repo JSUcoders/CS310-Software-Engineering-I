@@ -43,13 +43,7 @@ public class SaveToXML extends DefaultHandler{
 	private Argument.DataType stringType;
 	
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *Class constructor. 
 	 */
 	
 	public SaveToXML(){

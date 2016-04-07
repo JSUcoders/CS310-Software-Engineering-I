@@ -24,13 +24,7 @@ public class OptionalArgument extends Argument{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
-	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *Class constructor. 
 	 */
 	
     public void setValue(String v){
