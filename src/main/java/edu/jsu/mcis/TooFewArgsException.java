@@ -16,7 +16,12 @@ public class TooFewArgsException extends RuntimeException {
     private String exceptionOutput= "";
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *Class constructor. 
+	 *
+	 *@param preMsg Pre-message used to contruct the exceptionOutput 
+	 *@param cla Command Line Argument
+	 *@param arguments List of Program arguments 	 
+	 *@param prgmName Program name
 	 */
 	
     public TooFewArgsException(String preMsg,  String[] cla, List<Argument> arguments, String prgmName){
@@ -46,13 +51,9 @@ public class TooFewArgsException extends RuntimeException {
     }
 	 
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return exceptionOutput Exeption output message
 	 */
 	
     public String getExceptionOutput(){

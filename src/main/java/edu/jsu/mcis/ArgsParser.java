@@ -75,7 +75,7 @@ public class ArgsParser{
 	 /**
 	 *This method creates a pre-message that is used with certain exceptions.
 	 *
-	 *@returns preMessage text
+	 *@return preMessage text
 	 */
 	 
     private String makePreMessage(){
@@ -103,7 +103,7 @@ public class ArgsParser{
 	 /**
 	 *This method returns the description of this program.
 	 *
-	 *@returns programDescription
+	 *@return programDescription
 	 */
 	
     public String getProgramDescription(){
@@ -125,7 +125,7 @@ public class ArgsParser{
 	 /**
 	 *This method returns the name of this program.
 	 *
-	 *@returns programName
+	 *@return programName
 	 */
 	
     public String getProgramName(){
@@ -135,7 +135,7 @@ public class ArgsParser{
 	 /**
 	 *This method returns the number of arguments involved with this program.
 	 *
-	 *@returns The number of arguments in this list.
+	 *@return arguments.size() The number of arguments in this list.
 	 */
 	
     public int getNumOfArguments(){
@@ -146,9 +146,9 @@ public class ArgsParser{
 	 *This method returns the data type for an argument value.
 	 *
 	 *@param name The name of this argument.
-	 *@returns the data type associated with this argument's value if it is an optional argument.
-	 *@returns the data type associated with this argument's value if it is a primary argument.
-	 *@throws ThatArgumentDoesNotExistException
+	 *@return optionalArguments.get(tempOptNames.indexOf(name)).getType() the data type associated with this argument's value if it is an optional argument.
+	 *@return arguments.get(tempNames.indexOf(name)).getType() the data type associated with this argument's value if it is a primary argument.
+	 *@throws ThatArgumentDoesNotExistException Exception that is thrown when the specified arguement does not exsist
 	 
 	 */
 	
@@ -183,9 +183,9 @@ public class ArgsParser{
 	 /**
 	 *This method adds a named argument to the program.
 	 *
-	 *@param name   
-	 *@param descriptionOrDefaultValue 
-	 *@param t <Data Type identifier 
+	 *@param name The name of this argument  
+	 *@param descriptionOrDefaultValue The description or default value of this argument
+	 *@param t Data Type identifier 
 	 */
 	
 	public void addArg(String name,String descriptionOrDefaultValue, Argument.DataType t){
@@ -204,7 +204,7 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to this program whoes data type will be automatically set to a string value.
 	 *
-	 *@param name   
+	 *@param name name of this argument  
 	 */
 	
 	public void addArg(String name){
@@ -214,8 +214,8 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to this program whoes data type will be automatically set to a string value.
 	 *
-	 *@param name 
-	 *@param descriptionOrDefaultValue
+	 *@param name Name of this argument		
+	 *@param descriptionOrDefaultValue The description or default value of this argument 
 	 */
 	
 	public void addArg(String name, String descriptionOrDefaultValue){
@@ -234,7 +234,7 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to this program with a specified data type.
 	 *
-	 *@param name 
+	 *@param name The name of this argument
 	 *@param t Data type identifier
 	 */
 	
@@ -245,9 +245,9 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to this program with a specified description, value, and data type.
 	 *
-	 *@param name 
-	 *@param description
-	 *@param value
+	 *@param name The name of this arguement 	
+	 *@param description The description of this argument
+	 *@param value The value of this argument
 	 *@param t Data type identifier
 	 */
 	
@@ -260,9 +260,9 @@ public class ArgsParser{
 
 	 /**
 	 *This method adds an argument to this program with a specified default value, and shortname or description.
-	 *@param name
-	 *@param defaultValue
-	 *@param shortNameOrDescription
+	 *@param name The name of this argument
+	 *@param defaultValue The default value of this argument
+	 *@param shortNameOrDescription the shortName or description of argument
 	 */
 	
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
@@ -283,10 +283,10 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to this program with a specified description, defaultValue, and shortName that will have a data type value of string.
 	 *
-	 *@param name  
-	 *@param description
-	 *@param defaultValue
-	 *@param shortName
+	 *@param name The name of this argument
+	 *@param description The description of this argument
+	 *@param defaultValue The default value of this argument
+	 *@param shortName The shortname of this argument 
 	 */
 	
     public void addArg(String name, String description, String defaultValue, String shortName){
@@ -298,10 +298,10 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to the program.
 	 *
-	 *@param name
-	 *@param defaultValue
-	 *@param t Data Type identifier
-	 *@param shortName
+	 *@param name The name of this argument
+	 *@param defaultValue The default value this argument
+	 *@param t Data Type identifier 
+	 *@param shortName The shortName of this argument
 	 */
 	
     public void addArg(String name, String defaultValue,Argument.DataType t,String shortName){
@@ -313,11 +313,11 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to the program with a specified description, default value, data type, and shortname.
 	 *
-	 *@param name
-	 *@param description
-	 *@param defaultValue
+	 *@param name Name of this arguement 
+	 *@param description Description of this argument
+	 *@param defaultValue Default value of this arguement 
 	 *@param t Data type identifier
-	 *@param shortName
+	 *@param shortName the shortname of this argument
 	 */
 	
     public void addArg(String name,String description, String defaultValue,Argument.DataType t,String shortName){
@@ -330,7 +330,7 @@ public class ArgsParser{
 	 *This method checks the arguments list to ensure the command line arguments supplied do not exceed the proper amount.
 	 *
 	 *@param cla Command line argument  
-	 *@throws TooManyArgsException
+	 *@throws TooManyArgsException Exception thrown when there are too many arguments in the command line
 	 */
 	
     private void checkForTooManyArgs(String [] cla){
@@ -411,7 +411,7 @@ public class ArgsParser{
 	 *This method checks the arguments list to ensure the command line arguments supplied are not less than the proper amount.
 	 *
 	 *@param cla Command line argument  
-	 *@throws TooFewArgsException
+	 *@throws TooFewArgsException Exception that is thrown when there are too few arguments in the command line
 	 */
 	
     private void checkForTooFewArgs(String[] cla)  {   
@@ -424,7 +424,7 @@ public class ArgsParser{
 	 *This method throws a help exception if a help flag is invoked.
 	 *
 	 *@param cla Command line argument  
-	 *@throws HelpException
+	 *@throws HelpException Exception that is thrown when the help option is invoked in the command line 
 	 */
 	
     private void checkForHelp(String[] cla){      
@@ -438,7 +438,7 @@ public class ArgsParser{
 	/**
 	 *This method throws an invalid argument exception a value does not match a data type.
 	 *  
-	 *@throws InvalidArgumentException
+	 *@throws InvalidArgumentException Exception that is thrown when the data types do not match up from an arguement object
 	 */
 	
 	private void checkForInvalidArgument( ){
@@ -463,7 +463,7 @@ public class ArgsParser{
 	 /**
 	 *This method checks for arguments that this program is not equiped to deal with.
 	 *
-	 *@throws UnknownArgumentException
+	 *@throws UnknownArgumentException Exception that is thrown when an argument in the command line is unexpected
 	 */
 	
 	private void checkForUnknownArg(){
@@ -476,8 +476,8 @@ public class ArgsParser{
 	 *This method parses the command line arguments and inputs them into this program for logic handling.
 	 *
 	 *@param cla Command line arguments  
-	 *@throws TooFewArgsException
-	 *@throws HelpException
+	 *@throws TooFewArgsException Exception thrown when there are too few arguments in command line
+	 *@throws HelpException Exception that is thrown when the help option is invoked in the command line 
 	 *@see #checkForTooManyArgs(String[] cla)
 	 *@see #checkForUnknownArg()
 	 *@see #checkForHelp(String[] cla)
@@ -557,9 +557,12 @@ public class ArgsParser{
 	 /**
 	 *This method returns this object's value   
 	 *
-	 *@param name  
-	 *@throws ThatArgumentDoesNotExistException
-	 *@returns This object's value
+	 *@param name Name of and argument  
+	 *@return Integer.parseInt(optionalArguments.get(tempOptNames.indexOf(name)).getValue()) value parsed as an Integer
+	 *@return Float.parseFloat(optionalArguments.get(tempOptNames.indexOf(name)).getValue()) value parsed as an Float
+	 *@return Boolean.parseBoolean(optionalArguments.get(tempOptNames.indexOf(name)).getValue()) value parsed as an Boolean
+	 *@return (String)optionalArguments.get(tempOptNames.indexOf(name)).getValue() value parsed as an String
+	 *@throws ThatArgumentDoesNotExistException Exception thrown when...	 
 	 */
 	
     public Object getArg(String name){
@@ -617,8 +620,8 @@ public class ArgsParser{
 	 /**
 	 *This method creats XML data for current arguments and saves them to the specified file.
 	 *
-	 *@param filepath  
-	 *@throws RuntimeException	 
+	 *@param filepath the filepath of the file containing xml data
+	 *@throws RuntimeException Exception thrown when there is an issue opening the specified file.	 
 	 */
 	
 	public void saveXML(String filepath){

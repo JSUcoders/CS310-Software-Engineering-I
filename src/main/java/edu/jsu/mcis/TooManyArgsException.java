@@ -15,8 +15,16 @@ import java.util.*;
 public class TooManyArgsException extends RuntimeException{
 	private String exceptionOutput= "";
 	
-	 /**
+	/**
 	 *Class constructor. 
+	 *
+	 *@param preMessage Pre-message used to contruct the exceptionOutput
+	 *@param cla Command Line Arguments list
+	 *@param arguments Program arguments list
+	 *@param prgmName Program name
+ 	 *@param optArgs Optional arguments list
+	 *@param unknownAN unknown argument name list
+	 *@param unknownAV unknown argument value list
 	 */
 
 	public TooManyArgsException(String preMessage,String[] cla, List<Argument> arguments, String prgmName, List<OptionalArgument> optArgs, List<String> unknownAN, List<String> unknownAV){
@@ -57,6 +65,12 @@ public class TooManyArgsException extends RuntimeException{
         
 
     }
+	
+	 /**
+	 *This method adds a ... to the program.
+	 *
+	 *@return exceptionOutput Exception output message
+	 */
 	public String getExceptionOutput(){
 		return exceptionOutput;
 	}

@@ -24,6 +24,10 @@ public class Argument {
    
     /**
 	 *Class constructor. 
+	 *
+	 *@param n Argument name  
+	 *@param d Argument description
+	 *@param t Argument data Type identifier 
 	 */
     
     public Argument(String n, String d, DataType t){
@@ -36,13 +40,9 @@ public class Argument {
     }
     
      /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param v Value for this argument
 	 */
 	
     public void addValue(String v){
@@ -50,13 +50,9 @@ public class Argument {
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return name Argument name 
 	 */
 	
     public String getName(){
@@ -64,13 +60,9 @@ public class Argument {
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return value argument value
 	 */
 	
     public String getValue(){
@@ -78,13 +70,9 @@ public class Argument {
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@param index Position of the argument   
 	 */
 	
     public void setPosition(int index){
@@ -93,13 +81,8 @@ public class Argument {
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
 	 */
 	
     public void updateXMLData(){
@@ -108,13 +91,9 @@ public class Argument {
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return type Data type identifier for the argument
 	 */
 	
     public DataType getType(){
@@ -122,13 +101,9 @@ public class Argument {
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return description Description of the argument
 	 */
 	
     public String getDescription(){
@@ -136,13 +111,9 @@ public class Argument {
 	}
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return XMLData returns a string containing the XML value for this argument 
 	 */
 	
     public String getXMLDataForArg(){

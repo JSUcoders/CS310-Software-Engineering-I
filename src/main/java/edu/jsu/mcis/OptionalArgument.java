@@ -14,6 +14,19 @@ import java.util.*;
 
 public class OptionalArgument extends Argument{
     protected String shortName;
+	
+	/**
+	 *Class constructor. 
+	 *
+	 *@param n Argument name  
+	 *@param d Argument description
+	 *@param v Argument value
+	 *@param t Argument data Type identifier
+	 *@param shortName shortname of this argument	 
+	 */
+	
+	
+	
     public OptionalArgument(String n, String d, String v, DataType t, String shortName){
         super(n,d,t);
 		addValue(v);
@@ -24,8 +37,10 @@ public class OptionalArgument extends Argument{
     }
     
 	 /**
-	 *Class constructor. 
-	 */
+	 *This method adds a ... to the program.
+	 *
+	 *@param v Value of this argument
+	 */ 
 	
     public void setValue(String v){
         addValue(v);
@@ -34,11 +49,7 @@ public class OptionalArgument extends Argument{
 	 /**
 	 *This method adds a named argument to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return this.shortName Shortname of this argument
 	 */
 	
     public String getShortName(){
@@ -46,13 +57,9 @@ public class OptionalArgument extends Argument{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return XMLData String of XML data representing this argument
 	 */
 	
     public String getXMLDataForOptArg(){

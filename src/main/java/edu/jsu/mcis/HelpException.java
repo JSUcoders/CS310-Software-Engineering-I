@@ -18,6 +18,10 @@ public class HelpException extends RuntimeException{
 	
 	 /**
 	 *Class constructor. 
+	 *
+	 *@param preMessage Pre-message used to contruct the exceptionOutput   
+	 *@param prgmDescript Program description
+	 *@param arguments Program list of arguments	 
 	 */
 	
 	public HelpException(String preMessage, String prgmDescript, List<Argument> arguments){	
@@ -30,13 +34,9 @@ public class HelpException extends RuntimeException{
     }
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return exceptionOutput The output message from this exception.
 	 */
 	
 	public String getExceptionOutput(){

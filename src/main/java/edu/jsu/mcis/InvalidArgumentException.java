@@ -18,6 +18,10 @@ public class InvalidArgumentException extends RuntimeException{
 	
 	 /**
 	 *Class constructor. 
+	 *
+	 *@param preMsg Pre-message used to contruct the exceptionOutput
+	 *@param programName Program name
+	 *@param arg Argument name
 	 */
 	
 	public InvalidArgumentException(String preMsg, String programName, Argument arg){
@@ -39,13 +43,9 @@ public class InvalidArgumentException extends RuntimeException{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return exceptionOutput Exception output message
 	 */
 	
     public String getExceptionOutput(){

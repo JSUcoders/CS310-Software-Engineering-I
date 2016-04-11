@@ -18,6 +18,10 @@ public class UnknownArgumentException extends RuntimeException{
 	
 	 /**
 	 *Class constructor. 
+	 *
+	 *@param preMessage pre message that is passed in to help identify where the issue is ocurring 
+	 *@param prgrmName Program name
+	 *@param unknownArgumentNames Program list of unknown argument names
 	 */
 	
 	public UnknownArgumentException(String preMessage, String prgrmName, 
@@ -43,13 +47,10 @@ public class UnknownArgumentException extends RuntimeException{
 	}
 	
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method adds a ... to the program.
 	 *
-	 *@param <name> <description>  
-	 *@throws <exception name>
-	 *@returns <return value name>
-	 
-	 or @ <no value here> for void functions
+	 *@return exceptionOutput Exception output message
+	 *
 	 */
 	
 	public String getExceptionOutput(){
