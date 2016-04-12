@@ -2,8 +2,31 @@ package edu.jsu.mcis;
 import java.util.*;
 
 /**<p>
- * This class allows the user to ...
+ * This class allows the use of optional arguments objects.
  *<p>
+ * this is an example of how to use this class 
+ * in the example the string array args would be replaced with the comandline arguments taken from the user
+ *<p>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	ArgsParser p = new ArgsParser();
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	String[] s = {"7", "--myArg", "5", "3", "--otherArg", "otherValue", "2"};
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramName("VolumeCalculator");
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("length", Argument.DataType.FLOAT);
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("width", Argument.DataType.FLOAT);
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("height", Argument.DataType.FLOAT);
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+ *<br>
+ *      &nbsp;&nbsp;&nbsp;&nbsp;	p.parse(s); 
+ 
  *@author Avery Whitecotton
  *@author Adam Butler
  *@author Colby Morris
@@ -37,7 +60,7 @@ public class OptionalArgument extends Argument{
     }
     
 	 /**
-	 *This method adds a ... to the program.
+	 *This method sets a specified value to an argument object
 	 *
 	 *@param v Value of this argument
 	 */ 
@@ -47,7 +70,7 @@ public class OptionalArgument extends Argument{
     }
     
 	 /**
-	 *This method adds a named argument to the program.
+	 *This method returns the shortname value for this argument object
 	 *
 	 *@return this.shortName Shortname of this argument
 	 */
@@ -57,7 +80,7 @@ public class OptionalArgument extends Argument{
     }
     
 	 /**
-	 *This method adds a ... to the program.
+	 *This method returns the XML value for this argument object.
 	 *
 	 *@return XMLData String of XML data representing this argument
 	 */

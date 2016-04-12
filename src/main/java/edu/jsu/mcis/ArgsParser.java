@@ -7,32 +7,32 @@ import java.lang.*;
 /**<p>
  * This program allows the user to add arguments and enter data values into them from the command line.
  * this is an example of how to use this class 
- * in the example the string array args would be replaced with the comandline arguments taken form the user
+ * in the example the string array args would be replaced with the comandline arguments taken from the user
  *<p>
- * 		&nbsp;&nbsp;&nbsp;&nbsp; private ArgsParser p = new ArgsParser();
+ * 		&nbsp;&nbsp;&nbsp;&nbsp;	private ArgsParser p = new ArgsParser();
  *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp; String[] args = new String[] {"7","--digits","10"};
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	String[] args = new String[] {"7","--digits","10"};
  *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp; p.setProgramName("VolumeCalculator");
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramName("VolumeCalculator");
  *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp; p.setProgramDescription("Calculate the volume of a box");
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramDescription("Calculate the volume of a box");
  *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp; p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
  *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp; p.addArg("--digits","4");
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--digits","4");
  *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp; p.parseValues(args);
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	p.parseValues(args);
  *<p>
  * after the block of code excutes the value stored in the argument length would be  "7" and the value of digits would be 10.
  * to obtain the values from this class use the getValue function like so 
  *<p>
- * 		&nbsp;&nbsp;&nbsp;&nbsp; p.getArg("length")
+ * 		&nbsp;&nbsp;&nbsp;&nbsp;	p.getArg("length")
  *<p>
  * this would return a 7 if using the above example
  * the user can also get the data type of any given argument by using getArgumentType
  * for length it would return string use like so
  *<p>
- *		&nbsp;&nbsp;&nbsp;&nbsp; ap.getDataType("length")
+ *		&nbsp;&nbsp;&nbsp;&nbsp;	p.getDataType("length")
  *
  *@author Avery Whitecotton
  *@author Adam Butler
