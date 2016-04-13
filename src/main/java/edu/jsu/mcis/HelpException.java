@@ -4,26 +4,21 @@ import java.util.*;
 
 /**<p>
  * This class allows the use of runtime exceptions that are specific to a senario that involves a help argument to be called from the command line. 
+ *</p>
  *<p>
  * this is an example of how this exception would be thrown
  * in the example the string array args would be replaced with the comandline arguments taken from the user
- *<p>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	ArgsParser p = new ArgsParser();
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	String[] s = {"-h"}; or  String[] s = {"--help"};
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramName("VolumeCalculator");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramDescription("Calculate the volume of a box.");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.parse(s);
- *<br>
+ *</p>
+ *<pre>
+ *      	ArgsParser p = new ArgsParser();
+ *      	String[] s = {"-h"}; or  String[] s = {"--help"};
+ *      	p.setProgramName("VolumeCalculator");
+ *      	p.setProgramDescription("Calculate the volume of a box.");
+ *      	p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+ *      	p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
+ *      	p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
+ *      	p.parse(s);
+ *</pre>
 
  *@author Avery Whitecotton
  *@author Adam Butler

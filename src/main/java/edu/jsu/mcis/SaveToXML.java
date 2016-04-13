@@ -10,39 +10,31 @@ import java.io.*;
 
 /**<p>
  * This class allows program data to be saved or loaded from XML files.
+ *</p>
  *<p>
  * this is an example of how to use this class to load from XML files
  * in the example the string array args would be replaced with the comandline arguments taken from the user
- *<p>
- * 		&nbsp;&nbsp;&nbsp;&nbsp;	ArgsParser p = new ArgsParser();
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	SaveToXML rw = new SaveToXML();
- *<br> 
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p=rw.parseXML("newXML.xml");
+ *</p>
+ *<pre>
+ *	ArgsParser p = new ArgsParser();
+ *	SaveToXML rw = new SaveToXML();
+ *	p=rw.parseXML("newXML.xml");
+ *</pre>
  *<p>
  *This is an example of how to use this class to save XML files.
- *<p>
- *		&nbsp;&nbsp;&nbsp;&nbsp;	ArgsParser p = new ArgsParser();
- *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramName("VolumeCalculator");
- *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramDescription("Calculate the volume of a box.");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
- *<br>
- *     	&nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
- *<br>
- * 		&nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
- *<br>
- * 		&nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--help","false");
- *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--digits","4");
- *<br>
- *		&nbsp;&nbsp;&nbsp;&nbsp;	p.saveXML("newXML.xml");
- *<br>
- 
+ *</p>
+ *<pre>
+ *	ArgsParser p = new ArgsParser();
+ *	p.setProgramName("VolumeCalculator");
+ *	p.setProgramDescription("Calculate the volume of a box.");
+ *	p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
+ *	p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
+ *	p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
+ *	p.addArg("--help","false");
+ *	p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
+ *	p.addArg("--digits","4");
+ *	p.saveXML("newXML.xml");
+ *</pre>
  *@author Avery Whitecotton
  *@author Adam Butler
  *@author Colby Morris

@@ -3,57 +3,29 @@ import java.util.*;
 
 /**<p>
  * This class allows the use of runtime exceptions that are specific to a senario that involves an argument that does not exist to be called from the command line. 
+ *</p>
  *<p>
  * this is an example of how this excetpion would be thrown
  * in the example the string array args would be replaced with the comandline arguments taken from the user
- *<p>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	ArgsParser p = new ArgsParser();
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	String[] s = {"7", "--myArg", "5", "3", "--otherArg", "otherValue", "2"};
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramName("VolumeCalculator");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("length", Argument.DataType.FLOAT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("width", Argument.DataType.FLOAT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("height", Argument.DataType.FLOAT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.parse(s);
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	try{
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;		Argument.DataType d = p.getDataType("--z-axis");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	}catch(ThatArgumentDoesNotExistException e){
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;		System.out.println(e.getExceptionOutput());
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;		throw e;
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	}
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+ *</p>
+ *<pre>
+ *      	ArgsParser p = new ArgsParser();
+ *      	String[] s = {"7", "--myArg", "5", "3", "--otherArg", "otherValue", "2"};
+ *      	p.setProgramName("VolumeCalculator");
+ *      	p.addArg("length", Argument.DataType.FLOAT);
+ *      	p.addArg("width", Argument.DataType.FLOAT);
+ *      	p.addArg("height", Argument.DataType.FLOAT);
+ *      	p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
+ *      	p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
+ *      	p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+ *      	p.parse(s);
+ *      	try{
+ *      		Argument.DataType d = p.getDataType("--z-axis");
+ *      	}catch(ThatArgumentDoesNotExistException e){
+ *      		System.out.println(e.getExceptionOutput());
+ *      		throw e;
+ *      	}
+ *</pre>
  *@author Avery Whitecotton
  *@author Adam Butler
  *@author Colby Morris
