@@ -3,7 +3,7 @@ import java.util.*;
 
 public class ThatArgumentDoesNotExistException extends RuntimeException{ 
     private String exceptionOutput;
-    public ThatArgumentDoesNotExistException(String name, Map<String, OptionalArgument> optionalArguments, Map<String,Argument> arguments){
+    public ThatArgumentDoesNotExistException(String name, Map<String, NamedArgument> optionalArguments, Map<String,Argument> arguments){
         exceptionOutput = "The argument " + name+ " does not exist." + " Here are the optional argument names given: ";
         for(String key : optionalArguments.keySet()){
             exceptionOutput += optionalArguments.get(key).getName() + " ";

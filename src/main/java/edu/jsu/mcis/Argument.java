@@ -23,6 +23,19 @@ public class Argument {
                           "<type>" + t + "</type>\n" + "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" +  "</positionalArgument>\n"; 
     }
     
+    public Argument(String n, String d, DataType t, List<String> restricted){
+        name = n;
+        type = t;
+		description = d;
+		value = "";
+		restrictedValues = new ArrayList<String>(restricted);
+        XMLData = "<positionalArgument>\n" + "<name>" + name + "</name>\n" + "<description>" + description + "</description>\n" + 
+                          "<type>" + t + "</type>\n" + "<restrictedValues>" + restrictedValues + "</restrictedValues>\n" +  "</positionalArgument>\n"; 
+    }
+     
+    
+    
+    
     
     public void addValue(String v){
         value = v;

@@ -7,7 +7,7 @@ import java.lang.*;
 public class ArgsParser{
     List<String> argNames;
     private Map<String, Argument> arguments;
-	private Map<String, OptionalArgument> optionalArguments;
+	private Map<String, NamedArgument> optionalArguments;
     private String programName;
     private String programDescription;
     private Map<String, String> unknownArguments;
@@ -17,13 +17,14 @@ public class ArgsParser{
         argNames = new ArrayList<String>();
         unknownArguments = new HashMap<String,String>();
         arguments = new HashMap<String, Argument>();
-		optionalArguments = new HashMap<String, OptionalArgument>();
+		optionalArguments = new HashMap<String, NamedArgument>();
         programName = "";
         programDescription = "";
 		longShortArgNames = new HashMap<String, String>(); 
         XMLData = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"+ "<program>\n";      
 
     }
+    
    
     private String makePreMessage(){
         String names = "";
@@ -68,7 +69,7 @@ public class ArgsParser{
 	}
 	public void addArg(String name,String descriptionOrDefaultValue, Argument.DataType t){
         if(name.contains("--")){
-           OptionalArgument o = new OptionalArgument(name, "", descriptionOrDefaultValue, t,"");
+           NamedArgument o = new NamedArgument(name, "", descriptionOrDefaultValue, t,"");
            optionalArguments.put(name, o); 
         }
         else{
@@ -95,52 +96,63 @@ public class ArgsParser{
 		addArg(name, "", t);
 	}
     public void addArg(String name,String description,String value, Argument.DataType t){
-		OptionalArgument o = new OptionalArgument(name,description,value, t,"");
+		NamedArgument o = new NamedArgument(name,description,value, t,"");
 		optionalArguments.put(name, o);
 	}
 
 	public void addArg(String name, String defaultValue, String shortNameOrDescription){
         if(shortNameOrDescription.length() == 2){
-            OptionalArgument o = new OptionalArgument(name, "", defaultValue,Argument.DataType.STRING ,shortNameOrDescription);
+            NamedArgument o = new NamedArgument(name, "", defaultValue,Argument.DataType.STRING ,shortNameOrDescription);
             optionalArguments.put(name, o);
             longShortArgNames.put(shortNameOrDescription,name);
         }
         else{
-            OptionalArgument o = new OptionalArgument(name, shortNameOrDescription, defaultValue,Argument.DataType.STRING, "");
+            NamedArgument o = new NamedArgument(name, shortNameOrDescription, defaultValue,Argument.DataType.STRING, "");
             optionalArguments.put(name,o);
         }
 	}
 	
     public void addArg(String name, String description, String defaultValue, String shortName){
-        OptionalArgument o = new OptionalArgument(name, description, defaultValue,Argument.DataType.STRING ,shortName);
+        NamedArgument o = new NamedArgument(name, description, defaultValue,Argument.DataType.STRING ,shortName);
         optionalArguments.put(name, o);
         longShortArgNames.put(shortName,name);
     }
     
     public void addArg(String name, String defaultValue,Argument.DataType t,String shortName){
-        OptionalArgument o = new OptionalArgument(name, "", defaultValue,t ,shortName);
+        NamedArgument o = new NamedArgument(name, "", defaultValue,t ,shortName);
         optionalArguments.put(name,o);
         longShortArgNames.put(shortName,name);
     }
     
     public void addArg(String name,String description, String defaultValue,Argument.DataType t,String shortName){
-        OptionalArgument o = new OptionalArgument(name, description, defaultValue,t ,shortName);
+        NamedArgument o = new NamedArgument(name, description, defaultValue,t ,shortName);
         optionalArguments.put(name, o);
         longShortArgNames.put(shortName,name);
     }
 	
-	public void setRestricted(String name, List<String> restrictedValue){
+    public void addArg(Argument arg){
+        
+            arguments.put(arg.getName(), arg);
+            argNames.add(arg.getName());
+        
+    }
+    
+    public void addNamedArgument(NamedArgument optArg){
+        optionalArguments.put(optArg.getName(), optArg);
+    }
+    
+/* 	public void setRestricted(String name, List<String> restrictedValue){
 		if(name.contains("--")){
 			optionalArguments.get(name).restrictedValues = restrictedValue;
 		}
 		else{
 			arguments.get(name).restrictedValues = restrictedValue;
 		}
-	}
+	} */
     
-    public void setOptArgToRequired(String name){
+/*     public void setOptArgToRequired(String name){
         optionalArguments.get(name).setRequired();
-    }
+    } */
   
     
     private void checkForTooManyArgs(String [] cla){
@@ -173,17 +185,19 @@ public class ArgsParser{
 					i= i + shortnamesUsed;
                }
 			   		   
-               for(int i =0; i < args.size();i++){
+                for(int i =0; i < args.size();i++){
                    if(optionalArguments.containsKey(args.get(i)) ){
                        args.remove(args.get(i));
                    }
-                   for(OptionalArgument a : optionalArguments.values()){
+
+                   
+                }
+               
+                for(NamedArgument a : optionalArguments.values()){
                        if(args.contains(a.getValue())){
                            args.remove(a.getValue());
                        }
-                   }
-                   
-               }
+                }
 			   
 			   for(int i = 0; i < args.size(); i++){
 					if(unknownArguments.containsKey(args.get(i))){
@@ -249,7 +263,7 @@ public class ArgsParser{
         for(int i =0; i < cla.length;i++){
             tempCLA.add(cla[i]);
         }
-        for(OptionalArgument o: optionalArguments.values()){
+        for(NamedArgument o: optionalArguments.values()){
             if(o.required && !tempCLA.contains(o.getName())){
                 throw new RequiredArgumentsNeededException(optionalArguments);
             }
@@ -257,7 +271,7 @@ public class ArgsParser{
         
     }
     
-    private void setTheValuesOfOptionalArguments(String [] cla, int i){
+    private void setTheValuesOfNamedArguments(String [] cla, int i){
         if(optionalArguments.get(cla[i]).getValue() == "false"){
                 optionalArguments.get(cla[i]).setValue("true");
         }
@@ -271,7 +285,7 @@ public class ArgsParser{
             }
     }
     
-    private void setTheValuesOfOptionalArgumentsThatUseShortNamesOnTheCommandLine(String [] cla, int i){
+    private void setTheValuesOfNamedArgumentsThatUseShortNamesOnTheCommandLine(String [] cla, int i){
         int shortnamesUsed=0;
             for(int j=1;j<cla[i].length();j++){					
 										
@@ -290,7 +304,7 @@ public class ArgsParser{
         checkForTooFewArgs(cla);
         for(int i = 0; i < cla.length;i++){
             if(optionalArguments.containsKey(cla[i])){
-                setTheValuesOfOptionalArguments(cla, i);
+                setTheValuesOfNamedArguments(cla, i);
 			}
             else if(cla[i].contains("--") && !optionalArguments.containsKey(cla[i])){
 				unknownArguments.put(cla[i], cla[i+1]);
@@ -298,11 +312,11 @@ public class ArgsParser{
             }
 			
 			else if(cla[i].contains("-") && (cla[i].charAt(0) == '-' && cla[i].charAt(1) != '-')){ 
-				setTheValuesOfOptionalArgumentsThatUseShortNamesOnTheCommandLine( cla,  i);
+				setTheValuesOfNamedArgumentsThatUseShortNamesOnTheCommandLine( cla,  i);
 			}
 		}
         List<String> tempOptValues = new ArrayList<String>();
-        for(OptionalArgument o : optionalArguments.values()){
+        for(NamedArgument o : optionalArguments.values()){
             tempOptValues.add(o.getValue());
         }    
         

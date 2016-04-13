@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <program>
-<name>VolumeCalculator</name>
-<description>Calculate the volume of a box.</description>
+<name>Volume Calculator</name>
+<description>A way to calculate the volume</description>
 <arguments>
 <positionalArgument>
 <name>length</name>
-<description>length the length of the box(float)</description>
+<description>length the length</description>
 <type>FLOAT</type>
 <position>1</position>
-<restrictedValues>[7]</restrictedValues>
+<restrictedValues>[7, 6, 5]</restrictedValues>
 </positionalArgument>
 <positionalArgument>
 <name>width</name>
-<description>width the width of the box(float)</description>
+<description>width the width</description>
 <type>FLOAT</type>
 <position>2</position>
 <restrictedValues>[]</restrictedValues>
 </positionalArgument>
 <positionalArgument>
 <name>height</name>
-<description>height the height of the box(float)</description>
+<description>height the height</description>
 <type>FLOAT</type>
 <position>3</position>
 <restrictedValues>[]</restrictedValues>
@@ -30,16 +30,25 @@
 <defaultValue>box</defaultValue>
 <type>STRING</type>
 <shortName>-t</shortName>
+<required>false</required>
+<restrictedValues>[box, pyramid, cylinder]</restrictedValues>
+</optionalArgument>
+<optionalArgument>
+<name>--other</name>
+<description>another namedArg</description>
+<defaultValue>pyramid</defaultValue>
+<type>STRING</type>
+<shortName>-o</shortName>
 <required>true</required>
-<restrictedValues>[]</restrictedValues>
+<restrictedValues>[box, pyramid, cylinder]</restrictedValues>
 </optionalArgument>
 <optionalArgument>
 <name>--digits</name>
-<description></description>
+<description>the digits</description>
 <defaultValue>4</defaultValue>
-<type>STRING</type>
-<shortName></shortName>
-<required>false</required>
+<type>INT</type>
+<shortName>-d</shortName>
+<required>true</required>
 <restrictedValues>[]</restrictedValues>
 </optionalArgument>
 </arguments>

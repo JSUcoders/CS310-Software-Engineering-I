@@ -5,7 +5,7 @@ public class TooManyArgsException extends RuntimeException{
 	private String exceptionOutput= "";
 	
 
-	public TooManyArgsException(String preMessage,String[] cla, Map<String, Argument> arguments, String prgmName, Map<String, OptionalArgument> optArgs, Map<String,String> unknownArgs){
+	public TooManyArgsException(String preMessage,String[] cla, Map<String, Argument> arguments, String prgmName, Map<String, NamedArgument> optArgs, Map<String,String> unknownArgs){
 
 		String extraArgs = "";
 		if(optArgs.size() == 0){
@@ -22,7 +22,7 @@ public class TooManyArgsException extends RuntimeException{
                 temp.add(key);
                 temp.add(value.getValue());
             }
-            for (Map.Entry<String, OptionalArgument> entry : optArgs.entrySet()) {
+            for (Map.Entry<String, NamedArgument> entry : optArgs.entrySet()) {
                 String key = entry.getKey();
                 Argument value = entry.getValue();
                 temp.add(key);

@@ -3,6 +3,8 @@ package edu.jsu.mcis;
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.util.*;
+import java.util.Arrays;
+
 
 public class ArgsParserTest{
     
@@ -242,7 +244,7 @@ public class ArgsParserTest{
         assertEquals("4", p.getArg("--digits"));
     }
     @Test
-    public void testAddingOptionalArguments(){
+    public void testAddingNamedArguments(){
         ArgsParser p =  new ArgsParser();
         String[] s = {"--type", "ellipsoid","7","3","--digits","1","2"};
         p.addArg("length", Argument.DataType.FLOAT);
@@ -305,7 +307,7 @@ public class ArgsParserTest{
 
    
     @Test
-    public void testAddingOptionalArgumentsShortNames(){
+    public void testAddingNamedArgumentsShortNames(){
         ArgsParser p =  new ArgsParser();
         String[] s = {"-t", "ellipsoid","7","3","-d","1","2"};
         p.addArg("length", Argument.DataType.FLOAT);
@@ -378,16 +380,16 @@ public class ArgsParserTest{
    }
    
     @Test
-	public void testOptionalArgumentsGetADataType(){
+	public void testNamedArgumentsGetADataType(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"7", "--myArg", "5", "3", "--otherArg", "otherValue", "2"};
 		p.setProgramName("VolumeCalculator");
 		p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
-        p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
-        p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+        p.addArg("--myArg","this is a test for myArg","1",NamedArgument.DataType.INT);
+        p.addArg("--otherArg", "this is a test for otherArg","hello", NamedArgument.DataType.STRING);
+        p.addArg("--anotherArg", "this is a test for anotherArg", "8", NamedArgument.DataType.FLOAT);
 	    p.parse(s);
 	    assertEquals(5, p.getArg("--myArg"));
         assertEquals("otherValue", p.getArg("--otherArg"));
@@ -403,9 +405,9 @@ public class ArgsParserTest{
 		p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
-        p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
-        p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+        p.addArg("--myArg","this is a test for myArg","1",NamedArgument.DataType.INT);
+        p.addArg("--otherArg", "this is a test for otherArg","hello", NamedArgument.DataType.STRING);
+        p.addArg("--anotherArg", "this is a test for anotherArg", "8", NamedArgument.DataType.FLOAT);
 	    p.parse(s);
 	    try{
             Object o = p.getArg("--z-axis");
@@ -417,34 +419,34 @@ public class ArgsParserTest{
    }
    
     @Test
-	public void testGetDataTypeForOptionalArgument(){
+	public void testGetDataTypeForNamedArgument(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"7", "--myArg", "5", "3", "--otherArg", "otherValue", "2"};
 		p.setProgramName("VolumeCalculator");
 		p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
-        p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
-        p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+        p.addArg("--myArg","this is a test for myArg","1",NamedArgument.DataType.INT);
+        p.addArg("--otherArg", "this is a test for otherArg","hello", NamedArgument.DataType.STRING);
+        p.addArg("--anotherArg", "this is a test for anotherArg", "8", NamedArgument.DataType.FLOAT);
 	    p.parse(s);
-	    assertEquals(OptionalArgument.DataType.INT, p.getDataType("--myArg"));
-        assertEquals(OptionalArgument.DataType.FLOAT, p.getDataType("--anotherArg"));
-        assertEquals(OptionalArgument.DataType.STRING, p.getDataType("--otherArg"));    
+	    assertEquals(NamedArgument.DataType.INT, p.getDataType("--myArg"));
+        assertEquals(NamedArgument.DataType.FLOAT, p.getDataType("--anotherArg"));
+        assertEquals(NamedArgument.DataType.STRING, p.getDataType("--otherArg"));    
 		
    }
    
    @Test(expected = ThatArgumentDoesNotExistException.class)
-	public void testGetDataTypeForOptionalArgumentThrowsExceptionWhenIncorrectArgIsGiven(){
+	public void testGetDataTypeForNamedArgumentThrowsExceptionWhenIncorrectArgIsGiven(){
 		ArgsParser p = new ArgsParser();
 		String[] s = {"7", "--myArg", "5", "3", "--otherArg", "otherValue", "2"};
 		p.setProgramName("VolumeCalculator");
 		p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
-        p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
-        p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+        p.addArg("--myArg","this is a test for myArg","1",NamedArgument.DataType.INT);
+        p.addArg("--otherArg", "this is a test for otherArg","hello", NamedArgument.DataType.STRING);
+        p.addArg("--anotherArg", "this is a test for anotherArg", "8", NamedArgument.DataType.FLOAT);
 	    p.parse(s);
         try{
             Argument.DataType d = p.getDataType("--z-axis");
@@ -464,9 +466,9 @@ public class ArgsParserTest{
 		p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
-        p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
-        p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+        p.addArg("--myArg","this is a test for myArg","1",NamedArgument.DataType.INT);
+        p.addArg("--otherArg", "this is a test for otherArg","hello", NamedArgument.DataType.STRING);
+        p.addArg("--anotherArg", "this is a test for anotherArg", "8", NamedArgument.DataType.FLOAT);
 	    p.parse(s);
         try{
             Argument.DataType d = p.getDataType("z-axis");
@@ -486,9 +488,9 @@ public class ArgsParserTest{
 		p.addArg("length", Argument.DataType.FLOAT);
 		p.addArg("width", Argument.DataType.FLOAT);
 		p.addArg("height", Argument.DataType.FLOAT);
-        p.addArg("--myArg","this is a test for myArg","1",OptionalArgument.DataType.INT);
-        p.addArg("--otherArg", "this is a test for otherArg","hello", OptionalArgument.DataType.STRING);
-        p.addArg("--anotherArg", "this is a test for anotherArg", "8", OptionalArgument.DataType.FLOAT);
+        p.addArg("--myArg","this is a test for myArg","1",NamedArgument.DataType.INT);
+        p.addArg("--otherArg", "this is a test for otherArg","hello", NamedArgument.DataType.STRING);
+        p.addArg("--anotherArg", "this is a test for anotherArg", "8", NamedArgument.DataType.FLOAT);
 	    p.parse(s);
 	    try{
             Object o = p.getArg("z-axis");
@@ -504,14 +506,14 @@ public class ArgsParserTest{
    public void testThatDifferentAddArgsWork(){
        ArgsParser p = new ArgsParser();
        p.addArg("--aName", "this is a test", "hi", "-a");
-       p.addArg("--bName", "7", OptionalArgument.DataType.INT,"-b");
-       p.addArg("--cName", "this is another test", "hello", OptionalArgument.DataType.STRING, "-c");
-       p.addArg("--dName", "8", OptionalArgument.DataType.FLOAT);
+       p.addArg("--bName", "7", NamedArgument.DataType.INT,"-b");
+       p.addArg("--cName", "this is another test", "hello", NamedArgument.DataType.STRING, "-c");
+       p.addArg("--dName", "8", NamedArgument.DataType.FLOAT);
        p.addArg("--eName", "code", "oh look another test");
        assertEquals(7, p.getArg("--bName"));
        assertEquals("hello", p.getArg("--cName"));
-       assertEquals(OptionalArgument.DataType.STRING, p.getDataType("--aName"));
-       assertEquals(OptionalArgument.DataType.FLOAT, p.getDataType("--dName"));
+       assertEquals(NamedArgument.DataType.STRING, p.getDataType("--aName"));
+       assertEquals(NamedArgument.DataType.FLOAT, p.getDataType("--dName"));
        assertEquals("code", p.getArg("--eName"));
    }
    
@@ -519,43 +521,9 @@ public class ArgsParserTest{
 
    
    
-    @Test
-	public void testSavingtoXMLFile(){
-		ArgsParser p = new ArgsParser();
-		List<String> restrictedValue = new ArrayList<String>();
-		restrictedValue.add("7");
-		p.setProgramName("VolumeCalculator");
-		p.setProgramDescription("Calculate the volume of a box.");
-        p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
-        p.addArg("width",  "width the width of the box(float)", Argument.DataType.FLOAT);
-        p.addArg("height", "height the height of the box(float)", Argument.DataType.FLOAT);
-		p.addArg("--type", "the type","box",OptionalArgument.DataType.STRING,"-t");
-		p.setRestricted("length", restrictedValue);
-        p.setOptArgToRequired("--type");
-        p.addArg("--digits","4");
-		p.saveXML("newXML.xml");
-	
-    }
-   
-    @Test
-    public void testLoadingFromXMLFile(){
-        ArgsParser p = new ArgsParser();
-        SaveToXML rw = new SaveToXML();   
-        p=rw.parseXML("newXML.xml");
-        assertEquals(Argument.DataType.FLOAT,p.getDataType("length"));
-    
-    }
-    
-    @Test
-    public void testLoadingFromXMLFile2(){
-        ArgsParser p = new ArgsParser();
-        SaveToXML rw = new SaveToXML();   
-        p=rw.parseXML("newXML.xml");
-        assertEquals("4",p.getArg("--digits"));
 
-    }
 	
-	@Test
+/* 	@Test
 	public void testParsingAllowedValueOfRestrictedSet(){
 		String[] s = {"3", "4", "--type", "ellipsoid", "5"};
 		ArgsParser p = new ArgsParser();
@@ -579,29 +547,23 @@ public class ArgsParserTest{
 		
 		assertEquals("3", p.getArg("length"));
 		assertEquals("ellipsoid", p.getArg("--type"));
-	}
+	} */
 	
 	@Test(expected = RestrictedArgumentException.class)
 	public void testParsedUnallowedValueOfRestrictedSet(){
 		String[] s = {"7", "3", "--type", "frustum", "2"};
 		ArgsParser p = new ArgsParser();
 		p.setProgramName("VolumeCalculator");
-		List<String> restrictedLengthValues = new ArrayList<String>();
+
 		List<String> restrictedTypeValues = new ArrayList<String>();
-		restrictedLengthValues.add("7");
-		restrictedLengthValues.add("6");
-		restrictedLengthValues.add("9");
-		
+
 		restrictedTypeValues.add("box");
 		restrictedTypeValues.add("ellipsoid");
 		restrictedTypeValues.add("pyramid");
 		p.addArg("length");
 		p.addArg("width");
 		p.addArg("height");
-		p.addArg("--type", "box");
-		
-		p.setRestricted("length", restrictedLengthValues);
-		p.setRestricted("--type", restrictedTypeValues);
+		p.addNamedArgument(new NamedArgument("--type", "the type", "box", NamedArgument.DataType.STRING,"-t", restrictedTypeValues));
 		
 		try{
 			p.parse(s);
@@ -609,29 +571,25 @@ public class ArgsParserTest{
             System.out.println(e.getExceptionOutput());
 			throw e;
 		}
-	}
+	} 
 	
-	@Test(expected = RestrictedArgumentException.class)
+ 	@Test(expected = RestrictedArgumentException.class)
 	public void testParsedUnallowedValueOfRestrictedSet2(){
 		String[] s = {"5", "3", "--type", "pyramid", "2"};
 		ArgsParser p = new ArgsParser();
 		p.setProgramName("VolumeCalculator");
 		List<String> restrictedLengthValues = new ArrayList<String>();
-		List<String> restrictedTypeValues = new ArrayList<String>();
 		restrictedLengthValues.add("7");
 		restrictedLengthValues.add("6");
 		restrictedLengthValues.add("9");
 		
-		restrictedTypeValues.add("box");
-		restrictedTypeValues.add("ellipsoid");
-		restrictedTypeValues.add("pyramid");
-		p.addArg("length");
+
+		p.addArg(new Argument("length", "length the length", Argument.DataType.FLOAT, restrictedLengthValues) );
 		p.addArg("width");
 		p.addArg("height");
 		p.addArg("--type", "box");
 		
-		p.setRestricted("length", restrictedLengthValues);
-		p.setRestricted("--type", restrictedTypeValues);
+
 		
 		try{
 			p.parse(s);
@@ -641,7 +599,7 @@ public class ArgsParserTest{
 		}
 	}
     
-    @Test(expected = RequiredArgumentsNeededException.class)
+/*     @Test(expected = RequiredArgumentsNeededException.class)
     public void testNotHavingARequiredNamedArgumentThrowsAnException(){
         ArgsParser p = new ArgsParser();
         String [] s = {"7","3", "2"};
@@ -656,19 +614,17 @@ public class ArgsParserTest{
             System.out.println(e.getExceptionOutput());
             throw e;
         }  
-    }
+    } */
     
     @Test(expected = RequiredArgumentsNeededException.class)
     public void testNotHavingARequiredNamedArgumentThrowsAnException2(){
         ArgsParser p = new ArgsParser();
         String [] s = {"7","3", "2"};
+        NamedArgument optArg1 = new NamedArgument("--digits", "the digits", "4", NamedArgument.DataType.INT, "-d",true);
         p.addArg("length", Argument.DataType.INT);
         p.addArg("width" , Argument.DataType.INT);
         p.addArg("height", Argument.DataType.INT);
-        p.addArg("--type", "box");
-        p.setOptArgToRequired("--type");
-        p.addArg("--digits", "5");
-        p.setOptArgToRequired("--digits");
+        p.addNamedArgument(optArg1);
         try{
           p.parse(s);  
         }catch(RequiredArgumentsNeededException e){
@@ -677,7 +633,7 @@ public class ArgsParserTest{
         }  
     }
     
-    @Test
+/*     @Test
     public void testHavingARequiredNamedArgument(){
         ArgsParser p = new ArgsParser();
         String [] s = {"7","3", "2","--type", "ellipsoid"};
@@ -685,11 +641,82 @@ public class ArgsParserTest{
         p.addArg("width" , Argument.DataType.INT);
         p.addArg("height", Argument.DataType.INT);
         p.addArg("--type", "box");
-        p.addArg("--digits", "4", OptionalArgument.DataType.FLOAT);
+        p.addArg("--digits", "4", NamedArgument.DataType.FLOAT);
         p.setOptArgToRequired("--type");
         p.parse(s);
         assertEquals("ellipsoid", p.getArg("--type"));   
+    } */
+    
+    @Test
+    public void testUserCreatesArgument(){
+        List<String> restrictedTypeValues = Arrays.asList("box", "pyramid","cylinder");
+        List<String> restrictedLengthValues = Arrays.asList("7", "6" ,"5");
+        ArgsParser p = new ArgsParser();
+        String[] s = {"7","3", "2","--digits", "6", "--other", "cylinder"};
+        
+        Argument arg1 = new Argument("length", "length the length", Argument.DataType.FLOAT, restrictedLengthValues);
+        NamedArgument optArg1 = new NamedArgument("--digits", "the digits", "4", NamedArgument.DataType.INT, "-d",true);
+        NamedArgument optArg2 = new NamedArgument("--type", "the type", "box",NamedArgument.DataType.STRING, "-t", restrictedTypeValues);  
+        NamedArgument optArg3 = new NamedArgument("--other","another namedArg","pyramid", NamedArgument.DataType.STRING,"-o" ,restrictedTypeValues, true);   
+        p.addArg(arg1);
+        p.addArg("width", "width the width", Argument.DataType.FLOAT);
+        p.addArg("height","height the height",Argument.DataType.FLOAT);
+        p.addNamedArgument(optArg1);
+        p.addNamedArgument(optArg2);
+        p.addNamedArgument(optArg3);
+        //try{
+           p.parse(s);
+        //}catch(TooManyArgsException e){
+            //p.print();
+            //System.out.println(e.getExceptionOutput());
+        //}
+       
+        assertEquals((float)7 , p.getArg("length"));
+        assertEquals(NamedArgument.DataType.INT, p.getDataType("--digits"));
+        assertEquals("box" , p.getArg("--type"));
+        assertEquals("cylinder", p.getArg("--other"));
     }
+    
+    
+    @Test
+	public void testSavingtoXMLFile(){
+        List<String> restrictedTypeValues = Arrays.asList("box", "pyramid","cylinder");
+        List<String> restrictedLengthValues = Arrays.asList("7", "6" ,"5");
+        ArgsParser p = new ArgsParser();
+        String[] s = {"7","3", "2","--digits", "6", "--other", "cylinder"};
+        p.setProgramName("Volume Calculator");
+        p.setProgramDescription("A way to calculate the volume");
+        Argument arg1 = new Argument("length", "length the length", Argument.DataType.FLOAT, restrictedLengthValues);
+        NamedArgument optArg1 = new NamedArgument("--digits", "the digits", "4", NamedArgument.DataType.INT, "-d",true);
+        NamedArgument optArg2 = new NamedArgument("--type", "the type", "box",NamedArgument.DataType.STRING, "-t", restrictedTypeValues);  
+        NamedArgument optArg3 = new NamedArgument("--other","another namedArg","pyramid", NamedArgument.DataType.STRING,"-o" ,restrictedTypeValues, true);   
+        p.addArg(arg1);
+        p.addArg("width", "width the width", Argument.DataType.FLOAT);
+        p.addArg("height","height the height",Argument.DataType.FLOAT);
+        p.addNamedArgument(optArg1);
+        p.addNamedArgument(optArg2);
+        p.addNamedArgument(optArg3);
+        p.saveXML("newXML.xml");
 	
+    }
+   
+    @Test
+    public void testLoadingFromXMLFile(){
+        ArgsParser p = new ArgsParser();
+        SaveToXML rw = new SaveToXML();   
+        p=rw.parseXML("newXML.xml");
+        assertEquals(Argument.DataType.FLOAT,p.getDataType("length"));
+    
+    }
+    
+    @Test
+    public void testLoadingFromXMLFile2(){
+        ArgsParser p = new ArgsParser();
+        SaveToXML rw = new SaveToXML();   
+        p=rw.parseXML("newXML.xml");
+        assertEquals( 4 ,p.getArg("--digits"));
+            
+
+    }	
 	
 }
