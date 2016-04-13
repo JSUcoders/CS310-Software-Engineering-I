@@ -3,23 +3,20 @@ import java.util.*;
 
 /**<p>
  * This class allows the use of runtime exceptions that are specific to a senario that involves too few arguments called from the command line. 
+ *</p>
  *<p>
  * this is an example of how this excetpion would be thrown
  * in the example the string array args would be replaced with the comandline arguments taken from the user
- *<p>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	ArgsParser p = new ArgsParser();
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.setProgramName("VolumeCalculator");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	String[] s = {"7", "3"};
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("length");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("width");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.addArg("height");
- *<br>
- *      &nbsp;&nbsp;&nbsp;&nbsp;	p.parse(s);
+ *</p>
+ *<pre>
+ *	ArgsParser p = new ArgsParser();
+ *	p.setProgramName("VolumeCalculator");
+ *	String[] s = {"7", "3"};
+ *	p.addArg("length");
+ *	p.addArg("width");
+ *	p.addArg("height");
+ *	p.parse(s);
+ *</pre>
 
  *@author Avery Whitecotton
  *@author Adam Butler
