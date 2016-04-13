@@ -291,9 +291,9 @@ public class ArgsParser{
 	 /**
 	 *This method adds an argument to the program with a specified description, default value, data type, and shortname.
 	 *
-	 *@param name Name of this arguement 
+	 *@param name Name of this argument 
 	 *@param description Description of this argument
-	 *@param defaultValue Default value of this arguement 
+	 *@param defaultValue Default value of this argument 
 	 *@param t Data type identifier
 	 *@param shortName the shortname of this argument
 	 */
@@ -303,6 +303,13 @@ public class ArgsParser{
         optionalArguments.put(name, o);
         longShortArgNames.put(shortName,name);
     }
+    
+    /**
+    *This method adds a fully constructed postional argument to the program.
+    *
+    *@param arg the fully contructed argument
+    */    
+    
 	
     public void addArg(Argument arg){
         
@@ -310,6 +317,12 @@ public class ArgsParser{
             argNames.add(arg.getName());
         
     }
+    
+    /**
+    *This method adds a fully constructed named argument to the program.
+    *
+    *@param optArg the fully contructed  named argument
+    */    
     
     public void addNamedArgument(NamedArgument optArg){
         optionalArguments.put(optArg.getName(), optArg);
