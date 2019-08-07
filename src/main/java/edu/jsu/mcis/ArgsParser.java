@@ -16,7 +16,7 @@ import java.lang.*;
  *	p.setProgramDescription("Calculate the volume of a box");
  *	p.addArg("length","length the length of the box(float)",Argument.DataType.FLOAT );
  *	p.addArg("--digits","4");
- *	p.parseValues(args);
+ *	p.parse(args);
  *</pre>
  *<p>
  * after the block of code excutes the value stored in the argument length would be  "7" and the value of digits would be 10.
@@ -580,11 +580,11 @@ public class ArgsParser{
 	 *@return Float.parseFloat(optionalArguments.get(tempOptNames.indexOf(name)).getValue()) value parsed as an Float
 	 *@return Boolean.parseBoolean(optionalArguments.get(tempOptNames.indexOf(name)).getValue()) value parsed as an Boolean
 	 *@return (String)optionalArguments.get(tempOptNames.indexOf(name)).getValue() value parsed as an String
-	 *@throws ThatArgumentDoesNotExistException Exception thrown when...	 
+	 *@throws ThatArgumentDoesNotExistException Exception thrown when name does not exist in program	 
 	 */
 	
-
-    public Object getArg(String name){
+    
+     public Object getArg(String name){
         if(name.contains("--")){
             
             if(optionalArguments.containsKey(name)){
@@ -626,7 +626,7 @@ public class ArgsParser{
                 throw new ThatArgumentDoesNotExistException(name, optionalArguments, arguments);
             }
         }     
-    }
+    } 
 	
 	 /**
 	 *This method creats XML data for current arguments and saves them to the specified file.

@@ -8,7 +8,7 @@
 <description>length the length of the box</description>
 <type>FLOAT</type>
 <position>1</position>
-<restrictedValues>[5, 8, 10]</restrictedValues>
+<restrictedValues>[]</restrictedValues>
 </positionalArgument>
 <positionalArgument>
 <name>width</name>
@@ -30,7 +30,7 @@
 <defaultValue>box</defaultValue>
 <type>STRING</type>
 <shortName>-t</shortName>
-<required>true</required>
+<required>false</required>
 <restrictedValues>[]</restrictedValues>
 </optionalArgument>
 <optionalArgument>

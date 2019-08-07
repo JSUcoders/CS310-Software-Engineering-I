@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<program>
+<name>Ice cream shop</name>
+<description>This program runs a very basic simulation of an ice cream shop</description>
+<arguments>
+<positionalArgument>
+<name>flavor</name>
+<description>flavor of the ice cream</description>
+<type>STRING</type>
+<position>1</position>
+<restrictedValues>[]</restrictedValues>
+</positionalArgument>
+<positionalArgument>
+<name>container</name>
+<description>how the ice cream is served</description>
+<type>STRING</type>
+<position>2</position>
+<restrictedValues>[]</restrictedValues>
+</positionalArgument>
+<positionalArgument>
+<name>price</name>
+<description>price of the ice cream</description>
+<type>FLOAT</type>
+<position>3</position>
+<restrictedValues>[]</restrictedValues>
+</positionalArgument>
+<optionalArgument>
+<name>--toppings</name>
+<description>toppings of the ice cream</description>
+<defaultValue>whip cream</defaultValue>
+<type>STRING</type>
+<shortName>-t</shortName>
+<required>false</required>
+<restrictedValues>[]</restrictedValues>
+</optionalArgument>
+</arguments>
+</program>

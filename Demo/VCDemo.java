@@ -5,17 +5,13 @@ public class VCDemo{
     public static void main(String[] args){
         
         ArgsParser p = new ArgsParser();
-        List<String> restricted  =  Arrays.asList("5", "8", "10"); 
         String message = "VolumeCalculator";
         String description = "Calculate the volume of a box";
         p.addArg("length","length the length of the box",Argument.DataType.FLOAT);
-        p.setRestricted("length", restricted);
         p.addArg("width","width the width of the box",Argument.DataType.FLOAT);
         p.addArg("height","height the height of the box",Argument.DataType.FLOAT);
-        p.addArg("--type","the shape of the object","box",OptionalArgument.DataType.STRING,"-t");
-        p.setOptArgToRequired("--type");
-        p.addArg("--digits","the amount of digits in the volume","4",OptionalArgument.DataType.INT,"-d");
-        
+        p.addArg("--type","the shape of the object","box",NamedArgument.DataType.STRING,"-t");
+        p.addArg("--digits","the amount of digits in the volume","4",NamedArgument.DataType.INT,"-d");
         p.setProgramName(message);
         p.setProgramDescription(description);
         p.saveXML("VCDemo.xml");
@@ -29,13 +25,14 @@ public class VCDemo{
         }
         catch(HelpException e){
             System.out.println(e.getExceptionOutput());
-            //throw e;
         }
         catch(RequiredArgumentsNeededException e){
             System.out.println(e.getExceptionOutput());
-            //throw e;
         }
         catch(RestrictedArgumentException e){
+            System.out.println(e.getExceptionOutput());
+        }
+        catch(TooManyArgsException e){
             System.out.println(e.getExceptionOutput());
         }
         
